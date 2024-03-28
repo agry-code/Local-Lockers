@@ -10,9 +10,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.locallockers.model.UserModel
 import com.google.firebase.Firebase
+import com.google.firebase.appcheck.appCheck
+import com.google.firebase.appcheck.safetynet.SafetyNetAppCheckProviderFactory
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.initialize
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -73,11 +76,11 @@ class RegisterViewModel : ViewModel() {
                 email = email.toString(),
                 userName = userName
             )
-
         FirebaseFirestore.getInstance().collection("Users")
             .add(user)
             .addOnSuccessListener {
                 Log.d("Guardado","Guardado correctamente")
+
             }.addOnFailureListener {
                 Log.d("Error al guardar","Error al guardar en Firestore")
             }

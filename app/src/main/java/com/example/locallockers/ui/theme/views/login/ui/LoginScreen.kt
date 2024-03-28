@@ -72,6 +72,7 @@ fun Login(modifier: Modifier, viewModel: LoginViewModel, navController: NavContr
                 viewModel.signInWithGoogleCredential(credential) {
                     //función para navegar a un home screen
                     Log.d("LocakLocker", "Se ha logeado correctamente con SignIn")
+                    navController.navigate("Main")
                 }
             } catch (ex: Exception) {
                 Log.d("LocalLocker", "Google SignInFallo")
@@ -90,7 +91,10 @@ fun Login(modifier: Modifier, viewModel: LoginViewModel, navController: NavContr
             LogginButton(loginEnable) {
                 coroutineScope.launch {
                     viewModel.login(email,password){
+                        Log.d("Los muertos","Se ha llegado a logear")
                         navController.navigate("Main")
+                        Log.d("Los muertos","Se ha llegado a navegar")
+
                     }
                 }
             }
@@ -140,7 +144,10 @@ fun GoogleSignInButton(
 @Composable
 fun LogginButton(loginEnable: Boolean, login: () -> Unit) {
     Button(
-        onClick = { login() },
+        onClick = {
+            Log.d("Los muertos","Se ha hecho click al boton")
+            login()
+                  },
         modifier = Modifier
             .fillMaxWidth()
             .height(48.dp),

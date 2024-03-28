@@ -9,6 +9,6 @@ class MainViewModel : ViewModel(){
     private val auth: FirebaseAuth = Firebase.auth
 
     fun signOut(){
-        auth.signOut()
+     auth.signOut()
     }
 }

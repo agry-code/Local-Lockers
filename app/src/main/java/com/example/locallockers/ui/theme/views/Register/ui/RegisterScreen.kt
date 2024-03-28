@@ -67,9 +67,9 @@ fun Register(modifier: Modifier, registerModel: RegisterViewModel, navController
             onConfirmPasswordChanged = { registerModel.onConfirmPasswordChanged(it) })
         Button(
             onClick = {
-                      registerModel.createUser(email,password,name){
-                          navController.navigate("Main")
-                      }
+                registerModel.createUser(email,password,name){
+                    navController.navigate("Main")
+                }
             }, modifier = Modifier
                 .fillMaxWidth()
                 .padding(8.dp)

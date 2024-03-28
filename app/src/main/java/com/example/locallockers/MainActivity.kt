@@ -19,15 +19,18 @@ import com.example.locallockers.ui.theme.views.login.ui.LoginViewModel
 import com.example.locallockers.ui.theme.views.tabs.TabsViews
 import com.example.locallockers.ui.theme.views.turista.main.MainScreen
 import com.example.locallockers.ui.theme.views.turista.main.MainViewModel
+import com.google.firebase.FirebaseApp
+import com.google.firebase.appcheck.FirebaseAppCheck
+import com.google.firebase.appcheck.safetynet.SafetyNetAppCheckProviderFactory
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val loginViewModel : LoginViewModel by viewModels()
         val mainViewModel : MainViewModel by viewModels()
+
         setContent {
             LocalLockersTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background

@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.locallockers.ui.theme.views.Register.ui.RegisterViewModel
+import com.example.locallockers.ui.theme.views.login.ui.BlankView
 import com.example.locallockers.ui.theme.views.login.ui.LoginScreen
 import com.example.locallockers.ui.theme.views.login.ui.LoginViewModel
 import com.example.locallockers.ui.theme.views.tabs.TabsViews
@@ -16,12 +17,15 @@ import com.example.locallockers.ui.theme.views.turista.main.MainViewModel
 @Composable
 fun NavManager(mainViewModel: MainViewModel){
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = "TabsViews" ){
+    NavHost(navController = navController, startDestination = "Blank" ){
+        composable("Blank"){
+            BlankView(navController)
+        }
         composable("TabsViews"){
             TabsViews(navController)
         }
         composable("Main"){
-            MainScreen(navController,mainViewModel)
+            MainScreen(navController, mainViewModel)
         }
     }
 }
