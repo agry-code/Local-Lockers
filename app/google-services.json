@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "737784074734",
+    "project_id": "locallockers-30dec",
+    "storage_bucket": "locallockers-30dec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:737784074734:android:406405c00598de5705feff",
+        "android_client_info": {
+          "package_name": "com.example.locallockers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "737784074734-ads1i04i4vshp8pkih7i7k9gvlegdqte.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.locallockers",
+            "certificate_hash": "e7377a5aadf1795ed47ada8b685feed3664a2bfc"
+          }
+        },
+        {
+          "client_id": "737784074734-fo1cdue2jte8ho2s0qq5nb1sjtfuqno7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2P8i4eVQK6ETw-tw5vZr-TDK1GwuYzVQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "737784074734-fo1cdue2jte8ho2s0qq5nb1sjtfuqno7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
