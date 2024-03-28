@@ -6,19 +6,22 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.locallockers.ui.theme.Register.ui.RegisterViewModel
-import com.example.locallockers.ui.theme.login.ui.LoginScreen
-import com.example.locallockers.ui.theme.login.ui.LoginViewModel
+import com.example.locallockers.ui.theme.views.Register.ui.RegisterViewModel
+import com.example.locallockers.ui.theme.views.login.ui.LoginScreen
+import com.example.locallockers.ui.theme.views.login.ui.LoginViewModel
+import com.example.locallockers.ui.theme.views.tabs.TabsViews
+import com.example.locallockers.ui.theme.views.turista.main.MainScreen
+import com.example.locallockers.ui.theme.views.turista.main.MainViewModel
 
 @Composable
-fun NavManager(){
+fun NavManager(mainViewModel: MainViewModel){
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = "Login" ){
-        composable("Login"){
-            LoginScreen(LoginViewModel(),navController)
+    NavHost(navController = navController, startDestination = "TabsViews" ){
+        composable("TabsViews"){
+            TabsViews(navController)
         }
-        composable("Register"){
-            RegisterScreen(RegisterViewModel(),navController)
+        composable("Main"){
+            MainScreen(navController,mainViewModel)
         }
     }
 }

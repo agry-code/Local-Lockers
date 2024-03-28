@@ -1,59 +1,46 @@
-import androidx.compose.foundation.layout.Box
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.locallockers.ui.theme.Composable.Alert
 import com.example.locallockers.ui.theme.Composable.ConfirmPasswordField
 import com.example.locallockers.ui.theme.Composable.EmailField
+import com.example.locallockers.ui.theme.Composable.MainIconButton
 import com.example.locallockers.ui.theme.Composable.NameField
 import com.example.locallockers.ui.theme.Composable.PasswordField
-import com.example.locallockers.ui.theme.Register.ui.RegisterViewModel
+import com.example.locallockers.ui.theme.Composable.TitleBar
+import com.example.locallockers.ui.theme.views.Register.ui.RegisterViewModel
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RegisterScreen(registerModel: RegisterViewModel, navController: NavController) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally, // Esto centrará todos los composables de la Columna horizontalmente
-    ) {
-        Header() // Esto se centrará horizontalmente en la Columna
-        Spacer(Modifier.height(8.dp)) // Proporciona espacio entre el encabezado y el formulario de registro
-        // Utiliza un Box para contener y centrar el formulario de registro en la pantalla
-        Box(
-            contentAlignment = Alignment.Center, // Centra el contenido (el formulario de registro) dentro del Box
-            modifier = Modifier.padding(10.dp), // El Box ocupa todo el espacio disponible
-        ) {
-            Register(Modifier.align(Alignment.Center), registerModel, navController)
-        }
-    }
-}
-
-@Composable
-fun Header() {
-    Text(
-        text = "Registro",
-        style = MaterialTheme.typography.headlineMedium.copy(
-            fontWeight = FontWeight.Bold,
-            fontSize = 24.sp,
-        ),
-        modifier = Modifier.padding(bottom = 16.dp)
-    )
+fun RegisterScreen(
+    registerModel: RegisterViewModel,
+    navController: NavController,
+    modifier: Modifier = Modifier
+) {
+    Register(modifier = modifier, registerModel = registerModel, navController = navController)
 }
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -66,18 +53,33 @@ fun Register(modifier: Modifier, registerModel: RegisterViewModel, navController
     val confirmPassword: String by registerModel.confirmPassword.observeAsState(initial = "")
 
     Column(modifier = modifier) {
-
+        Spacer(modifier = Modifier.padding(40.dp))
         EmailField(email = email, onTextFieldChanged = { registerModel.onEmailChanged(it) })
         Spacer(modifier = Modifier.padding(8.dp))
-        NameField(name = name,onTextFieldChanged = {registerModel.onNameChanged(it)})
+        NameField(name = name, onTextFieldChanged = { registerModel.onNameChanged(it) })
         Spacer(modifier = Modifier.padding(8.dp))
-        PasswordField(password = password, onPasswordChanged = {registerModel.onPasswordChanged(it)})
+        PasswordField(
+            password = password,
+            onPasswordChanged = { registerModel.onPasswordChanged(it) })
         Spacer(modifier = Modifier.padding(8.dp))
-        ConfirmPasswordField(confirmPassword = confirmPassword, onConfirmPasswordChanged = {registerModel.onConfirmPasswordChanged(it)})
-        Button(onClick = { /*TODO*/ },modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp)) {
+        ConfirmPasswordField(
+            confirmPassword = confirmPassword,
+            onConfirmPasswordChanged = { registerModel.onConfirmPasswordChanged(it) })
+        Button(
+            onClick = {
+                      registerModel.createUser(email,password,name){
+                          navController.navigate("Main")
+                      }
+            }, modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        ) {
             Text(text = "Registrarse")
+        }
+        if(registerModel.showAlert){
+            Alert(title = "Alerta", msg = "Usuario no creado", confirmText = "Aceptar", onConfirmClick = { registerModel.closeAlert() }) {
+                
+            }
         }
     }
 }

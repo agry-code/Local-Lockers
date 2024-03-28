@@ -1,4 +1,4 @@
-package com.example.locallockers.ui.theme.login.ui
+package com.example.locallockers.ui.theme.views.login.ui
 
 import android.content.Intent
 import android.util.Log
@@ -35,9 +35,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.locallockers.R
+import com.example.locallockers.ui.theme.Composable.Alert
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
@@ -60,7 +62,6 @@ fun Login(modifier: Modifier, viewModel: LoginViewModel, navController: NavContr
     val email: String by viewModel.email.observeAsState(initial = "")
     val password: String by viewModel.password.observeAsState(initial = "")
     val loginEnable: Boolean by viewModel.loginEnable.observeAsState(initial = false)
-    //val isLoading: Boolean by viewModel.isLoading.observeAsState(initial = false)
     val coroutineScope = rememberCoroutineScope()
     val launcher =
         rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) {
@@ -77,9 +78,6 @@ fun Login(modifier: Modifier, viewModel: LoginViewModel, navController: NavContr
             }
         }
 
-//        Box(Modifier.fillMaxSize()) {
-//            CircularProgressIndicator(Modifier.align(Alignment.Center))
-
         Column(modifier = modifier) {
             HeaderImage(Modifier.align(Alignment.CenterHorizontally))
             Spacer(modifier = Modifier.padding(16.dp))
@@ -91,23 +89,21 @@ fun Login(modifier: Modifier, viewModel: LoginViewModel, navController: NavContr
             Spacer(modifier = Modifier.padding(16.dp))
             LogginButton(loginEnable) {
                 coroutineScope.launch {
-                    viewModel.onLoginSelected()
+                    viewModel.login(email,password){
+                        navController.navigate("Main")
+                    }
                 }
             }
             GoogleSignInButton(launcher)
-            RegisterButton(navController)
+            if(viewModel.showAlert){
+                Alert(title = "Alerta",
+                    msg = "Usuario o contraseña erronea",
+                    confirmText = "Aceptar",
+                    onConfirmClick = { viewModel.closeAlert() }) {
+                }
+            }
         }
     }
-
-@Composable
-fun RegisterButton(navController: NavController) {
-Button(onClick = { navController.navigate("Register") }, colors = ButtonDefaults.buttonColors(
-    containerColor = Color.Black,
-    contentColor = Color.White
-), modifier = Modifier.fillMaxWidth()) {
-    Text(text = "¿No tienes cuenta? ¡Registrate!")
-}
-}
 
 
 @Composable
@@ -142,9 +138,9 @@ fun GoogleSignInButton(
 }
 
 @Composable
-fun LogginButton(loginEnable: Boolean, onLoginSelected: () -> Unit) {
+fun LogginButton(loginEnable: Boolean, login: () -> Unit) {
     Button(
-        onClick = { onLoginSelected() },
+        onClick = { login() },
         modifier = Modifier
             .fillMaxWidth()
             .height(48.dp),
@@ -157,12 +153,13 @@ fun LogginButton(loginEnable: Boolean, onLoginSelected: () -> Unit) {
     ) {
         Text(text = "Iniciar sesion")
     }
+
 }
 
 @Composable
 fun ForgotPassword(align: Modifier) {
     Text(
-        text = "Olvidaste la contraseña?",
+        text = "¿Olvidaste la contraseña?",
         modifier = align.clickable { },
         fontWeight = FontWeight.Bold,
         color = Color(0xFFFB9600)
@@ -176,6 +173,7 @@ fun PasswordField(password: String, onTextFieldChanged: (String) -> Unit) {
         value = password, onValueChange = { onTextFieldChanged(it) },
         placeholder = { Text(text = "Contraseña") },
         modifier = Modifier.fillMaxWidth(),
+        visualTransformation = PasswordVisualTransformation(),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
         singleLine = true,
         textStyle = LocalTextStyle.current.copy(color = Color(0xFF636262)),
