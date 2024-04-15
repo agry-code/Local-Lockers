@@ -12,19 +12,14 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.locallockers.ui.theme.Composable.Alert
 import com.example.locallockers.ui.theme.Composable.ConfirmPasswordField
 import com.example.locallockers.ui.theme.Composable.EmailField
-import com.example.locallockers.ui.theme.Composable.MainIconButton
 import com.example.locallockers.ui.theme.Composable.NameField
 import com.example.locallockers.ui.theme.Composable.PasswordField
-import com.example.locallockers.ui.theme.Composable.TitleBar
 import com.example.locallockers.ui.theme.views.Register.ui.RegisterViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
