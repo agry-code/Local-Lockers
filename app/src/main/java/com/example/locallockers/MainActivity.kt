@@ -22,7 +22,7 @@ import com.example.locallockers.ui.theme.views.turista.main.MainViewModel
 import com.google.firebase.FirebaseApp
 import com.google.firebase.appcheck.FirebaseAppCheck
 import com.google.firebase.appcheck.safetynet.SafetyNetAppCheckProviderFactory
-
+//AIzaSyBTA_bquHKAeJfOOLKNX-RxaA4_Cr7iPao
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

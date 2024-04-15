@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
+import com.example.locallockers.ui.theme.views.turista.main.views.MapsView
 
 @Composable
 fun MainScreen(navController: NavController, mainViewModel: MainViewModel ) {
@@ -38,7 +39,7 @@ fun MainScreen(navController: NavController, mainViewModel: MainViewModel ) {
             modifier = Modifier.padding(pad),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = "MainView!")
+            MapsView()
         }
     }
 }

@@ -3,12 +3,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -33,7 +28,6 @@ import com.example.locallockers.ui.theme.Composable.TitleBar
 import com.example.locallockers.ui.theme.views.Register.ui.RegisterViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RegisterScreen(
     registerModel: RegisterViewModel,
@@ -78,7 +72,6 @@ fun Register(modifier: Modifier, registerModel: RegisterViewModel, navController
         }
         if(registerModel.showAlert){
             Alert(title = "Alerta", msg = "Usuario no creado", confirmText = "Aceptar", onConfirmClick = { registerModel.closeAlert() }) {
-                
             }
         }
     }
