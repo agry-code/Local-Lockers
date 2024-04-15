@@ -91,9 +91,9 @@ fun Login(modifier: Modifier, viewModel: LoginViewModel, navController: NavContr
             LogginButton(loginEnable) {
                 coroutineScope.launch {
                     viewModel.login(email,password){
-                        Log.d("Los muertos","Se ha llegado a logear")
+                        Log.d("Login","Se ha llegado a logear")
                         navController.navigate("Main")
-                        Log.d("Los muertos","Se ha llegado a navegar")
+                        Log.d("Login","Se ha llegado a navegar")
 
                     }
                 }
@@ -145,7 +145,7 @@ fun GoogleSignInButton(
 fun LogginButton(loginEnable: Boolean, login: () -> Unit) {
     Button(
         onClick = {
-            Log.d("Los muertos","Se ha hecho click al boton")
+            Log.d("Login","Se ha hecho click al boton")
             login()
                   },
         modifier = Modifier

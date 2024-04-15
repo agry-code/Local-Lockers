@@ -75,7 +75,7 @@ class RegisterViewModel : ViewModel() {
                 userId = id.toString(),
                 email = email.toString(),
                 userName = userName
-            )
+            ).toMap()
         FirebaseFirestore.getInstance().collection("Users")
             .add(user)
             .addOnSuccessListener {
