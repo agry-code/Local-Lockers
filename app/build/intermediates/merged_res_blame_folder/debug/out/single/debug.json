@@ -1,0 +1,118 @@
+[
+    {
+        "merged": "com.example.locallockers.app-merged_res-69:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.locallockers.app-main-71:/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.locallockers.app-merged_res-69:/drawable_icon_google.png.flat",
+        "source": "com.example.locallockers.app-main-71:/drawable/icon_google.png"
+    },
+    {
+        "merged": "com.example.locallockers.app-merged_res-69:/drawable_ojo_negativo.png.flat",
+        "source": "com.example.locallockers.app-main-71:/drawable/ojo_negativo.png"
+    },
+    {
+        "merged": "com.example.locallockers.app-merged_res-69:/xml_data_extraction_rules.xml.flat",
+        "source": "com.example.locallockers.app-main-71:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "com.example.locallockers.app-merged_res-69:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "com.example.locallockers.app-main-71:/mipmap-hdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.locallockers.app-merged_res-69:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "com.example.locallockers.app-main-71:/mipmap-xhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.locallockers.app-merged_res-69:/drawable_confi.png.flat",
+        "source": "com.example.locallockers.app-main-71:/drawable/confi.png"
+    },
+    {
+        "merged": "com.example.locallockers.app-merged_res-69:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.example.locallockers.app-main-71:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.example.locallockers.app-merged_res-69:/drawable_book.png.flat",
+        "source": "com.example.locallockers.app-main-71:/drawable/book.png"
+    },
+    {
+        "merged": "com.example.locallockers.app-merged_res-69:/drawable_confi_focus.png.flat",
+        "source": "com.example.locallockers.app-main-71:/drawable/confi_focus.png"
+    },
+    {
+        "merged": "com.example.locallockers.app-merged_res-69:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.example.locallockers.app-main-71:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.example.locallockers.app-merged_res-69:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.locallockers.app-main-71:/mipmap-xhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.locallockers.app-merged_res-69:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "com.example.locallockers.app-main-71:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.locallockers.app-merged_res-69:/drawable_ojo.jpg.flat",
+        "source": "com.example.locallockers.app-main-71:/drawable/ojo.jpg"
+    },
+    {
+        "merged": "com.example.locallockers.app-merged_res-69:/xml_backup_rules.xml.flat",
+        "source": "com.example.locallockers.app-main-71:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.example.locallockers.app-merged_res-69:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.example.locallockers.app-main-71:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.example.locallockers.app-merged_res-69:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.locallockers.app-main-71:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.locallockers.app-merged_res-69:/drawable_sardina2.png.flat",
+        "source": "com.example.locallockers.app-main-71:/drawable/sardina2.png"
+    },
+    {
+        "merged": "com.example.locallockers.app-merged_res-69:/drawable_map_focus.png.flat",
+        "source": "com.example.locallockers.app-main-71:/drawable/map_focus.png"
+    },
+    {
+        "merged": "com.example.locallockers.app-merged_res-69:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.locallockers.app-main-71:/mipmap-xxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.locallockers.app-merged_res-69:/drawable_list.png.flat",
+        "source": "com.example.locallockers.app-main-71:/drawable/list.png"
+    },
+    {
+        "merged": "com.example.locallockers.app-merged_res-69:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.locallockers.app-main-71:/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.locallockers.app-merged_res-69:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.locallockers.app-main-71:/mipmap-xxxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.locallockers.app-merged_res-69:/drawable_book_focus.png.flat",
+        "source": "com.example.locallockers.app-main-71:/drawable/book_focus.png"
+    },
+    {
+        "merged": "com.example.locallockers.app-merged_res-69:/drawable_map.png.flat",
+        "source": "com.example.locallockers.app-main-71:/drawable/map.png"
+    },
+    {
+        "merged": "com.example.locallockers.app-merged_res-69:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.locallockers.app-main-71:/mipmap-xxxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.locallockers.app-merged_res-69:/drawable_sardina.jpg.flat",
+        "source": "com.example.locallockers.app-main-71:/drawable/sardina.jpg"
+    },
+    {
+        "merged": "com.example.locallockers.app-merged_res-69:/drawable_list_focus.png.flat",
+        "source": "com.example.locallockers.app-main-71:/drawable/list_focus.png"
+    },
+    {
+        "merged": "com.example.locallockers.app-merged_res-69:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.example.locallockers.app-main-71:/mipmap-anydpi-v26/ic_launcher.xml"
+    }
+]
