@@ -1,4 +1,4 @@
-package com.example.locallockers.ui.theme.views.turista.main.views
+package com.example.locallockers.ui.theme.views.turista.main.views.maps
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.EnterTransition

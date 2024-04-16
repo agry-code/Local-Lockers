@@ -7,27 +7,18 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavController
 import com.example.locallockers.navigation.NavManager
 import com.example.locallockers.ui.theme.LocalLockersTheme
-import com.example.locallockers.ui.theme.views.login.ui.LoginScreen
 import com.example.locallockers.ui.theme.views.login.ui.LoginViewModel
-import com.example.locallockers.ui.theme.views.tabs.TabsViews
-import com.example.locallockers.ui.theme.views.turista.main.MainScreen
-import com.example.locallockers.ui.theme.views.turista.main.MainViewModel
-import com.google.firebase.FirebaseApp
-import com.google.firebase.appcheck.FirebaseAppCheck
-import com.google.firebase.appcheck.safetynet.SafetyNetAppCheckProviderFactory
+import com.example.locallockers.ui.theme.views.turista.main.views.maps.MapViewModel
+
 //AIzaSyBTA_bquHKAeJfOOLKNX-RxaA4_Cr7iPao
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val loginViewModel : LoginViewModel by viewModels()
-        val mainViewModel : MainViewModel by viewModels()
+        val mapViewModel : MapViewModel by viewModels()
 
         setContent {
             LocalLockersTheme {
@@ -35,7 +26,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    NavManager(mainViewModel)
+                    NavManager(mapViewModel)
                 }
             }
         }
