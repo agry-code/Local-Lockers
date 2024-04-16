@@ -6,25 +6,26 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.locallockers.ui.theme.views.login.ui.BlankView
 import com.example.locallockers.ui.theme.views.tabs.TabsViews
+import com.example.locallockers.ui.theme.views.turista.main.views.confi.ConfiScreen
 import com.example.locallockers.ui.theme.views.turista.main.views.maps.MainScreen
 import com.example.locallockers.ui.theme.views.turista.main.views.maps.MapViewModel
 import com.example.locallockers.ui.theme.views.turista.main.views.maps.MapsView
 
 @Composable
-fun NavManager(mapViewModel: MapViewModel){
+fun NavManager(mapViewModel: MapViewModel) {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = "Blank" ){
-        composable("Blank"){
+    NavHost(navController = navController, startDestination = "Blank") {
+        composable("Blank") {
             BlankView(navController)
         }
-        composable("TabsViews"){
+        composable("TabsViews") {
             TabsViews(navController)
         }
-        composable("Main"){
+        composable("Main") {
             MainScreen(navController, mapViewModel)
         }
-        composable("List"){
-
+        composable("Confi") {
+            ConfiScreen(navController, mapViewModel)
         }
 
     }

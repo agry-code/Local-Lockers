@@ -20,14 +20,14 @@ import com.example.locallockers.navigation.BottomNav
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(navController: NavController, mapViewModel: MapViewModel) {
-    Scaffold (
+    Scaffold(
         topBar = {
-            TopAppBar(title = { Text(text = "Turista")},
+            TopAppBar(title = { Text(text = "Turista") },
                 navigationIcon = {
                     IconButton(onClick = {
                         mapViewModel.signOut()
                         navController.popBackStack()
-                        }) {
+                    }) {
                         Icon(imageVector = Icons.Default.ExitToApp, contentDescription = "")
                     }
                 }
@@ -42,7 +42,6 @@ fun MainScreen(navController: NavController, mapViewModel: MapViewModel) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             MapsView()
-            //BottomNav()
         }
     }
 }

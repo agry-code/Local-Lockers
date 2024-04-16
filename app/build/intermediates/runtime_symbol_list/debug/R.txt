@@ -1064,6 +1064,7 @@ int drawable abc_textfield_search_activated_mtrl_alpha 0x7f060051
 int drawable abc_textfield_search_default_mtrl_alpha 0x7f060052
 int drawable abc_textfield_search_material 0x7f060053
 int drawable abc_vector_test 0x7f060054
+int drawable about_confi 0x7f060098
 int drawable book 0x7f060055
 int drawable book_focus 0x7f060056
 int drawable common_full_open_on_phone 0x7f060057
@@ -1087,6 +1088,8 @@ int drawable common_google_signin_btn_text_light_normal 0x7f060068
 int drawable common_google_signin_btn_text_light_normal_background 0x7f060069
 int drawable confi 0x7f06006a
 int drawable confi_focus 0x7f06006b
+int drawable contact_confi 0x7f060099
+int drawable feedback_confi 0x7f06009a
 int drawable googleg_disabled_color_18 0x7f06006c
 int drawable googleg_standard_color_18 0x7f06006d
 int drawable ic_call_answer 0x7f06006e
@@ -1097,11 +1100,13 @@ int drawable ic_call_decline 0x7f060072
 int drawable ic_call_decline_low 0x7f060073
 int drawable ic_launcher_background 0x7f060074
 int drawable ic_launcher_foreground 0x7f060075
+int drawable ic_profile_card_image 0x7f060095
 int drawable icon_google 0x7f060076
 int drawable list 0x7f060077
 int drawable list_focus 0x7f060078
 int drawable map 0x7f060079
 int drawable map_focus 0x7f06007a
+int drawable more_customization_confi 0x7f060096
 int drawable notification_action_background 0x7f06007b
 int drawable notification_bg 0x7f06007c
 int drawable notification_bg_low 0x7f06007d
@@ -1109,6 +1114,7 @@ int drawable notification_bg_low_normal 0x7f06007e
 int drawable notification_bg_low_pressed 0x7f06007f
 int drawable notification_bg_normal 0x7f060080
 int drawable notification_bg_normal_pressed 0x7f060081
+int drawable notification_confi 0x7f060097
 int drawable notification_icon_background 0x7f060082
 int drawable notification_oversize_large_icon_bg 0x7f060083
 int drawable notification_template_icon_bg 0x7f060084
@@ -1120,6 +1126,7 @@ int drawable ojo_negativo 0x7f060089
 int drawable places_autocomplete_toolbar_shadow 0x7f06008a
 int drawable places_powered_by_google_dark 0x7f06008b
 int drawable places_powered_by_google_light 0x7f06008c
+int drawable privacy_confi 0x7f06009b
 int drawable quantum_ic_arrow_back_grey600_24 0x7f06008d
 int drawable quantum_ic_clear_grey600_24 0x7f06008e
 int drawable quantum_ic_cloud_off_vd_theme_24 0x7f06008f
@@ -1128,6 +1135,9 @@ int drawable sardina 0x7f060091
 int drawable sardina2 0x7f060092
 int drawable tooltip_frame_dark 0x7f060093
 int drawable tooltip_frame_light 0x7f060094
+int font font 0x7f100000
+int font poppins 0x7f100001
+int font reemkufi 0x7f100002
 int id ALT 0x7f070000
 int id CTRL 0x7f070001
 int id FUNCTION 0x7f070002

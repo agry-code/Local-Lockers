@@ -1065,6 +1065,7 @@ drawable abc_textfield_search_activated_mtrl_alpha
 drawable abc_textfield_search_default_mtrl_alpha
 drawable abc_textfield_search_material
 drawable abc_vector_test
+drawable about_confi
 drawable book
 drawable book_focus
 drawable common_full_open_on_phone
@@ -1088,6 +1089,8 @@ drawable common_google_signin_btn_text_light_normal
 drawable common_google_signin_btn_text_light_normal_background
 drawable confi
 drawable confi_focus
+drawable contact_confi
+drawable feedback_confi
 drawable googleg_disabled_color_18
 drawable googleg_standard_color_18
 drawable ic_call_answer
@@ -1098,11 +1101,13 @@ drawable ic_call_decline
 drawable ic_call_decline_low
 drawable ic_launcher_background
 drawable ic_launcher_foreground
+drawable ic_profile_card_image
 drawable icon_google
 drawable list
 drawable list_focus
 drawable map
 drawable map_focus
+drawable more_customization_confi
 drawable notification_action_background
 drawable notification_bg
 drawable notification_bg_low
@@ -1110,6 +1115,7 @@ drawable notification_bg_low_normal
 drawable notification_bg_low_pressed
 drawable notification_bg_normal
 drawable notification_bg_normal_pressed
+drawable notification_confi
 drawable notification_icon_background
 drawable notification_oversize_large_icon_bg
 drawable notification_template_icon_bg
@@ -1121,6 +1127,7 @@ drawable ojo_negativo
 drawable places_autocomplete_toolbar_shadow
 drawable places_powered_by_google_dark
 drawable places_powered_by_google_light
+drawable privacy_confi
 drawable quantum_ic_arrow_back_grey600_24
 drawable quantum_ic_clear_grey600_24
 drawable quantum_ic_cloud_off_vd_theme_24
@@ -1129,6 +1136,9 @@ drawable sardina
 drawable sardina2
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
+font font
+font poppins
+font reemkufi
 id ALT
 id CTRL
 id FUNCTION

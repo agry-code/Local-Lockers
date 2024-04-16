@@ -18,15 +18,15 @@ sealed class BottomBarScreen (
 
     //for listScreen
     object List: BottomBarScreen(
-        route = "TabsViews",
-        title = "TabsViews",
+        route = "List",
+        title = "Listado",
         icon = R.drawable.list,
         icon_focused = R.drawable.list_focus
     )
 
     //for bookScreen
     object Book: BottomBarScreen(
-        route = "book",
+        route = "Book",
         title = "Book",
         icon = R.drawable.book,
         icon_focused = R.drawable.book_focus
@@ -34,7 +34,7 @@ sealed class BottomBarScreen (
 
     //for confiScreen
     object Confi: BottomBarScreen(
-        route = "confi",
+        route = "Confi",
         title = "Confi",
         icon = R.drawable.confi,
         icon_focused = R.drawable.confi_focus
