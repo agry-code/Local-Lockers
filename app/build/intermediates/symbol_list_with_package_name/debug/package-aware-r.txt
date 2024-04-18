@@ -1091,6 +1091,7 @@ drawable confi
 drawable confi_focus
 drawable contact_confi
 drawable feedback_confi
+drawable flecha_derecha
 drawable googleg_disabled_color_18
 drawable googleg_standard_color_18
 drawable ic_call_answer
@@ -1539,6 +1540,7 @@ string default_popup_window_title
 string default_web_client_id
 string dialog
 string dropdown_menu
+string email_no_disponible
 string expanded
 string fallback_menu_item_copy_link
 string fallback_menu_item_open_in_browser
@@ -1590,6 +1592,7 @@ string time_picker_pm
 string token
 string tooltip_long_press_label
 string tooltip_pane_description
+string tu_perfil
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
 style Animation_AppCompat_Dialog

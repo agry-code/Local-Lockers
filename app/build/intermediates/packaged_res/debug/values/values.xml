@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <string name="app_name">Local Lockers</string>
     <string name="default_web_client_id" translatable="false">737784074734-fo1cdue2jte8ho2s0qq5nb1sjtfuqno7.apps.googleusercontent.com</string>
+    <string name="email_no_disponible">Email no disponible</string>
     <string name="gcm_defaultSenderId" translatable="false">737784074734</string>
     <string name="google_api_key" translatable="false">AIzaSyC2P8i4eVQK6ETw-tw5vZr-TDK1GwuYzVQ</string>
     <string name="google_app_id" translatable="false">1:737784074734:android:406405c00598de5705feff</string>
@@ -16,5 +17,6 @@
     <string name="google_storage_bucket" translatable="false">locallockers-30dec.appspot.com</string>
     <string name="project_id" translatable="false">locallockers-30dec</string>
     <string name="token">737784074734-fo1cdue2jte8ho2s0qq5nb1sjtfuqno7.apps.googleusercontent.com</string>
+    <string name="tu_perfil">Tu perfil</string>
     <style name="Theme.LocalLockers" parent="android:Theme.Material.Light.NoActionBar"/>
 </resources>

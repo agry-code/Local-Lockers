@@ -14,6 +14,7 @@ drawable confi
 drawable confi_focus
 drawable contact_confi
 drawable feedback_confi
+drawable flecha_derecha
 drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable ic_profile_card_image
@@ -36,6 +37,7 @@ mipmap ic_launcher
 mipmap ic_launcher_round
 string app_name
 string default_web_client_id
+string email_no_disponible
 string gcm_defaultSenderId
 string google_api_key
 string google_app_id
@@ -43,6 +45,7 @@ string google_crash_reporting_api_key
 string google_storage_bucket
 string project_id
 string token
+string tu_perfil
 style Theme.LocalLockers
 xml backup_rules
 xml data_extraction_rules

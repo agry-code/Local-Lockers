@@ -67,8 +67,9 @@ class RegisterViewModel : ViewModel() {
             }
         }
     }
-    private fun saveUser(userName:String){
-        val id = auth.currentUser?.uid
+    //Usa userId es facil de obtener información pero es menos segura
+    private fun saveUser(userName: String) {
+        val id = auth.currentUser?.uid  // UID del usuario autenticado
         val email = auth.currentUser?.email
         viewModelScope.launch(Dispatchers.IO) {
             val user = UserModel(
@@ -76,16 +77,41 @@ class RegisterViewModel : ViewModel() {
                 email = email.toString(),
                 userName = userName
             ).toMap()
-        FirebaseFirestore.getInstance().collection("Users")
-            .add(user)
-            .addOnSuccessListener {
-                Log.d("Guardado","Guardado correctamente")
-
-            }.addOnFailureListener {
-                Log.d("Error al guardar","Error al guardar en Firestore")
+            if (id != null) {
+                FirebaseFirestore.getInstance().collection("Users")
+                    .document(id)  // Usa el UID como el Document ID
+                    .set(user)
+                    .addOnSuccessListener {
+                        Log.d("Guardado", "Guardado correctamente")
+                    }
+                    .addOnFailureListener {
+                        Log.d("Error al guardar", "Error al guardar en Firestore")
+                    }
             }
         }
     }
+
+
+    //USA documentID es menos eficiente pero mas seguro
+//    private fun saveUser(userName:String){
+//        val id = auth.currentUser?.uid
+//        val email = auth.currentUser?.email
+//        viewModelScope.launch(Dispatchers.IO) {
+//            val user = UserModel(
+//                userId = id.toString(),
+//                email = email.toString(),
+//                userName = userName
+//            ).toMap()
+//        FirebaseFirestore.getInstance().collection("Users")
+//            .add(user)
+//            .addOnSuccessListener {
+//                Log.d("Guardado","Guardado correctamente")
+//
+//            }.addOnFailureListener {
+//                Log.d("Error al guardar","Error al guardar en Firestore")
+//            }
+//        }
+//    }
     fun closeAlert(){
         showAlert = false
     }

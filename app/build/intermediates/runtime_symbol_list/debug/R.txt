@@ -1090,6 +1090,7 @@ int drawable confi 0x7f06006a
 int drawable confi_focus 0x7f06006b
 int drawable contact_confi 0x7f060099
 int drawable feedback_confi 0x7f06009a
+int drawable flecha_derecha 0x7f06009c
 int drawable googleg_disabled_color_18 0x7f06006c
 int drawable googleg_standard_color_18 0x7f06006d
 int drawable ic_call_answer 0x7f06006e
@@ -1538,6 +1539,7 @@ int string default_popup_window_title 0x7f0c006a
 int string default_web_client_id 0x7f0c006b
 int string dialog 0x7f0c006c
 int string dropdown_menu 0x7f0c006d
+int string email_no_disponible 0x7f0c00a2
 int string expanded 0x7f0c006e
 int string fallback_menu_item_copy_link 0x7f0c006f
 int string fallback_menu_item_open_in_browser 0x7f0c0070
@@ -1589,6 +1591,7 @@ int string time_picker_pm 0x7f0c009d
 int string token 0x7f0c009e
 int string tooltip_long_press_label 0x7f0c009f
 int string tooltip_pane_description 0x7f0c00a0
+int string tu_perfil 0x7f0c00a1
 int style AlertDialog_AppCompat 0x7f0d0000
 int style AlertDialog_AppCompat_Light 0x7f0d0001
 int style Animation_AppCompat_Dialog 0x7f0d0002
