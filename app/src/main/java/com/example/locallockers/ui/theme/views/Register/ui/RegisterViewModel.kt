@@ -90,28 +90,6 @@ class RegisterViewModel : ViewModel() {
             }
         }
     }
-
-
-    //USA documentID es menos eficiente pero mas seguro
-//    private fun saveUser(userName:String){
-//        val id = auth.currentUser?.uid
-//        val email = auth.currentUser?.email
-//        viewModelScope.launch(Dispatchers.IO) {
-//            val user = UserModel(
-//                userId = id.toString(),
-//                email = email.toString(),
-//                userName = userName
-//            ).toMap()
-//        FirebaseFirestore.getInstance().collection("Users")
-//            .add(user)
-//            .addOnSuccessListener {
-//                Log.d("Guardado","Guardado correctamente")
-//
-//            }.addOnFailureListener {
-//                Log.d("Error al guardar","Error al guardar en Firestore")
-//            }
-//        }
-//    }
     fun closeAlert(){
         showAlert = false
     }

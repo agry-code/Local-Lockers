@@ -19,7 +19,7 @@ import com.example.locallockers.navigation.BottomNav
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen(navController: NavController, mapViewModel: MapViewModel) {
+fun MainScreen(navController: NavController, mapViewModel: MapViewModel, userRol: String) {
     Scaffold(
         topBar = {
             TopAppBar(title = { Text(text = "Turista") },
@@ -34,7 +34,7 @@ fun MainScreen(navController: NavController, mapViewModel: MapViewModel) {
             )
         },
         bottomBar = {
-            BottomNav(navController)
+            BottomNav(navController,userRol)
         }
     ) { pad ->
         Column(

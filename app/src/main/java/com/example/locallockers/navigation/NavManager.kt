@@ -5,6 +5,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.locallockers.ui.theme.views.login.ui.BlankView
+import com.example.locallockers.ui.theme.views.login.ui.LoginViewModel
 import com.example.locallockers.ui.theme.views.tabs.TabsViews
 import com.example.locallockers.ui.theme.views.turista.main.views.confi.ConfiScreen
 import com.example.locallockers.ui.theme.views.turista.main.views.maps.MainScreen
@@ -12,8 +13,10 @@ import com.example.locallockers.ui.theme.views.turista.main.views.maps.MapViewMo
 import com.example.locallockers.ui.theme.views.turista.main.views.maps.MapsView
 
 @Composable
-fun NavManager(mapViewModel: MapViewModel) {
+fun NavManager(loginViewModel: LoginViewModel, mapViewModel: MapViewModel) {
     val navController = rememberNavController()
+    val userRole = loginViewModel.userRole.value  // Observa el rol del usuario
+
     NavHost(navController = navController, startDestination = "Blank") {
         composable("Blank") {
             BlankView(navController)
@@ -22,10 +25,10 @@ fun NavManager(mapViewModel: MapViewModel) {
             TabsViews(navController)
         }
         composable("Main") {
-            MainScreen(navController, mapViewModel)
+            MainScreen(navController, mapViewModel,userRole)
         }
         composable("Confi") {
-            ConfiScreen(navController, mapViewModel)
+            ConfiScreen(navController, mapViewModel,userRole)
         }
 
     }

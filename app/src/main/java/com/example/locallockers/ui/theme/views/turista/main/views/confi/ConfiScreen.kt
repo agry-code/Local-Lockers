@@ -28,7 +28,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ConfiScreen(navController: NavController, mapViewModel: MapViewModel) {
+fun ConfiScreen(navController: NavController, mapViewModel: MapViewModel, userRol: String) {
     val userViewModel : UserViewModel = viewModel()
     val user by userViewModel.currentUser.observeAsState()
     Scaffold(
@@ -44,7 +44,7 @@ fun ConfiScreen(navController: NavController, mapViewModel: MapViewModel) {
                 })
         },
         bottomBar = {
-            BottomNav(navController)
+            BottomNav(navController,userRol)
         }
     ) { pad ->
         Column(

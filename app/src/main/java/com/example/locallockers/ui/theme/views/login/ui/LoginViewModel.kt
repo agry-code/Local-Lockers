@@ -13,11 +13,14 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import com.google.firebase.firestore.firestore
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
 class LoginViewModel : ViewModel() {
     private val auth: FirebaseAuth = Firebase.auth
     var showAlert by mutableStateOf(false)
+
     private val _email = MutableLiveData<String>()
     val email: LiveData<String> = _email
 
@@ -27,21 +30,38 @@ class LoginViewModel : ViewModel() {
     private val _loginEnable = MutableLiveData<Boolean>()
     val loginEnable: LiveData<Boolean> = _loginEnable
 
+    var userRole = mutableStateOf("Huesped")// No se modifica el userRole
 
-    fun login (email: String, password: String, onSucess:() -> Unit){
+    private fun fetchUserRole(onRoleFetched: () -> Unit) {
+        auth.currentUser?.let { user ->
+            val userId = user.uid
+            val db = Firebase.firestore
+            db.collection("Users").document(userId).get().addOnSuccessListener { document ->
+                val role = document.getString("role") ?: "Turista"  // Asumiendo "Turista" como rol por defecto
+                userRole.value = role
+                Log.d("Firebase", "El rol del usuario es: ${role}")
+                onRoleFetched()  // Llamada al callback
+            }.addOnFailureListener {
+                Log.d("Firebase", "Error al obtener el rol del usuario: ${it.message}")
+            }
+        }
+    }
+
+    fun login(email: String, password: String, onSuccess: () -> Unit) {
         viewModelScope.launch {
             try {
-                auth.signInWithEmailAndPassword(email,password).addOnCompleteListener{
-                    task->
-                    if(task.isSuccessful){
-                        onSucess()
-                    }else{
-                        Log.d("Error en Firebase","Usuario o contraseña incorrecto")
+                auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        fetchUserRole {
+                            onSuccess()  // Esto se llama después de actualizar el rol
+                        }
+                    } else {
+                        Log.d("Error en Firebase", "Usuario o contraseña incorrecto")
                         showAlert = true
                     }
                 }
-            }catch (e:Exception){
-                Log.d("Error en Jetpack","Error ${e.localizedMessage}")
+            } catch (e: Exception) {
+                Log.d("Error en Jetpack", "Error ${e.localizedMessage}")
             }
         }
     }
@@ -69,6 +89,7 @@ class LoginViewModel : ViewModel() {
         _email.value = email
         _password.value = password
         _loginEnable.value = isValidEmail(email) && isValidPass(password)
+
     }
 
     private fun isValidEmail(email: String): Boolean =

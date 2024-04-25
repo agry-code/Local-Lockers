@@ -9,7 +9,7 @@ import com.google.firebase.auth.FirebaseAuth
 fun BlankView(navController: NavController){
     LaunchedEffect(Unit){
         if (!FirebaseAuth.getInstance().currentUser?.email.isNullOrEmpty()){
-            navController.navigate("Main")
+            navController.navigate("Confi")
         }else{
             navController.navigate("TabsViews")
         }

@@ -1,6 +1,5 @@
 package com.example.locallockers.navigation
 
-import android.annotation.SuppressLint
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -14,7 +13,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -23,33 +21,27 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
-import com.example.locallockers.ui.theme.views.turista.main.views.maps.MapViewModel
 
 @Composable
-fun BottomNav(navController: NavController) {
-    BottomBar(navController = navController)
+fun BottomNav(navController: NavController, userRole: String) {
+    val screens = when (userRole) {
+        "Turista" -> listOf(BottomBarScreen.Map, BottomBarScreen.Confi)
+        "Huesped" -> listOf(BottomBarScreen.Confi)
+        else -> emptyList()  // Puedes definir un caso por defecto si lo consideras necesario
+    }
+    BottomBar(navController = navController, screens = screens)
 }
 
-
 @Composable
-fun BottomBar(navController: NavController) {
-    val screens = listOf(
-        BottomBarScreen.Map,
-        BottomBarScreen.List,
-        BottomBarScreen.Book,
-        BottomBarScreen.Confi
-    )
-
-    val navStackbackEntry by navController.currentBackStackEntryAsState()
-    val currentDestination = navStackbackEntry?.destination
+fun BottomBar(navController: NavController, screens: List<BottomBarScreen>) {
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentDestination = navBackStackEntry?.destination
 
     Row(
         modifier = Modifier
@@ -68,7 +60,6 @@ fun BottomBar(navController: NavController) {
         }
     }
 }
-
 @Composable
 fun RowScope.AddItem(
     screen: BottomBarScreen,
