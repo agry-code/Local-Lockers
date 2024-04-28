@@ -9,12 +9,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.locallockers.model.UserModel
 import com.google.firebase.Firebase
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class LoginViewModel : ViewModel() {
@@ -30,42 +35,60 @@ class LoginViewModel : ViewModel() {
     private val _loginEnable = MutableLiveData<Boolean>()
     val loginEnable: LiveData<Boolean> = _loginEnable
 
-    var userRole = mutableStateOf("Huesped")// No se modifica el userRole
+    private val _currentUser = MutableStateFlow<UserModel?>(null)
+    val currentUser: StateFlow<UserModel?> = _currentUser.asStateFlow()
 
-    private fun fetchUserRole(onRoleFetched: () -> Unit) {
-        auth.currentUser?.let { user ->
-            val userId = user.uid
-            val db = Firebase.firestore
-            db.collection("Users").document(userId).get().addOnSuccessListener { document ->
-                val role = document.getString("role") ?: "Turista"  // Asumiendo "Turista" como rol por defecto
-                userRole.value = role
-                Log.d("Firebase", "El rol del usuario es: ${role}")
-                onRoleFetched()  // Llamada al callback
-            }.addOnFailureListener {
-                Log.d("Firebase", "Error al obtener el rol del usuario: ${it.message}")
-            }
-        }
-    }
+    var isLoading by mutableStateOf(false)
 
-    fun login(email: String, password: String, onSuccess: () -> Unit) {
-        viewModelScope.launch {
-            try {
-                auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        fetchUserRole {
-                            onSuccess()  // Esto se llama después de actualizar el rol
-                        }
-                    } else {
-                        Log.d("Error en Firebase", "Usuario o contraseña incorrecto")
-                        showAlert = true
-                    }
+    private var searchJob: Job? = null
+
+
+    private fun fetchUserDetails(onDetailsFetched: () -> Unit) {
+        isLoading = true
+        auth.currentUser?.let { firebaseUser ->
+            val userId = firebaseUser.uid
+            Firebase.firestore.collection("Users").document(userId).get().addOnSuccessListener { document ->
+                viewModelScope.launch {
+                    _currentUser.emit(UserModel(
+                        userId = document.getString("userId") ?: userId,
+                        email = document.getString("email") ?: "",
+                        userName = document.getString("userName") ?: "",
+                        role = document.getString("role") ?: "Turista"
+                    ))
+                    onDetailsFetched()
+                    isLoading = false
                 }
-            } catch (e: Exception) {
-                Log.d("Error en Jetpack", "Error ${e.localizedMessage}")
+            }.addOnFailureListener {
+                isLoading = false
+                Log.d("Firebase", "Error al obtener los detalles del usuario: ${it.message}")
             }
         }
     }
 
+fun login(email: String, password: String, onSuccess: () -> Unit) {
+    viewModelScope.launch {
+        isLoading = true
+        try {
+            auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    fetchUserDetails {
+                        onSuccess()
+                        isLoading = false
+                        Log.d("ProblemaRol", "Detalles del usuario actualizados LVM : ${_currentUser.value}")
+                    }
+                } else {
+                    isLoading = false
+                    Log.d("Error en Firebase", "Usuario o contraseña incorrecto: ${task.exception?.message}")
+                    showAlert = true
+                }
+            }
+        } catch (e: Exception) {
+            isLoading = false
+            Log.d("Error en Jetpack", "Error durante el login: ${e.localizedMessage}")
+            showAlert = true
+        }
+    }
+}
 
     fun signInWithGoogleCredential(credential: AuthCredential, home:() -> Unit)
     = viewModelScope.launch {
@@ -89,7 +112,6 @@ class LoginViewModel : ViewModel() {
         _email.value = email
         _password.value = password
         _loginEnable.value = isValidEmail(email) && isValidPass(password)
-
     }
 
     private fun isValidEmail(email: String): Boolean =
@@ -98,5 +120,44 @@ class LoginViewModel : ViewModel() {
 
     fun closeAlert(){
         showAlert = false
+    }
+    fun fetchUserDetailsByEmail(email: String) {
+        isLoading = true
+        Firebase.firestore.collection("Users")
+            .whereEqualTo("email", email)
+            .get()
+            .addOnSuccessListener { documents ->
+                if (!documents.isEmpty) {
+                    val document = documents.documents.first()
+                    viewModelScope.launch {
+                        _currentUser.emit(UserModel(
+                            userId = document.getString("userId") ?: "",
+                            email = document.getString("email") ?: "",
+                            userName = document.getString("userName") ?: "",
+                            role = document.getString("role") ?: "Turista"
+                        ))
+                        Log.d("ProblemaRol", "Detalles del usuario actualizados LVM : ${_currentUser.value}")
+                        isLoading = false
+                    }
+                } else {
+                    isLoading = false
+                    Log.d("ProblemaRol", "No se encontró el usuario con el correo: $email")
+                }
+            }
+            .addOnFailureListener {
+                isLoading = false
+                Log.d("ProblemaRol", "Error al buscar el usuario: ${it.message}")
+            }
+    }
+    fun onEmailChangedDebounced(email: String) {
+        _email.value = email
+        _loginEnable.value = isValidEmail(email) && isValidPass(_password.value ?: "")
+
+        //Lo uso para el delay y para comprobar el email constantemente
+        searchJob?.cancel()  // Cancela cualquier trabajo existente si el usuario sigue escribiendo
+        searchJob = viewModelScope.launch {
+            delay(1000)  // Retraso de 500 milisegundos
+            fetchUserDetailsByEmail(email)  // Llama a tu función que realiza la operación de red
+        }
     }
 }

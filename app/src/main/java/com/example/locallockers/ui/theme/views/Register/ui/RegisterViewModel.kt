@@ -75,7 +75,8 @@ class RegisterViewModel : ViewModel() {
             val user = UserModel(
                 userId = id.toString(),
                 email = email.toString(),
-                userName = userName
+                userName = userName,
+                role = "Turista",
             ).toMap()
             if (id != null) {
                 FirebaseFirestore.getInstance().collection("Users")

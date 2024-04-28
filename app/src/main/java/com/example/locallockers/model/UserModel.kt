@@ -1,8 +1,9 @@
 package com.example.locallockers.model
 
 data class UserModel(
-    val userId: String,
     val email: String,
+    val role: String,
+    val userId: String,
     val userName: String,
 ){
     fun toMap() : MutableMap<String,Any>{
@@ -10,6 +11,7 @@ data class UserModel(
             "userId" to this.userId,
             "email" to this.email,
             "userName" to this.userName,
+            "role" to this.role,
         )
     }
 

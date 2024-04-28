@@ -32,7 +32,8 @@ class UserViewModel : ViewModel() {
                         currentUser.value = UserModel(
                             userId = firebaseUser.uid,
                             email = email,
-                            userName = userName
+                            userName = userName,
+                            role = "Turista" //MODIFICAR POR SI ES HUESPED SE QUEDE HUESPED
                         )
                     } else {
                         Log.d("Firestore", "No such document")
@@ -40,7 +41,8 @@ class UserViewModel : ViewModel() {
                         currentUser.value = UserModel(
                             userId = firebaseUser.uid,
                             email = firebaseUser.email ?: "",
-                            userName = "Default Name"
+                            userName = "Default Name",
+                            role = "Turista" /*TODO*/
                         )
                     }
                 }

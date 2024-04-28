@@ -19,6 +19,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Text
@@ -44,16 +45,24 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.GoogleAuthProvider
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
 fun LoginScreen(viewModel: LoginViewModel, navController: NavController) {
-    Box(
-        Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
-        Login(Modifier.align(Alignment.Center), viewModel, navController)
+    val isLoading = viewModel.isLoading
+    if (isLoading) {
+        Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
+            CircularProgressIndicator()
+        }
+    } else {
+        Box(
+            Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+        ) {
+            Login(Modifier.align(Alignment.Center), viewModel, navController)
+        }
     }
 }
 
@@ -72,42 +81,39 @@ fun Login(modifier: Modifier, viewModel: LoginViewModel, navController: NavContr
                 viewModel.signInWithGoogleCredential(credential) {
                     //función para navegar a un home screen
                     Log.d("LocakLocker", "Se ha logeado correctamente con SignIn")
-                    navController.navigate("Main")
+                    navController.navigate("Confi")
                 }
             } catch (ex: Exception) {
                 Log.d("LocalLocker", "Google SignInFallo")
             }
         }
 
-        Column(modifier = modifier) {
-            HeaderImage(Modifier.align(Alignment.CenterHorizontally))
-            Spacer(modifier = Modifier.padding(16.dp))
-            EmailField(email, { viewModel.onLoginChanged(it, password) })
-            Spacer(modifier = Modifier.padding(4.dp))
-            PasswordField(password, { viewModel.onLoginChanged(email, it) })
-            Spacer(modifier = Modifier.padding(8.dp))
-            ForgotPassword(Modifier.align(Alignment.End))
-            Spacer(modifier = Modifier.padding(16.dp))
-            LogginButton(loginEnable) {
-                coroutineScope.launch {
-                    viewModel.login(email,password){
-                        Log.d("Login","Se ha llegado a logear")
-                        navController.navigate("Main")
-                        Log.d("Login","Se ha llegado a navegar")
-
-                    }
-                }
-            }
-            GoogleSignInButton(launcher)
-            if(viewModel.showAlert){
-                Alert(title = "Alerta",
-                    msg = "Usuario o contraseña erronea",
-                    confirmText = "Aceptar",
-                    onConfirmClick = { viewModel.closeAlert() }) {
+    Column(modifier = modifier) {
+        HeaderImage(Modifier.align(Alignment.CenterHorizontally))
+        Spacer(modifier = Modifier.padding(16.dp))
+        EmailField(email, { viewModel.onLoginChanged(it, password)}, viewModel )
+        Spacer(modifier = Modifier.padding(4.dp))
+        PasswordField(password, { viewModel.onLoginChanged(email, it) })
+        Spacer(modifier = Modifier.padding(8.dp))
+        ForgotPassword(Modifier.align(Alignment.End))
+        Spacer(modifier = Modifier.padding(16.dp))
+        LogginButton(loginEnable) {
+            coroutineScope.launch {
+                viewModel.login(email, password) {
+                    navController.navigate("Main")
                 }
             }
         }
+        GoogleSignInButton(launcher)
+        if (viewModel.showAlert) {
+            Alert(title = "Alerta",
+                msg = "Usuario o contraseña erronea",
+                confirmText = "Aceptar",
+                onConfirmClick = { viewModel.closeAlert() }) {
+            }
+        }
     }
+}
 
 
 @Composable
@@ -133,10 +139,13 @@ fun GoogleSignInButton(
             .padding(vertical = 8.dp),
         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4285F4))
     ) {
-        Image(painter = painterResource(id = R.drawable.icon_google), contentDescription ="Contend descripcion",
+        Image(
+            painter = painterResource(id = R.drawable.icon_google),
+            contentDescription = "Contend descripcion",
             modifier = Modifier
                 .padding(10.dp)
-                .size(40.dp))
+                .size(40.dp)
+        )
         Text(text = "Iniciar sesión con Google", color = Color.White)
     }
 }
@@ -145,9 +154,9 @@ fun GoogleSignInButton(
 fun LogginButton(loginEnable: Boolean, login: () -> Unit) {
     Button(
         onClick = {
-            Log.d("Login","Se ha hecho click al boton")
+            Log.d("Login", "Se ha hecho click al boton")
             login()
-                  },
+        },
         modifier = Modifier
             .fillMaxWidth()
             .height(48.dp),
@@ -194,10 +203,18 @@ fun PasswordField(password: String, onTextFieldChanged: (String) -> Unit) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EmailField(email: String, onTextFieldChanged: (String) -> Unit) {
+fun EmailField(email: String, onTextFieldChanged: (String) -> Unit, viewModel: LoginViewModel) {
     TextField(
         value = email,
-        onValueChange = { onTextFieldChanged(it) },
+        onValueChange = {
+/*          Este metodo reinicia cada vez qe se escribe la pantalla
+            onTextFieldChanged(it)
+            viewModel.fetchUserDetailsByEmail(it)*/
+            //Y este es mas warro porqe lo hace cada 10 segundos
+            onTextFieldChanged(it)
+            viewModel.onEmailChangedDebounced(it)
+
+        },
         modifier = Modifier.fillMaxWidth(),
         placeholder = { Text(text = "Email") },
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),

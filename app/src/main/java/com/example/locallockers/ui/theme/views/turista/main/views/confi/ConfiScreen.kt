@@ -1,6 +1,7 @@
 package com.example.locallockers.ui.theme.views.turista.main.views.confi
 
 import UserViewModel
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -45,6 +46,7 @@ fun ConfiScreen(navController: NavController, mapViewModel: MapViewModel, userRo
         },
         bottomBar = {
             BottomNav(navController,userRol)
+            Log.d("ProblemaRol","User Confi: ${user.toString()}")
         }
     ) { pad ->
         Column(
