@@ -100,7 +100,7 @@ fun Login(modifier: Modifier, viewModel: LoginViewModel, navController: NavContr
         LogginButton(loginEnable) {
             coroutineScope.launch {
                 viewModel.login(email, password) {
-                    navController.navigate("Main")
+                    navController.navigate("Confi")
                 }
             }
         }

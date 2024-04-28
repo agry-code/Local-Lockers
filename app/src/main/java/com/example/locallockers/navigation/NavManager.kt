@@ -17,32 +17,18 @@ import com.example.locallockers.ui.theme.views.tabs.TabsViews
 import com.example.locallockers.ui.theme.views.turista.main.views.confi.ConfiScreen
 import com.example.locallockers.ui.theme.views.turista.main.views.maps.MainScreen
 import com.example.locallockers.ui.theme.views.turista.main.views.maps.MapViewModel
+
 @Composable
 fun NavManager(loginViewModel: LoginViewModel, mapViewModel: MapViewModel) {
     val navController = rememberNavController()
-    val userModel = loginViewModel.currentUser.collectAsState().value //siempre es null
-    val email: String by loginViewModel.email.observeAsState(initial = "") //siempre es null
-
-
-    LaunchedEffect(Unit) {
-        Log.d("ProblemaRol", "NM LaunchedEffect userModel: $userModel")
-        loginViewModel.fetchUserDetailsByEmail(email)
-        Log.d("ProblemaRol", "NM LaunchedEffect userModel: $email")
-
-    }
 
     if (loginViewModel.isLoading) {
         CircularProgressIndicator()
-        Log.d("ProblemaRol", "NM isLoading: userModel is $userModel")
     } else {
-        Log.d("ProblemaRol", "NM Before NavHost: userModel is $userModel")
         NavHost(navController = navController, startDestination = "Blank") {
             composable("Blank") { BlankView(navController) }
             composable("TabsViews") { TabsViews(navController) }
-            composable("Main") {
-                Log.d("ProblemaRol", "NM In Main: userModel is $userModel")
-                MainScreen(navController, mapViewModel)
-            }
+            composable("Main") { MainScreen(navController, mapViewModel) }
             composable("Confi") { ConfiScreen(navController, mapViewModel) }
         }
     }
