@@ -42,6 +42,35 @@ class LoginViewModel : ViewModel() {
 
     private var searchJob: Job? = null
 
+    init {
+        loadInitialData()
+    }
+    private fun loadInitialData() {
+        viewModelScope.launch {
+            isLoading = true
+            val currentUser = auth.currentUser
+            if (currentUser != null) {
+                val userId = currentUser.uid
+                Firebase.firestore.collection("Users").document(userId).get().addOnSuccessListener { document ->
+                    viewModelScope.launch {  // Asegurarse de que emit se llama dentro de una coroutine
+                        _currentUser.emit(UserModel(
+                            userId = document.getString("userId") ?: userId,
+                            email = document.getString("email") ?: "",
+                            userName = document.getString("userName") ?: "",
+                            role = document.getString("role") ?: "Turista"
+                        ))
+                        isLoading = false
+                    }
+                }.addOnFailureListener { exception ->
+                    isLoading = false
+                    Log.d("LoginVM", "Error al cargar los datos del usuario: ${exception.message}")
+                }
+            } else {
+                isLoading = false
+                Log.d("LoginVM", "No hay usuario autenticado al inicializar")
+            }
+        }
+    }
 
     private fun fetchUserDetails(onDetailsFetched: () -> Unit) {
         isLoading = true

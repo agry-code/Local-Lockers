@@ -5,6 +5,8 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -16,12 +18,17 @@ import com.example.locallockers.ui.theme.views.turista.main.views.confi.ConfiScr
 import com.example.locallockers.ui.theme.views.turista.main.views.maps.MainScreen
 import com.example.locallockers.ui.theme.views.turista.main.views.maps.MapViewModel
 @Composable
-fun NavManager(loginViewModel: LoginViewModel = viewModel(), mapViewModel: MapViewModel = viewModel()) {
+fun NavManager(loginViewModel: LoginViewModel, mapViewModel: MapViewModel) {
     val navController = rememberNavController()
-    val userModel = loginViewModel.currentUser.collectAsState().value
+    val userModel = loginViewModel.currentUser.collectAsState().value //siempre es null
+    val email: String by loginViewModel.email.observeAsState(initial = "") //siempre es null
 
-    LaunchedEffect(userModel) {
+
+    LaunchedEffect(Unit) {
         Log.d("ProblemaRol", "NM LaunchedEffect userModel: $userModel")
+        loginViewModel.fetchUserDetailsByEmail(email)
+        Log.d("ProblemaRol", "NM LaunchedEffect userModel: $email")
+
     }
 
     if (loginViewModel.isLoading) {
@@ -34,9 +41,9 @@ fun NavManager(loginViewModel: LoginViewModel = viewModel(), mapViewModel: MapVi
             composable("TabsViews") { TabsViews(navController) }
             composable("Main") {
                 Log.d("ProblemaRol", "NM In Main: userModel is $userModel")
-                MainScreen(navController, mapViewModel, userModel?.role ?: "Turista")
+                MainScreen(navController, mapViewModel)
             }
-            composable("Confi") { ConfiScreen(navController, mapViewModel, userModel?.role ?: "Turista") }
+            composable("Confi") { ConfiScreen(navController, mapViewModel) }
         }
     }
 }

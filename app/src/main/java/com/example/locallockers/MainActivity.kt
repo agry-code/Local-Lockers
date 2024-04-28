@@ -9,6 +9,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.ViewModel
 import com.example.locallockers.navigation.NavManager
 import com.example.locallockers.ui.theme.LocalLockersTheme
 import com.example.locallockers.ui.theme.views.login.ui.LoginViewModel

@@ -207,12 +207,12 @@ fun EmailField(email: String, onTextFieldChanged: (String) -> Unit, viewModel: L
     TextField(
         value = email,
         onValueChange = {
-/*          Este metodo reinicia cada vez qe se escribe la pantalla
+          /*Este metodo reinicia cada vez qe se escribe la pantalla*/
             onTextFieldChanged(it)
-            viewModel.fetchUserDetailsByEmail(it)*/
+            //viewModel.fetchUserDetailsByEmail(it)
             //Y este es mas warro porqe lo hace cada 10 segundos
-            onTextFieldChanged(it)
-            viewModel.onEmailChangedDebounced(it)
+//            onTextFieldChanged(it)
+//            viewModel.onEmailChangedDebounced(it)
 
         },
         modifier = Modifier.fillMaxWidth(),

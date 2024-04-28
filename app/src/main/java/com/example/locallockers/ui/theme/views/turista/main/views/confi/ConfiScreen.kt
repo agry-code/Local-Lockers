@@ -29,9 +29,10 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ConfiScreen(navController: NavController, mapViewModel: MapViewModel, userRol: String) {
+fun ConfiScreen(navController: NavController, mapViewModel: MapViewModel) {
     val userViewModel : UserViewModel = viewModel()
     val user by userViewModel.currentUser.observeAsState()
+
     Scaffold(
         topBar = {
             TopAppBar(title = { Text(text = "Configuración") },
@@ -45,8 +46,10 @@ fun ConfiScreen(navController: NavController, mapViewModel: MapViewModel, userRo
                 })
         },
         bottomBar = {
-            BottomNav(navController,userRol)
+            BottomNav(navController, user?.role ?: "Turista")
+            Log.d("ProblemaRol","User Confi: ${user?.role}")
             Log.d("ProblemaRol","User Confi: ${user.toString()}")
+
         }
     ) { pad ->
         Column(

@@ -4,21 +4,49 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.locallockers.model.UserModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.launch
 
 class UserViewModel : ViewModel() {
-    val currentUser = MutableLiveData<UserModel?>()
     var showCustomizationDialog by mutableStateOf(false)
     var snackbarMessage by mutableStateOf("")
     var showSnackbar by mutableStateOf(false)
+    val currentUser = MutableLiveData<UserModel?>()
 
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
     private val db = FirebaseFirestore.getInstance()
 
     init {
-        updateUser()
+        //updateUser() Neceistamos aplicar una lógica para que no se pueda moficiar el rol del user. Creo que si lo dejamos en blanco no se modifica pero tengo que mirarlo
+        loadUserInfo()
+    }
+
+    private fun loadUserInfo() {
+        auth.currentUser?.let { firebaseUser ->
+            val userId = firebaseUser.uid
+            db.collection("Users").document(userId).get().addOnSuccessListener { document ->
+                if (document.exists()) {
+                    val user = UserModel(
+                        userId = document.getString("userId") ?: userId,
+                        email = document.getString("email") ?: "",
+                        userName = document.getString("userName") ?: "",
+                        role = document.getString("role") ?: "Turista"
+                    )
+                    viewModelScope.launch {
+                        currentUser.value = user
+                    }
+                } else {
+                    Log.d("Firestore", "No such document")
+                }
+            }.addOnFailureListener { exception ->
+                Log.d("Firestore", "Error getting document: ", exception)
+            }
+        } ?: run {
+            Log.d("UserVM", "No user is currently logged in")
+        }
     }
 
     private fun updateUser() {
