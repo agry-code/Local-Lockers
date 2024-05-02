@@ -18,7 +18,7 @@ sealed class BottomBarScreen (
 
     //for listScreen
     object Listado: BottomBarScreen(
-        route = "List",
+        route = "Listado",
         title = "Listado",
         icon = R.drawable.list,
         icon_focused = R.drawable.list_focus

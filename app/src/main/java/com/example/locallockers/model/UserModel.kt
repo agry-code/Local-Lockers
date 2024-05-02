@@ -5,6 +5,7 @@ data class UserModel(
     val role: String,
     val userId: String,
     val userName: String,
+    //val lockerId: String
 ){
     fun toMap() : MutableMap<String,Any>{
         return mutableMapOf(

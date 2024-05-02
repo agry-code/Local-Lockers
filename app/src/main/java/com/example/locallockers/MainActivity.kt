@@ -20,7 +20,6 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val loginViewModel : LoginViewModel by viewModels()
-        val mapViewModel : MapViewModel by viewModels()
 
         setContent {
             LocalLockersTheme {
@@ -28,7 +27,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    NavManager(loginViewModel,mapViewModel)
+                    NavManager(loginViewModel)
                 }
             }
         }

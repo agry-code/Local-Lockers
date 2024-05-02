@@ -40,7 +40,6 @@ class LoginViewModel : ViewModel() {
 
     var isLoading by mutableStateOf(false)
 
-    private var searchJob: Job? = null
 
     init {
         loadInitialData()
@@ -177,16 +176,5 @@ fun login(email: String, password: String, onSuccess: () -> Unit) {
                 isLoading = false
                 Log.d("ProblemaRol", "Error al buscar el usuario: ${it.message}")
             }
-    }
-    fun onEmailChangedDebounced(email: String) {
-        _email.value = email
-        _loginEnable.value = isValidEmail(email) && isValidPass(_password.value ?: "")
-
-        //Lo uso para el delay y para comprobar el email constantemente
-        searchJob?.cancel()  // Cancela cualquier trabajo existente si el usuario sigue escribiendo
-        searchJob = viewModelScope.launch {
-            delay(1000)  // Retraso de 500 milisegundos
-            fetchUserDetailsByEmail(email)  // Llama a tu función que realiza la operación de red
-        }
     }
 }
