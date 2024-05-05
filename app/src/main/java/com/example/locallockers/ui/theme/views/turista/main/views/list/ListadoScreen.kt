@@ -91,7 +91,7 @@ fun ListadoScreen(
             )
             Button(onClick = {
                 selectedDate = LocalDate.parse(dateText)
-                lockerViewModel.filterLockersByDateAndCapacity(selectedDate, neededCapacity)
+                //lockerViewModel.filterLockersByDateAndCapacity(selectedDate, neededCapacity)
             }) {
                 Text("Filtrar Lockers")
             }

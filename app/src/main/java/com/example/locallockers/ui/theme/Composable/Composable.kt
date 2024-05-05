@@ -34,11 +34,11 @@ fun EmailField(email: String, onTextFieldChanged: (String) -> Unit) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NameField(name: String, onTextFieldChanged: (String) -> Unit) {
+fun NameField(name: String, text: String, onTextFieldChanged: (String) -> Unit) {
     TextField(value = name,
         onValueChange = { onTextFieldChanged(it) },
         modifier = Modifier.fillMaxWidth(),
-        placeholder = { Text(text = "Nombre") },
+        placeholder = { Text(text = text) },
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
         singleLine = true,
         textStyle = LocalTextStyle.current.copy(color = Color(0xFF636262)),
@@ -70,6 +70,8 @@ fun PasswordField(password: String, onPasswordChanged: (String) -> Unit) {
     )
 }
 
+
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ConfirmPasswordField(confirmPassword: String, onConfirmPasswordChanged: (String) -> Unit) {
@@ -85,6 +87,39 @@ fun ConfirmPasswordField(confirmPassword: String, onConfirmPasswordChanged: (Str
             containerColor = Color(0xFFDEDDDD),
             focusedBorderColor = Color.Transparent,
             unfocusedBorderColor = Color.Transparent
+        )
+    )
+}
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun LocationField(location: String, onLocationChanged: (String) -> Unit) {
+    TextField(
+        value = location,
+        onValueChange = onLocationChanged,
+        modifier = Modifier.fillMaxWidth(),
+        placeholder = { Text("Ubicación") },
+        singleLine = true,
+        colors = TextFieldDefaults.outlinedTextFieldColors(
+            containerColor = Color(0xFFDEDDDD),
+            focusedBorderColor = Color.Transparent,
+            unfocusedBorderColor = Color.Transparent
+        )
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun OpenHoursField(openHours: String, onOpenHoursChanged: (String) -> Unit) {
+    TextField(
+        value = openHours,
+        onValueChange = onOpenHoursChanged,
+        modifier = Modifier.fillMaxWidth(),
+        placeholder = { Text("Horario de Apertura") },
+        singleLine = true,
+        colors = TextFieldDefaults.textFieldColors(
+            containerColor = Color(0xFFDEDDDD),
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent
         )
     )
 }

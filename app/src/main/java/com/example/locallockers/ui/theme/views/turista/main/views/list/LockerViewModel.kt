@@ -35,9 +35,7 @@ class LockerViewModel : ViewModel() {
                     val location = document.getString("location") ?: ""
                     val capacity = document.getLong("capacity")?.toInt() ?: 0
                     val openHours = document.getString("openHours") ?: ""
-                    val openDays =
-                        document.get("openDays") as String // Asegúrate de castear correctamente
-
+                    val owner = document.getString("owner") ?: ""  // Extracción del campo 'owner'
                     lockerList.add(
                         LockerModel(
                             id = id,
@@ -45,8 +43,8 @@ class LockerViewModel : ViewModel() {
                             location = location,
                             capacity = capacity,
                             openHours = openHours,
-                            openDays = openDays
-                        )
+                            owner = owner,
+                            )
                     )
                 }
                 _lockers.value = lockerList
@@ -60,7 +58,7 @@ class LockerViewModel : ViewModel() {
         // Lógica para manejar la selección o reserva de un locker
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
+/*    @RequiresApi(Build.VERSION_CODES.O)
     fun filterLockersByDateAndCapacity(date: LocalDate, neededCapacity: Int) {
         // Preparar el formato de la fecha para la comparación
         val dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
@@ -72,7 +70,7 @@ class LockerViewModel : ViewModel() {
         }
 
         _lockers.value = filteredLockers ?: listOf()
-    }
+    }*/
 //Se reserva hoy y acaba mañana
     fun reserveLocker(lockerId: String, numberOfBags: Int) {
         viewModelScope.launch {

@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.locallockers.model.LockerModel
 import com.example.locallockers.model.UserModel
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
@@ -31,6 +32,36 @@ class RegisterViewModel : ViewModel() {
     
     private val _confirmPassword = MutableLiveData<String>()
     val confirmPassword: LiveData<String> = _confirmPassword
+
+    // Nuevos estados para Huesped
+    private val _location = MutableLiveData<String>()
+    val location: LiveData<String> = _location
+
+    private val _openHours = MutableLiveData<String>()
+    val openHours: LiveData<String> = _openHours
+
+    private val _localName = MutableLiveData<String>()
+    val localName: LiveData<String> = _localName
+
+    fun onLocalNameChanged(localName: String){
+        _localName.value = localName
+    }
+    fun onLocationChanged(location: String) {
+        _location.value = location
+    }
+
+    fun onOpenHoursChanged(openHours: String) {
+        _openHours.value = openHours
+    }
+
+    // Variables de estado para manejar los datos del formulario
+    var userType by mutableStateOf("Turista")  // "Turista" es el valor predeterminado
+    private val _role = MutableLiveData<String>("Turista")
+
+    fun onRoleChanged(role: String) {
+        _role.value = role
+        userType = role  // Asegura que userType y role están sincronizados
+    }
     fun onEmailChanged(email: String) {
         _email.value = email
     }
@@ -46,49 +77,104 @@ class RegisterViewModel : ViewModel() {
     fun onConfirmPasswordChanged(it: String) {
         _confirmPassword.value = it
     }
-    fun createUser (email: String, password: String, userName: String, onSucess:() -> Unit){
+
+
+    fun createUser(email: String, password: String, userName: String, onSuccess: () -> Unit) {
         viewModelScope.launch {
             try {
-                auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener{
-                        task->
-                    if(task.isSuccessful){
-                        saveUser(userName)
-                        onSucess()
-                    }else{
-                        Log.d("Error en Firebase","Error al crear usuario")
+                auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val currentUser = auth.currentUser
+                        if (currentUser != null) {
+                            if (_role.value == "Huesped") {
+                                saveUser(userName, "Huesped", currentUser.uid) {
+                                    saveLocker(currentUser.uid) { lockerId ->
+                                        updateUserWithLockerId(currentUser.uid, lockerId, onSuccess)
+                                    }
+                                }
+                            } else {
+                                saveUser(userName, "Turista", currentUser.uid, onSuccess)
+                            }
+                        }
+                    } else {
+                        Log.d("Error en Firebase", "Error al crear usuario")
                         showAlert = true
                     }
                 }
-            }catch (e:Exception){
-                Log.d("Error en Jetpack","Error ${e.localizedMessage}")
+            } catch (e: Exception) {
+                Log.d("Error en Jetpack", "Error ${e.localizedMessage}")
+                showAlert = true
             }
         }
     }
 
-    private fun saveUser(userName: String) {
-        val id = auth.currentUser?.uid  // UID del usuario autenticado
-        val email = auth.currentUser?.email
-        viewModelScope.launch(Dispatchers.IO) {
-            val user = UserModel(
-                userId = id.toString(),
-                email = email.toString(),
-                userName = userName,
-                role = "Turista",
-            ).toMap()
-            if (id != null) {
-                FirebaseFirestore.getInstance().collection("Users")
-                    .document(id)  // Usa el UID como el Document ID
-                    .set(user)
-                    .addOnSuccessListener {
-                        Log.d("Guardado", "Guardado correctamente")
-                    }
-                    .addOnFailureListener {
-                        Log.d("Error al guardar", "Error al guardar en Firestore")
-                    }
+    private fun saveUser(userName: String, role: String, userId: String, onSuccess: () -> Unit = {}) {
+        val user = UserModel(
+            userId = userId,
+            email = auth.currentUser?.email ?: "",
+            userName = userName,
+            role = role
+        ).toMap()
+
+        FirebaseFirestore.getInstance().collection("Users")
+            .document(userId)
+            .set(user)
+            .addOnSuccessListener {
+                Log.d("Guardado", "Usuario guardado correctamente")
+                onSuccess()
             }
-        }
+            .addOnFailureListener { e ->
+                Log.d("Error al guardar", "Error al guardar en Firestore", e)
+                showAlert = true
+            }
     }
-    fun closeAlert(){
+
+
+    private fun saveLocker(ownerId: String, onSuccess: (String) -> Unit) {
+        val locker = LockerModel(
+            id = "", // El ID se genera automáticamente, no es necesario especificarlo aquí
+            name = _localName.value ?: "",
+            location = _location.value ?: "",
+            capacity = 0, //Capacidad se establece en otro proceso como mencionaste
+            openHours = _openHours.value ?: "",
+            owner = ownerId
+        ).toMap()
+
+        // Usar 'add' para que Firestore genere automáticamente un ID para el documento
+        FirebaseFirestore.getInstance().collection("Lockers")
+            .add(locker)
+            .addOnSuccessListener { documentReference ->
+                Log.d("Guardado", "Locker guardado correctamente con ID: ${documentReference.id}")
+                onSuccess(documentReference.id) // Pasar el ID autogenerado al callback
+            }
+            .addOnFailureListener {
+                Log.d("Error al guardar", "Error al guardar Locker en Firestore")
+                showAlert = true
+            }
+    }
+
+    fun updateUserWithLockerId(userId: String, lockerId: String, onSuccess: () -> Unit) {
+        // Obtener la referencia al documento del usuario
+        val userRef = FirebaseFirestore.getInstance().collection("Users").document(userId)
+
+        // Actualizar el documento con el nuevo lockerId
+        userRef.update("lockerId", lockerId)
+            .addOnSuccessListener {
+                Log.d("UpdateUser", "Usuario actualizado con nuevo locker ID")
+                onSuccess()  // Llamar al callback de éxito
+            }
+            .addOnFailureListener { e ->
+                Log.e("UpdateUser", "Error al actualizar usuario", e)
+                showAlert = true  // Mostrar alerta en la UI si es necesario
+            }
+    }
+    fun closeAlert() {
         showAlert = false
     }
+
+    fun showError(message: String) {
+        Log.e("RegistrationError", message)
+        showAlert = true
+    }
+
 }
