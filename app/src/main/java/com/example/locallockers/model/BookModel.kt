@@ -8,14 +8,15 @@ import java.util.Locale
 
 @IgnoreExtraProperties
 data class BookModel @RequiresApi(Build.VERSION_CODES.O) constructor(
-    val id: String = "",
+    var id: String = "",
     val userId: String = "",
     val lockerId: String = "",
     val lockerName: String = "",
     val startTime: Date = Date(),
     val endTime: Date = Date(),
     val userEmail: String = "",
-    val userName: String = ""
+    val userName: String = "",
+    val status: String = ""
 )
 // Para formatear o parsear fechas:
 val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US)

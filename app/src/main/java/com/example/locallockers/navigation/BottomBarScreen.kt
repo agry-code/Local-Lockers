@@ -40,4 +40,12 @@ sealed class BottomBarScreen (
         icon_focused = R.drawable.confi_focus
     )
 
+    //for RequesScreen
+    object Request: BottomBarScreen(
+        "Request",
+        "Request",
+        icon = R.drawable.request,
+        icon_focused = R.drawable.request_focus
+    )
+
 }

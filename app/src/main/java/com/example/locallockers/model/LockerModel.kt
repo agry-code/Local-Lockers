@@ -6,5 +6,5 @@ data class LockerModel(
     val location: String,
     val capacity: Int,
     val openHours: String,
-    val openDays: String  // Corregido para usar la sintaxis correcta de Kotlin para listas
+    val openDays: String  //ELIMINAR
 )

@@ -28,6 +28,8 @@ drawable notification_confi
 drawable ojo
 drawable ojo_negativo
 drawable privacy_confi
+drawable request
+drawable request_focus
 drawable sardina
 drawable sardina2
 font font

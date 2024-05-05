@@ -1132,6 +1132,8 @@ int drawable quantum_ic_arrow_back_grey600_24 0x7f060095
 int drawable quantum_ic_clear_grey600_24 0x7f060096
 int drawable quantum_ic_cloud_off_vd_theme_24 0x7f060097
 int drawable quantum_ic_search_grey600_24 0x7f060098
+int drawable request 0x7f06009d
+int drawable request_focus 0x7f06009e
 int drawable sardina 0x7f060099
 int drawable sardina2 0x7f06009a
 int drawable tooltip_frame_dark 0x7f06009b

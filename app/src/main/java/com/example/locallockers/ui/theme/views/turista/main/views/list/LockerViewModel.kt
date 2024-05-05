@@ -106,7 +106,7 @@ class LockerViewModel : ViewModel() {
             }
         }
     }
-    fun createReservation(userId: String, userEmail: String, lockerId: String, lockerName: String, startTime: Timestamp, endTime: Timestamp, userName: String) {
+    /*fun createReservation(userId: String, userEmail: String, lockerId: String, lockerName: String, startTime: Timestamp, endTime: Timestamp, userName: String) {
         val reservation = hashMapOf(
             "userId" to userId,
             "userEmail" to userEmail,
@@ -114,7 +114,8 @@ class LockerViewModel : ViewModel() {
             "lockerName" to lockerName,
             "startTime" to startTime,
             "endTime" to endTime,
-            "userName" to userName
+            "userName" to userName,
+            "status" to "pendiente"
         )
 
         db.collection("Reservations").add(reservation)
@@ -124,5 +125,32 @@ class LockerViewModel : ViewModel() {
             .addOnFailureListener { e ->
                 Log.w("Firestore", "Error adding document", e)
             }
+    }*/
+    fun createReservation(userId: String, userEmail: String, lockerId: String, lockerName: String, startTime: Timestamp, endTime: Timestamp, userName: String) {
+        // Crear un nuevo documento con un ID generado automáticamente
+        val newDocRef = db.collection("Reservations").document()
+
+        // Crear un HashMap con los datos de la reserva y añadir el ID generado al mapa
+        val reservation = hashMapOf(
+            "id" to newDocRef.id, // Asignar el ID del documento aquí
+            "userId" to userId,
+            "userEmail" to userEmail,
+            "lockerId" to lockerId,
+            "lockerName" to lockerName,
+            "startTime" to startTime,
+            "endTime" to endTime,
+            "userName" to userName,
+            "status" to "pendiente"
+        )
+
+        // Usar set en lugar de add para usar el documento con el ID específico
+        newDocRef.set(reservation)
+            .addOnSuccessListener {
+                Log.d("Firestore", "DocumentSnapshot written with ID: ${newDocRef.id}")
+            }
+            .addOnFailureListener { e ->
+                Log.w("Firestore", "Error adding document", e)
+            }
     }
+
 }

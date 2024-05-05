@@ -1133,6 +1133,8 @@ drawable quantum_ic_arrow_back_grey600_24
 drawable quantum_ic_clear_grey600_24
 drawable quantum_ic_cloud_off_vd_theme_24
 drawable quantum_ic_search_grey600_24
+drawable request
+drawable request_focus
 drawable sardina
 drawable sardina2
 drawable tooltip_frame_dark

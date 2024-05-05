@@ -79,6 +79,7 @@ fun ReservationItem(reservation: BookModel, userRole: String) {
             if(userRole == "Turista"){
                 Text("Reserva en: ${reservation.lockerName}")
             }
+            Text("Estado de la reserva: ${reservation.status}")
             Text("Inicio: ${reservation.startTime}")
             Text("Fin: ${reservation.endTime}")
             if(userRole == "Huesped"){
