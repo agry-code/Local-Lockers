@@ -103,14 +103,13 @@ fun ListadoScreen(
                     }
                 }
             }
-            if (showDialog && selectedLocker != null) {
+            if (showDialog && selectedLocker != null && selectedLocker!!.capacity!=0) {
                 ShowReservationDialog(
                     locker = selectedLocker!!,
                     onDismiss = { showDialog = false },
                     onConfirm = { numberOfBags ->
                         val startTime = Timestamp.now()  // Asumiendo que la reserva comienza ahora
-                        val endTime =
-                            Timestamp(Date(System.currentTimeMillis() + 86400000))  // Asumiendo reserva de un día
+                        val endTime =  Timestamp(Date(System.currentTimeMillis() + 86400000))  // Asumiendo reserva de un día
                         lockerViewModel.reserveLocker(selectedLocker!!.id, numberOfBags)
                         lockerViewModel.createReservation(
                             user!!.userId,
@@ -122,7 +121,6 @@ fun ListadoScreen(
                             user!!.userName
                         )
                         showDialog = false
-                        // Aquí añadirías la lógica para manejar la reserva con el número de maletas
                     }
                 )
             }
@@ -140,10 +138,13 @@ fun LockerItem(locker: LockerModel, onItemClicked: (LockerModel) -> Unit) {
             .padding(8.dp)
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
-            Text("Nombre: ${locker.name}")//, style = MaterialTheme.typography.h6)
-            Text("Ubicación: ${locker.location}")
-            Text("Capacidad: ${locker.capacity} maletas")
+            Text("Nombre: ${locker.name}")
             Text("Horario: ${locker.openHours}")
+            if (locker.capacity == 0) {
+                Text("Este locker está lleno", color = MaterialTheme.colorScheme.error)
+            }else{
+                Text("Capacidad: ${locker.capacity} maletas")
+            }
         }
     }
 }

@@ -13,20 +13,31 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.locallockers.model.LockerModel
 import com.example.locallockers.navigation.BottomBarScreen
 import com.example.locallockers.navigation.BottomNav
+import com.example.locallockers.ui.theme.views.turista.main.views.list.LockerViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen(navController: NavController, mapViewModel: MapViewModel) {
+fun MainScreen(navController: NavController,
+               mapViewModel: MapViewModel,
+               lockerViewModel: LockerViewModel) {
     val userViewModel : UserViewModel = viewModel()
     val user by userViewModel.currentUser.observeAsState()
+    val lockers by mapViewModel.lockers.observeAsState(initial = emptyList())
+
+    // Asegúrate de cargar los datos cuando sea necesario, puedes llamar a loadLockers en un evento de inicio adecuado
+    LaunchedEffect(key1 = true) {
+        mapViewModel.loadLockers()
+    }
 
     Scaffold(
         topBar = {
@@ -50,7 +61,8 @@ fun MainScreen(navController: NavController, mapViewModel: MapViewModel) {
             modifier = Modifier.padding(pad),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            MapsView()
+            MapsView(lockers, lockerViewModel)
+            Log.d("lockers","lista de lockers${lockers}")
         }
     }
 }

@@ -14,7 +14,6 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class RegisterViewModel : ViewModel() {
@@ -134,7 +133,9 @@ class RegisterViewModel : ViewModel() {
         val locker = LockerModel(
             id = "", // El ID se genera automáticamente, no es necesario especificarlo aquí
             name = _localName.value ?: "",
-            location = _location.value ?: "",
+            //location = _location.value ?: "",
+            latitude = 0.0,
+            longitude = 0.0,
             capacity = 0, //Capacidad se establece en otro proceso como mencionaste
             openHours = _openHours.value ?: "",
             owner = ownerId

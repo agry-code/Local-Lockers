@@ -31,6 +31,7 @@ fun NavManager(loginViewModel: LoginViewModel) {
             composable("Main") {
                 MainScreen(
                     navController,
+                    viewModel(),
                     viewModel()
                 )
             } // Usando viewModel aquí directamente
@@ -39,7 +40,7 @@ fun NavManager(loginViewModel: LoginViewModel) {
             composable("Book") {
                 BookScreen(navController, viewModel(), viewModel())
             }
-            composable("Request"){ RequestScreen(navController = navController)}
+            composable("Request"){ RequestScreen(navController)}
         }
     }
 }
