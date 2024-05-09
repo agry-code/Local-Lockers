@@ -33,7 +33,8 @@ class UserViewModel : ViewModel() {
                         userId = document.getString("userId") ?: userId,
                         email = document.getString("email") ?: "",
                         userName = document.getString("userName") ?: "",
-                        role = document.getString("role") ?: "Turista"
+                        role = document.getString("role") ?: "Turista",
+                        lockerId = document.getString("lockerId") ?: ""
                     )
                     viewModelScope.launch {
                         currentUser.value = user
@@ -61,8 +62,9 @@ class UserViewModel : ViewModel() {
                             userId = firebaseUser.uid,
                             email = email,
                             userName = userName,
-                            role = "Turista" //MODIFICAR POR SI ES HUESPED SE QUEDE HUESPED
-                        )
+                            role = "Turista", //MODIFICAR POR SI ES HUESPED SE QUEDE HUESPED
+                            lockerId = document.getString("lockerId") ?: ""
+                            )
                     } else {
                         Log.d("Firestore", "No such document")
                         // Fallback to default name if document does not exist
@@ -70,7 +72,9 @@ class UserViewModel : ViewModel() {
                             userId = firebaseUser.uid,
                             email = firebaseUser.email ?: "",
                             userName = "Default Name",
-                            role = "Turista" /*TODO*/
+                            role = "Turista", /*TODO*/
+                            lockerId = document.getString("lockerId") ?: ""
+
                         )
                     }
                 }

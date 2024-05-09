@@ -56,7 +56,8 @@ class LoginViewModel : ViewModel() {
                             userId = document.getString("userId") ?: userId,
                             email = document.getString("email") ?: "",
                             userName = document.getString("userName") ?: "",
-                            role = document.getString("role") ?: "Turista"
+                            role = document.getString("role") ?: "Turista",
+                            lockerId = document.getString("lockerId") ?: ""
                         ))
                         isLoading = false
                     }
@@ -81,7 +82,9 @@ class LoginViewModel : ViewModel() {
                         userId = document.getString("userId") ?: userId,
                         email = document.getString("email") ?: "",
                         userName = document.getString("userName") ?: "",
-                        role = document.getString("role") ?: "Turista"
+                        role = document.getString("role") ?: "Turista",
+                        lockerId = document.getString("lockerId") ?: ""
+
                     ))
                     onDetailsFetched()
                     isLoading = false
@@ -162,7 +165,9 @@ fun login(email: String, password: String, onSuccess: () -> Unit) {
                             userId = document.getString("userId") ?: "",
                             email = document.getString("email") ?: "",
                             userName = document.getString("userName") ?: "",
-                            role = document.getString("role") ?: "Turista"
+                            role = document.getString("role") ?: "Turista",
+                            lockerId = document.getString("lockerId") ?: ""
+
                         ))
                         Log.d("ProblemaRol", "Detalles del usuario actualizados LVM : ${_currentUser.value}")
                         isLoading = false

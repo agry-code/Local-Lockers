@@ -112,7 +112,8 @@ class RegisterViewModel : ViewModel() {
             userId = userId,
             email = auth.currentUser?.email ?: "",
             userName = userName,
-            role = role
+            role = role,
+            lockerId = "" //posible error
         ).toMap()
 
         FirebaseFirestore.getInstance().collection("Users")

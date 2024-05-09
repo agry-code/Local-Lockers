@@ -8,14 +8,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExitToApp
-import androidx.compose.material3.DatePickerState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -40,7 +38,8 @@ fun CalendarScreen(
     val userViewModel: UserViewModel = viewModel()
     val user by userViewModel.currentUser.observeAsState()
     val calendarViewModel: CalendarViewModel = viewModel()
-    val selectedDate by calendarViewModel.selectedDate.observeAsState(System.currentTimeMillis())
+//    val selectedDate by calendarViewModel.selectedDate.observeAsState(System.currentTimeMillis())
+
 
     Scaffold(
         topBar = {
@@ -70,7 +69,7 @@ fun CalendarScreen(
             modifier = Modifier.padding(pad),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            CalendarApp()
+            CalendarApp(calendarViewModel,user?.lockerId ?: "")
         }
     }
 }

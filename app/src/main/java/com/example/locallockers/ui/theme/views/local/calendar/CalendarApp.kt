@@ -1,6 +1,8 @@
 package com.example.locallockers.ui.theme.views.local.calendar
 
 import android.os.Build
+import android.util.Log
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -12,33 +14,45 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
+
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun CalendarApp(
-    modifier: Modifier = Modifier,
+    viewModel: CalendarViewModel,
+    lockerId: String,
 ) {
+
     val dataSource = CalendarDataSource()
     var data by remember { mutableStateOf(dataSource.getData(lastSelectedDate = dataSource.today)) }
-    Column(modifier = modifier.fillMaxSize()) {
+    Log.d("LockerId", " Desde CalendarApp ${lockerId}")
+    Column(modifier = Modifier.fillMaxSize()) {
         Header(
             data = data,
             onPrevClickListener = { startDate ->
                 val finalStartDate = startDate.minusDays(1)
-                data = dataSource.getData(startDate = finalStartDate, lastSelectedDate = data.selectedDate.date)
+                data = dataSource.getData(
+                    startDate = finalStartDate,
+                    lastSelectedDate = data.selectedDate.date
+                )
             },
             onNextClickListener = { endDate ->
                 val finalStartDate = endDate.plusDays(2)
-                data = dataSource.getData(startDate = finalStartDate, lastSelectedDate = data.selectedDate.date)
+                data = dataSource.getData(
+                    startDate = finalStartDate,
+                    lastSelectedDate = data.selectedDate.date
+                )
             }
         )
-        Content(data = data) { date ->
+        Content(viewModel, data, lockerId) { date ->
             data = data.copy(
                 selectedDate = date,
                 visibleDates = data.visibleDates.map {
@@ -48,14 +62,29 @@ fun CalendarApp(
                 }
             )
         }
-        Form()
+        Form(viewModel, lockerId, data)
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun Form() {
-    var capacity by remember { mutableStateOf("") }
-    var price by remember { mutableStateOf("") }
+fun Form(viewModel: CalendarViewModel, lockerId: String, data: CalendarUiModel) {
+    val context = LocalContext.current
+    val reservaDetails by viewModel.reservaDetails.observeAsState(emptyMap())
+    val snackbarMessage by viewModel.snackbarMessage.observeAsState()
+
+    var capacidad by remember { mutableStateOf(reservaDetails["capacidad"]?.toString() ?: "") }
+    var precio by remember { mutableStateOf(reservaDetails["precio"]?.toString() ?: "") }
+
+    LaunchedEffect(reservaDetails) {
+        capacidad = reservaDetails["capacidad"]?.toString() ?: ""
+        precio = reservaDetails["precio"]?.toString() ?: ""
+    }
+
+    // Mostrar Snackbar cuando el mensaje cambia
+    LaunchedEffect(snackbarMessage) {
+        snackbarMessage?.let { Toast.makeText(context, it, Toast.LENGTH_LONG).show() }
+    }
 
     Column(
         modifier = Modifier
@@ -68,22 +97,21 @@ fun Form() {
             style = MaterialTheme.typography.titleMedium
         )
         OutlinedTextField(
-            value = capacity,
-            onValueChange = { capacity = it },
+            value = capacidad,
+            onValueChange = { capacidad = it },
             label = { Text("Capacidad") },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
         )
         OutlinedTextField(
-            value = price,
-            onValueChange = { price = it },
+            value = precio,
+            onValueChange = { precio = it },
             label = { Text("Precio (€)") },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
         )
         Button(
-            onClick = { /* Lógica para manejar la reserva */ },
+            onClick = { viewModel.saveLockerDetails(lockerId, data.selectedDate.date, capacidad, precio) },
             modifier = Modifier.align(Alignment.End)
         ) {
-            Text("Guardar")
+            Text("Actualizar")
         }
     }
 }
@@ -131,16 +159,19 @@ fun Header(
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun Content(
+    viewModel: CalendarViewModel,
     data: CalendarUiModel,
+    lockerId: String,  // Asegúrate de tener acceso al lockerId aquí.
     onDateClickListener: (CalendarUiModel.Date) -> Unit,
 ) {
-    LazyRow (
-        Modifier.fillMaxWidth()
-    ){
+    LazyRow(Modifier.fillMaxWidth()) {
         items(items = data.visibleDates) { date ->
             ContentItem(
                 date = date,
-                onDateClickListener
+                onClickListener = { selectedDate ->
+                    onDateClickListener(selectedDate)
+                    viewModel.loadReservaDetails(lockerId, selectedDate.date.toString())
+                }
             )
         }
     }
@@ -159,8 +190,7 @@ fun ContentItem(
                 onClickListener(date)
             }
             .width(50.dp)
-            .height(50.dp)
-        ,
+            .height(50.dp),
         colors = CardDefaults.cardColors(
             containerColor = if (date.isSelected) {
                 MaterialTheme.colorScheme.primary
