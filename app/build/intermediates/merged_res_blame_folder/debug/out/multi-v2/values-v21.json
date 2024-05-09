@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.locallockers.app-mergeDebugResources-67:/values-v21/values-v21.xml",
+            "outputFile": "com.example.locallockers.app-mergeDebugResources-70:/values-v21/values-v21.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\adria\\.gradle\\caches\\transforms-3\\21a4524ef8fb86e5e7a15562c25be68f\\transformed\\core-1.12.0\\res\\values-v21\\values-v21.xml",
+                    "source": "C:\\Users\\adria\\.gradle\\caches\\transforms-3\\63a09e06c6aaaede947b7060824dcda1\\transformed\\core-1.13.1\\res\\values-v21\\values-v21.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,13",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4",
@@ -14,12 +14,31 @@
                         "endOffsets": "168,232,299,363,479,605,731,859,1031,1383"
                     },
                     "to": {
-                        "startLines": "2,3,4,5,263,264,265,266,267,270",
+                        "startLines": "2,3,4,5,263,264,265,266,275,278",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,173,237,304,18647,18763,18889,19015,19143,19315",
-                        "endLines": "2,3,4,5,263,264,265,266,269,274",
+                        "startOffsets": "55,173,237,304,18647,18763,18889,19015,19636,19808",
+                        "endLines": "2,3,4,5,263,264,265,266,277,282",
                         "endColumns": "117,63,66,63,115,125,125,127,12,12",
-                        "endOffsets": "168,232,299,363,18758,18884,19010,19138,19310,19662"
+                        "endOffsets": "168,232,299,363,18758,18884,19010,19138,19803,20155"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\adria\\.gradle\\caches\\transforms-3\\8f7c665c9a915ee0edac3f71284291bb\\transformed\\credentials-play-services-auth-1.2.0-rc01\\res\\values-v21\\values-v21.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "9",
+                        "endColumns": "12",
+                        "endOffsets": "543"
+                    },
+                    "to": {
+                        "startLines": "267",
+                        "startColumns": "4",
+                        "startOffsets": "19143",
+                        "endLines": "274",
+                        "endColumns": "12",
+                        "endOffsets": "19631"
                     }
                 },
                 {

@@ -8,8 +8,12 @@ color teal_200
 color teal_700
 color white
 drawable about_confi
+drawable arrow_back
+drawable arrow_forward
 drawable book
 drawable book_focus
+drawable calendar
+drawable calendar_focus
 drawable confi
 drawable confi_focus
 drawable contact_confi

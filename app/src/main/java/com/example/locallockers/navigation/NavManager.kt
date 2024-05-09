@@ -8,6 +8,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.locallockers.ui.theme.views.local.calendar.CalendarScreen
 import com.example.locallockers.ui.theme.views.local.request.RequestScreen
 import com.example.locallockers.ui.theme.views.login.ui.BlankView
 import com.example.locallockers.ui.theme.views.login.ui.LoginViewModel
@@ -41,6 +42,7 @@ fun NavManager(loginViewModel: LoginViewModel) {
                 BookScreen(navController, viewModel(), viewModel())
             }
             composable("Request"){ RequestScreen(navController)}
+            composable("Calendar"){ CalendarScreen(navController = navController, mapViewModel = viewModel() )}
         }
     }
 }

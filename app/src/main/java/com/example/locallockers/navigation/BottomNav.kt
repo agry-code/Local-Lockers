@@ -32,7 +32,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 fun BottomNav(navController: NavController, userRole: String) {
     val screens = when (userRole) {
         "Turista" -> listOf(BottomBarScreen.Map,  BottomBarScreen.Listado, BottomBarScreen.Book ,BottomBarScreen.Confi)
-        "Huesped" -> listOf(BottomBarScreen.Book, BottomBarScreen.Request, BottomBarScreen.Confi)
+        "Huesped" -> listOf(BottomBarScreen.Book, BottomBarScreen.Request, BottomBarScreen.Calendar,BottomBarScreen.Confi)
         else -> emptyList()  // Puedes definir un caso por defecto si lo consideras necesario
     }
     BottomBar(navController = navController, screens = screens)
