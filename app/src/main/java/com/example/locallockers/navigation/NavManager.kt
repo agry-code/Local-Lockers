@@ -29,20 +29,12 @@ fun NavManager(loginViewModel: LoginViewModel) {
         NavHost(navController = navController, startDestination = "Blank") {
             composable("Blank") { BlankView(navController) }
             composable("TabsViews") { TabsViews(navController) }
-            composable("Main") {
-                MainScreen(
-                    navController,
-                    viewModel(),
-                    viewModel()
-                )
-            } // Usando viewModel aquí directamente
-            composable("Confi") { ConfiScreen(navController, viewModel()) } // Igualmente aquí
+            composable("Main") {MainScreen(navController,viewModel(),viewModel())}
+            composable("Confi") { ConfiScreen(navController, viewModel()) }
             composable("Listado") { ListadoScreen(navController, viewModel(), viewModel()) }
-            composable("Book") {
-                BookScreen(navController, viewModel(), viewModel())
-            }
-            composable("Request"){ RequestScreen(navController)}
-            composable("Calendar"){ CalendarScreen(navController = navController, mapViewModel = viewModel() )}
+            composable("Book") {BookScreen(navController, viewModel(), viewModel())}
+            composable("Request") { RequestScreen(navController) }
+            composable("Calendar") {CalendarScreen(navController,viewModel())}
         }
     }
 }

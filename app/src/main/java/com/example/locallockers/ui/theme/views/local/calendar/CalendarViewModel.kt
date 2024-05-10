@@ -33,7 +33,6 @@ class CalendarViewModel : ViewModel() {
     }
 
     // Función para guardar la capacidad y precio modificados
-
     private fun isNumeric(input: String): Boolean {
         return input.all { it.isDigit() || it == '.' }
     }

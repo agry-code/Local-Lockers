@@ -37,9 +37,11 @@ import androidx.navigation.NavController
 import com.example.locallockers.model.LockerModel
 import com.example.locallockers.navigation.BottomNav
 import com.example.locallockers.ui.theme.views.turista.main.views.maps.MapViewModel
-import com.google.firebase.Timestamp
+import java.text.ParseException
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.util.Date
+import java.util.Locale
 
 @RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
@@ -107,7 +109,22 @@ fun ListadoScreen(
                 ShowReservationDialog(
                     locker = selectedLocker!!,
                     onDismiss = { showDialog = false },
-                    onConfirm = { numberOfBags ->
+                    onConfirm = { numberOfBags, startDate, endDate ->
+                        val startTime = java.sql.Timestamp(startDate.time)
+                        val endTime = java.sql.Timestamp(endDate.time)
+                        lockerViewModel.updateReservationCapacity(selectedLocker!!.id, numberOfBags)
+                        lockerViewModel.createReservation(
+                            user!!.userId,
+                            user!!.email,
+                            selectedLocker!!.id,
+                            selectedLocker!!.name,
+                            startTime,
+                            endTime,
+                            user!!.userName
+                        )
+                        showDialog = false
+                    }
+                    /*onConfirm = { numberOfBags ->
                         val startTime = Timestamp.now()  // Asumiendo que la reserva comienza ahora
                         val endTime =  Timestamp(Date(System.currentTimeMillis() + 86400000))  // Asumiendo reserva de un día
                         lockerViewModel.reserveLocker(selectedLocker!!.id, numberOfBags)
@@ -121,7 +138,7 @@ fun ListadoScreen(
                             user!!.userName
                         )
                         showDialog = false
-                    }
+                    }*/
                 )
             }
         }
@@ -150,32 +167,49 @@ fun LockerItem(locker: LockerModel, onItemClicked: (LockerModel) -> Unit) {
 }
 
 @Composable
-fun ShowReservationDialog(locker: LockerModel, onDismiss: () -> Unit, onConfirm: (Int) -> Unit) {
-    val (text, setText) = remember { mutableStateOf("") }
+fun ShowReservationDialog(locker: LockerModel, onDismiss: () -> Unit, onConfirm: (Int, Date, Date) -> Unit) {
+    val (numberOfBagsText, setNumberOfBagsText) = remember { mutableStateOf("") }
+    val (startDateText, setStartDateText) = remember { mutableStateOf("") }
+    val (endDateText, setEndDateText) = remember { mutableStateOf("") }
 
     AlertDialog(
         onDismissRequest = onDismiss,
         title = { Text("Reservar en ${locker.name}") },
         text = {
             Column {
+                Text("Capacidad disponible: ${locker.capacity}")
+                //Text("Precio por día: ${locker.precio}€")
                 Text("Indica cuántas maletas quieres reservar:")
-                // Asegurarse de que solo se introduzcan números
                 TextField(
-                    value = text,
+                    value = numberOfBagsText,
                     onValueChange = { newText ->
-                        if (newText.all { it.isDigit() }) setText(newText)
+                        if (newText.all { it.isDigit() }) setNumberOfBagsText(newText)
                     },
                     label = { Text("Número de maletas") },
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                )
+                Text("Fecha de entrada:")
+                TextField(
+                    value = startDateText,
+                    onValueChange = setStartDateText,
+                    label = { Text("DD/MM/AAAA") }
+                )
+                Text("Fecha de salida:")
+                TextField(
+                    value = endDateText,
+                    onValueChange = setEndDateText,
+                    label = { Text("DD/MM/AAAA") }
                 )
             }
         },
         confirmButton = {
             Button(
                 onClick = {
-                    // Verificar que el texto no esté vacío y sea un número válido
-                    text.toIntOrNull()?.let {
-                        onConfirm(it)
+                    val numberOfBags = numberOfBagsText.toIntOrNull()
+                    val startDate = parseDate(startDateText)
+                    val endDate = parseDate(endDateText)
+                    if (numberOfBags != null && startDate != null && endDate != null) {
+                        onConfirm(numberOfBags, startDate, endDate)
                     }
                 }
             ) {
@@ -189,3 +223,13 @@ fun ShowReservationDialog(locker: LockerModel, onDismiss: () -> Unit, onConfirm:
         }
     )
 }
+
+// Función de ayuda para parsear fechas
+fun parseDate(dateStr: String): Date? {
+    return try {
+        SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).parse(dateStr)
+    } catch (e: ParseException) {
+        null
+    }
+}
+

@@ -113,7 +113,7 @@ class RegisterViewModel : ViewModel() {
             email = auth.currentUser?.email ?: "",
             userName = userName,
             role = role,
-            lockerId = "" //posible error
+            lockerId = "" //puede probocar problemas
         ).toMap()
 
         FirebaseFirestore.getInstance().collection("Users")
@@ -130,7 +130,7 @@ class RegisterViewModel : ViewModel() {
     }
 
 
-    private fun saveLocker(ownerId: String, onSuccess: (String) -> Unit) {
+    /*private fun saveLocker(ownerId: String, onSuccess: (String) -> Unit) {
         val locker = LockerModel(
             id = "", // El ID se genera automáticamente, no es necesario especificarlo aquí
             name = _localName.value ?: "",
@@ -153,7 +153,39 @@ class RegisterViewModel : ViewModel() {
                 Log.d("Error al guardar", "Error al guardar Locker en Firestore")
                 showAlert = true
             }
+    }*/
+    private fun saveLocker(ownerId: String, onSuccess: (String) -> Unit) {
+        // Crear un LockerModel sin ID específico
+        val locker = LockerModel(
+            name = _localName.value ?: "",
+            latitude = 0.0,  // Estos valores deben ser establecidos de alguna manera antes de guardar
+            longitude = 0.0,
+            capacity = 0,
+            openHours = _openHours.value ?: "",
+            owner = ownerId
+        )
+
+        FirebaseFirestore.getInstance().collection("Lockers")
+            .add(locker.toMap())
+            .addOnSuccessListener { documentReference ->
+                val generatedId = documentReference.id
+                // Actualiza el documento para incluir el ID como un campo en él
+                documentReference.update("id", generatedId).addOnCompleteListener { updateTask ->
+                    if (updateTask.isSuccessful) {
+                        Log.d("DocumentUpdate", "Documento actualizado con su propio ID")
+                        onSuccess(generatedId)
+                    } else {
+                        Log.e("DocumentUpdateError", "Error al actualizar documento con su propio ID")
+                    }
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.e("Error al guardar", "Error al guardar Locker en Firestore", e)
+                showAlert = true
+            }
+
     }
+
 
     fun updateUserWithLockerId(userId: String, lockerId: String, onSuccess: () -> Unit) {
         // Obtener la referencia al documento del usuario

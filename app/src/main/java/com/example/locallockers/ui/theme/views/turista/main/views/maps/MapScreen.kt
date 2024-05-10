@@ -54,7 +54,6 @@ fun MainScreen(navController: NavController,
         },
         bottomBar = {
             BottomNav(navController, user?.role ?: "Turista")
-            Log.d("ProblemaRol","User Confi: ${user.toString()}")
         }
     ) { pad ->
         Column(

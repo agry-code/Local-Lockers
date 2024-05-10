@@ -72,6 +72,10 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
     implementation("androidx.compose.runtime:runtime-livedata:1.6.7")
 
+    //Convertir dirección en coordenadas
+    implementation ("com.google.android.gms:play-services-maps:17.0.1")
+    implementation ("com.google.android.gms:play-services-location:17.1.0")
+
     //Google services
     implementation("com.google.android.gms:play-services-auth:21.1.1")
     //Navitagion
