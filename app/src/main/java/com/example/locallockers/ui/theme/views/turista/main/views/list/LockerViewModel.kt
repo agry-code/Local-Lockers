@@ -96,9 +96,9 @@ class LockerViewModel : ViewModel() {
         }
     }
 
-
-
-
+    /**
+     * Función para obtener el día de la reserva en el mapa. El mapa solo reserva para hoy.
+     */
     fun getTodayReservation(lockerId: String): LiveData<Reservation?> {
         val today = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
         val result = MutableLiveData<Reservation?>()

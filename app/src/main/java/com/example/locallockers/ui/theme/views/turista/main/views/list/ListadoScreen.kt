@@ -37,6 +37,8 @@ import androidx.navigation.NavController
 import com.example.locallockers.model.LockerModel
 import com.example.locallockers.navigation.BottomNav
 import com.example.locallockers.ui.theme.views.turista.main.views.maps.MapViewModel
+import com.example.locallockers.ui.theme.views.turista.main.views.maps.ShowReservationDialog
+import java.sql.Timestamp
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.time.LocalDate
@@ -105,14 +107,23 @@ fun ListadoScreen(
                     }
                 }
             }
-            if (showDialog && selectedLocker != null && selectedLocker!!.capacity!=0) {
+            if (showDialog && selectedLocker != null) {
+                val todayReservation by lockerViewModel.getTodayReservation(selectedLocker!!.id)
+                    .observeAsState()
                 ShowReservationDialog(
                     locker = selectedLocker!!,
+                    reservation = todayReservation,
                     onDismiss = { showDialog = false },
                     onConfirm = { numberOfBags, startDate, endDate ->
-                        val startTime = java.sql.Timestamp(startDate.time)
-                        val endTime = java.sql.Timestamp(endDate.time)
-                        lockerViewModel.updateReservationCapacity(selectedLocker!!.id, numberOfBags)
+                        // Convertir las fechas al tipo java.sql.Timestamp
+                        val startTime = Timestamp(startDate.time)
+                        val endTime = Timestamp(endDate.time)
+
+                        lockerViewModel.updateReservationCapacity(
+                            selectedLocker!!.id,
+                            numberOfBags,
+                            startTime
+                        )
                         lockerViewModel.createReservation(
                             user!!.userId,
                             user!!.email,
@@ -122,23 +133,10 @@ fun ListadoScreen(
                             endTime,
                             user!!.userName
                         )
+
+                        // Cerrar el diálogo
                         showDialog = false
                     }
-                    /*onConfirm = { numberOfBags ->
-                        val startTime = Timestamp.now()  // Asumiendo que la reserva comienza ahora
-                        val endTime =  Timestamp(Date(System.currentTimeMillis() + 86400000))  // Asumiendo reserva de un día
-                        lockerViewModel.reserveLocker(selectedLocker!!.id, numberOfBags)
-                        lockerViewModel.createReservation(
-                            user!!.userId,
-                            user!!.email,
-                            selectedLocker!!.id,
-                            selectedLocker!!.name,
-                            startTime,
-                            endTime,
-                            user!!.userName
-                        )
-                        showDialog = false
-                    }*/
                 )
             }
         }
@@ -166,6 +164,15 @@ fun LockerItem(locker: LockerModel, onItemClicked: (LockerModel) -> Unit) {
     }
 }
 
+// Función de ayuda para parsear fechas
+fun parseDate(dateStr: String): Date? {
+    return try {
+        SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).parse(dateStr)
+    } catch (e: ParseException) {
+        null
+    }
+}
+/*
 @Composable
 fun ShowReservationDialog(locker: LockerModel, onDismiss: () -> Unit, onConfirm: (Int, Date, Date) -> Unit) {
     val (numberOfBagsText, setNumberOfBagsText) = remember { mutableStateOf("") }
@@ -221,15 +228,6 @@ fun ShowReservationDialog(locker: LockerModel, onDismiss: () -> Unit, onConfirm:
                 Text("Cancelar")
             }
         }
-    )
-}
+    )*/
 
-// Función de ayuda para parsear fechas
-fun parseDate(dateStr: String): Date? {
-    return try {
-        SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).parse(dateStr)
-    } catch (e: ParseException) {
-        null
-    }
-}
 
