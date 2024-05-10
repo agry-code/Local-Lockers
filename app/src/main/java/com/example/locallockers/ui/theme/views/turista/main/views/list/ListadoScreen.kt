@@ -87,21 +87,14 @@ fun ListadoScreen(
                 label = { Text("Fecha (YYYY-MM-DD)") },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
             )
-            TextField(
-                value = neededCapacity.toString(),
-                onValueChange = { neededCapacity = it.toIntOrNull() ?: 0 },
-                label = { Text("Capacidad necesaria") },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
-            )
             Button(onClick = {
                 selectedDate = LocalDate.parse(dateText)
-                //lockerViewModel.filterLockersByDateAndCapacity(selectedDate, neededCapacity)
             }) {
                 Text("Filtrar Lockers")
             }
             LazyColumn {
                 items(lockers) { locker ->
-                    LockerItem(locker) {
+                    LockerItem(locker,selectedDate,lockerViewModel) {
                         selectedLocker = locker
                         showDialog = true
                     }
@@ -143,22 +136,28 @@ fun ListadoScreen(
     }
 }
 
-
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun LockerItem(locker: LockerModel, onItemClicked: (LockerModel) -> Unit) {
+fun LockerItem(locker: LockerModel, date: LocalDate, lockerViewModel: LockerViewModel, onItemClicked: (LockerModel) -> Unit) {
+    val reservation by lockerViewModel.getReservationForDate(locker.id, date).observeAsState()
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { onItemClicked(locker) }
+//            .clickable { onItemClicked(locker) }
+            .clickable(enabled = reservation != null && reservation!!.capacidad > 0) {
+                onItemClicked(locker)
+            }
             .padding(8.dp)
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
-            Text("Nombre: ${locker.name}")
-            Text("Horario: ${locker.openHours}")
-            if (locker.capacity == 0) {
-                Text("Este locker está lleno", color = MaterialTheme.colorScheme.error)
-            }else{
-                Text("Capacidad: ${locker.capacity} maletas")
+            Text("Nombre: ${locker.name}", style = MaterialTheme.typography.titleMedium)
+            Text("Horario: ${locker.openHours}", style = MaterialTheme.typography.bodySmall)
+            if (reservation != null) {
+                Text("Capacidad disponible: ${reservation!!.capacidad}")
+                Text("Precio por bolsa: ${reservation!!.precio}")
+            } else {
+                Text("No hay información de reserva para esta fecha")
             }
         }
     }
@@ -172,62 +171,5 @@ fun parseDate(dateStr: String): Date? {
         null
     }
 }
-/*
-@Composable
-fun ShowReservationDialog(locker: LockerModel, onDismiss: () -> Unit, onConfirm: (Int, Date, Date) -> Unit) {
-    val (numberOfBagsText, setNumberOfBagsText) = remember { mutableStateOf("") }
-    val (startDateText, setStartDateText) = remember { mutableStateOf("") }
-    val (endDateText, setEndDateText) = remember { mutableStateOf("") }
-
-    AlertDialog(
-        onDismissRequest = onDismiss,
-        title = { Text("Reservar en ${locker.name}") },
-        text = {
-            Column {
-                Text("Capacidad disponible: ${locker.capacity}")
-                //Text("Precio por día: ${locker.precio}€")
-                Text("Indica cuántas maletas quieres reservar:")
-                TextField(
-                    value = numberOfBagsText,
-                    onValueChange = { newText ->
-                        if (newText.all { it.isDigit() }) setNumberOfBagsText(newText)
-                    },
-                    label = { Text("Número de maletas") },
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
-                )
-                Text("Fecha de entrada:")
-                TextField(
-                    value = startDateText,
-                    onValueChange = setStartDateText,
-                    label = { Text("DD/MM/AAAA") }
-                )
-                Text("Fecha de salida:")
-                TextField(
-                    value = endDateText,
-                    onValueChange = setEndDateText,
-                    label = { Text("DD/MM/AAAA") }
-                )
-            }
-        },
-        confirmButton = {
-            Button(
-                onClick = {
-                    val numberOfBags = numberOfBagsText.toIntOrNull()
-                    val startDate = parseDate(startDateText)
-                    val endDate = parseDate(endDateText)
-                    if (numberOfBags != null && startDate != null && endDate != null) {
-                        onConfirm(numberOfBags, startDate, endDate)
-                    }
-                }
-            ) {
-                Text("Confirmar")
-            }
-        },
-        dismissButton = {
-            Button(onClick = onDismiss) {
-                Text("Cancelar")
-            }
-        }
-    )*/
 
 

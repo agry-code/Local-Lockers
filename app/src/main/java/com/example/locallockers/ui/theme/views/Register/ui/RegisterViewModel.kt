@@ -160,7 +160,6 @@ class RegisterViewModel : ViewModel() {
             name = _localName.value ?: "",
             latitude = 0.0,  // Estos valores deben ser establecidos de alguna manera antes de guardar
             longitude = 0.0,
-            capacity = 0,
             openHours = _openHours.value ?: "",
             owner = ownerId
         )

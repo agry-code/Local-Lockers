@@ -1,6 +1,8 @@
 package com.example.locallockers.ui.theme.views.turista.main.views.list
 
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,6 +15,8 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.ZoneId
 import java.util.Date
 import java.util.Locale
 
@@ -42,13 +46,12 @@ class LockerViewModel : ViewModel() {
                         LockerModel(
                             id = id,
                             name = name,
-                            capacity = capacity,
                             openHours = openHours,
                             owner = owner,
                             longitude = longitude,
                             latitude = latitude
 
-                            )
+                        )
                     )
                 }
                 _lockers.value = lockerList
@@ -57,6 +60,7 @@ class LockerViewModel : ViewModel() {
                 Log.e("Firebase", "Error getting documents: ", exception)
             }
     }
+
     fun updateReservationCapacity(lockerId: String, numberOfBags: Int, reservationDate: Date) {
         val db = Firebase.firestore
         val lockerRef = db.collection("Lockers").document(lockerId)
@@ -81,7 +85,11 @@ class LockerViewModel : ViewModel() {
                                     Log.d("UpdateCapacity", "Capacidad actualizada con éxito")
                                 }
                                 .addOnFailureListener { e ->
-                                    Log.e("UpdateCapacityError", "Error actualizando la capacidad", e)
+                                    Log.e(
+                                        "UpdateCapacityError",
+                                        "Error actualizando la capacidad",
+                                        e
+                                    )
                                 }
                         } else {
                             Log.d("UpdateCapacity", "No hay suficiente capacidad")
@@ -94,6 +102,41 @@ class LockerViewModel : ViewModel() {
         }.addOnFailureListener { e ->
             Log.e("FirestoreError", "Error getting document", e)
         }
+    }
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun getReservationForDate(lockerId: String, date: LocalDate): LiveData<Reservation?> {
+        val result = MutableLiveData<Reservation?>()
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val dateStr = dateFormat.format(Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant()))
+
+        val reservationRef = Firebase.firestore.collection("Lockers").document(lockerId)
+        reservationRef.get().addOnSuccessListener { document ->
+            if (document.exists()) {
+                val reservas = document.data?.get("reservas") as? Map<String, Map<String, Any>>
+                reservas?.let {
+                    val reservationData = it[dateStr]
+                    reservationData?.let {
+                        val capacidad = (it["capacidad"]?.toString()?.toIntOrNull() ?: 0)
+                        val precio = it["precio"] as? Double ?: 0.0
+                        result.value = Reservation(capacidad, precio)
+                    } ?: run {
+                        Log.d("GetReservationForDate", "No reservation found for $dateStr")
+                        result.value = null
+                    }
+                } ?: run {
+                    Log.d("GetReservationForDate", "No reservations map found")
+                    result.value = null
+                }
+            } else {
+                Log.d("GetReservationForDate", "Document not found")
+                result.value = null
+            }
+        }.addOnFailureListener {
+            Log.e("FirestoreError", "Error getting document", it)
+            result.value = null
+        }
+
+        return result
     }
 
     /**
@@ -133,41 +176,16 @@ class LockerViewModel : ViewModel() {
         return result
     }
 
-    fun updateReservationCapacity(lockerId: String, numberOfBags: Int) {
-        viewModelScope.launch {
-            try {
-                val db = FirebaseFirestore.getInstance()
-                val lockerRef = db.collection("Lockers").document(lockerId)
 
-                // Realizar la transacción y esperar su resultado
-                val result = db.runTransaction { transaction ->
-                    val snapshot = transaction.get(lockerRef)
-                    val currentCapacity = snapshot.getLong("capacity") ?: 0
-
-                    if (currentCapacity >= numberOfBags) {
-                        val newCapacity = currentCapacity - numberOfBags
-                        transaction.update(lockerRef, "capacity", newCapacity)
-                        newCapacity
-                    } else {
-                        throw Exception("No hay suficiente capacidad")
-                    }
-                }.await()  // Espera a que la transacción se complete
-
-                // Actualizar el LiveData dentro del scope correcto
-                val updatedLockers = _lockers.value?.map { locker ->
-                    if (locker.id == lockerId) locker.copy(capacity = result.toInt()) else locker
-                }
-                _lockers.postValue(updatedLockers ?: listOf())
-
-            } catch (e: Exception) {
-                // Manejar errores, como la falta de capacidad
-                println("Transaction failure: $e")
-            }
-        }
-    }
-
-
-    fun createReservation(userId: String, userEmail: String, lockerId: String, lockerName: String, startTime: java.sql.Timestamp, endTime: java.sql.Timestamp, userName: String) {
+    fun createReservation(
+        userId: String,
+        userEmail: String,
+        lockerId: String,
+        lockerName: String,
+        startTime: java.sql.Timestamp,
+        endTime: java.sql.Timestamp,
+        userName: String
+    ) {
         // Crear un nuevo documento con un ID generado automáticamente
         val newDocRef = db.collection("Reservations").document()
 
@@ -193,8 +211,4 @@ class LockerViewModel : ViewModel() {
                 Log.w("Firestore", "Error adding document", e)
             }
     }
-
-
-
-
 }

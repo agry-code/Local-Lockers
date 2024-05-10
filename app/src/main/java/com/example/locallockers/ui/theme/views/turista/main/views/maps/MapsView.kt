@@ -59,12 +59,10 @@ fun MapsView(lockers: List<LockerModel>, lockerViewModel: LockerViewModel) {
                 Marker(
                     state = markerState,
                     title = locker.name,
-                    snippet = "Capacidad: ${locker.capacity}\nHorario: ${locker.openHours}",
+                    snippet = "Horario: ${locker.openHours}",
                     onClick = {
-                        if (locker.capacity > 0) {
                             selectedLocker = locker
                             showDialog = true
-                        }
                         true // Indica que el evento de clic ha sido manejado
                     }
                 )
@@ -113,32 +111,6 @@ fun MapsView(lockers: List<LockerModel>, lockerViewModel: LockerViewModel) {
             }
         )
     }
-
-    /*if (showDialog && selectedLocker != null) {
-        val todayReservation by lockerViewModel.getTodayReservation(selectedLocker!!.id)
-            .observeAsState()
-        ShowReservationDialog(
-            locker = selectedLocker!!,
-            reservation = todayReservation,
-            onDismiss = { showDialog = false },
-            onConfirm = { numberOfBags, startDate, endDate ->
-                val startTime = java.sql.Timestamp(startDate.time)
-                val endTime = java.sql.Timestamp(endDate.time)
-                lockerViewModel.reserveLocker(selectedLocker!!.id, numberOfBags)
-                lockerViewModel.createReservation(
-                    user!!.userId,
-                    user!!.email,
-                    selectedLocker!!.id,
-                    selectedLocker!!.name,
-                    startTime,
-                    endTime,
-                    user!!.userName
-                )
-                // Lógica de confirmación aquí
-                showDialog = false
-            }
-        )
-    }*/
 }
 
 @Composable
