@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.locallockers.app-mergeDebugResources-70:/values-en-rXC/values-en-rXC.xml",
+            "outputFile": "com.example.locallockers.app-mergeDebugResources-71:/values-en-rXC/values-en-rXC.xml",
             "map": [
                 {
                     "source": "C:\\Users\\adria\\.gradle\\caches\\transforms-3\\8d1c58926e8f845cc718b153dd170a80\\transformed\\foundation-release\\res\\values-en-rXC\\values-en-rXC.xml",

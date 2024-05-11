@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.locallockers.app-mergeDebugResources-70:/values-large-v4/values-large-v4.xml",
+            "outputFile": "com.example.locallockers.app-mergeDebugResources-71:/values-large-v4/values-large-v4.xml",
             "map": [
                 {
                     "source": "C:\\Users\\adria\\.gradle\\caches\\transforms-3\\e5092ea4f7ebccbdbf9544c7a96318ca\\transformed\\appcompat-1.0.0\\res\\values-large-v4\\values-large-v4.xml",

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.locallockers.app-mergeDebugResources-70:/values-v21/values-v21.xml",
+            "outputFile": "com.example.locallockers.app-mergeDebugResources-71:/values-v21/values-v21.xml",
             "map": [
                 {
                     "source": "C:\\Users\\adria\\.gradle\\caches\\transforms-3\\63a09e06c6aaaede947b7060824dcda1\\transformed\\core-1.13.1\\res\\values-v21\\values-v21.xml",

@@ -1,4 +1,5 @@
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -22,10 +23,12 @@ import com.example.locallockers.ui.theme.Composable.NameField
 import com.example.locallockers.ui.theme.Composable.OpenHoursField
 import com.example.locallockers.ui.theme.Composable.PasswordField
 import com.example.locallockers.ui.theme.views.Register.ui.RegisterViewModel
+import com.example.locallockers.ui.theme.views.turista.main.views.maps.SearchViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun RegisterScreen(
+    searchViewModel: SearchViewModel,
     registerModel: RegisterViewModel,
     navController: NavController,
     modifier: Modifier = Modifier
@@ -34,9 +37,16 @@ fun RegisterScreen(
     val name: String by registerModel.name.observeAsState(initial = "")
     val password: String by registerModel.password.observeAsState(initial = "")
     val confirmPassword: String by registerModel.confirmPassword.observeAsState(initial = "")
-    val location by registerModel.location.observeAsState(initial = "")
+    val location by searchViewModel.location.observeAsState(initial = "")
     val openHours by registerModel.openHours.observeAsState(initial = "")
     val localName by registerModel.localName.observeAsState("")
+
+    val lat by searchViewModel.lat.observeAsState()
+    val long by searchViewModel.long.observeAsState()
+
+    LaunchedEffect(lat, long) {
+
+    }
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -92,22 +102,28 @@ fun RegisterScreen(
         if (registerModel.userType == "Huesped") {
             NameField(name = localName, text = "Nombre del local", onTextFieldChanged = registerModel::onLocalNameChanged )
             Spacer(modifier = Modifier.padding(8.dp))
-            LocationField(location = location, onLocationChanged = registerModel::onLocationChanged)
+            LocationField(location = location, onLocationChanged = searchViewModel::onLocationChanged)
             Spacer(modifier = Modifier.padding(8.dp))
             OpenHoursField(openHours = openHours, onOpenHoursChanged = registerModel::onOpenHoursChanged)
         }
-        // Botón de registro
-        Button(
-            onClick = {
-                registerModel.createUser(email, password, name) {
-                    navController.navigate("Main")
+        Button(onClick = {
+            if(location.isNotEmpty()) {
+                searchViewModel.getLocation(location)
+            }
+            if(lat != null && long != null) {
+                registerModel.createUser(email, password, name, lat!!, long!!) {
+                    if(registerModel.userType == "Turista") {
+                        navController.navigate("Main")
+                    } else {
+                        navController.navigate("Request")
+                    }
                 }
-            }, modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
-        ) {
+            }
+        }
+        , modifier = Modifier.fillMaxWidth().padding(8.dp)) {
             Text(text = "Registrarse")
         }
+
         // Alerta de errores
         if (registerModel.showAlert) {
             Alert(
@@ -116,48 +132,5 @@ fun RegisterScreen(
                 confirmText = "Aceptar",
                 onConfirmClick = { registerModel.closeAlert() }) {
             }        }
-    }
-}
-
-
-@Composable
-fun Register(modifier: Modifier, registerModel: RegisterViewModel, navController: NavController) {
-    val email: String by registerModel.email.observeAsState(initial = "")
-    val name: String by registerModel.name.observeAsState(initial = "")
-    val password: String by registerModel.password.observeAsState(initial = "")
-    val confirmPassword: String by registerModel.confirmPassword.observeAsState(initial = "")
-
-    Column(modifier = modifier) {
-        Spacer(modifier = Modifier.padding(40.dp))
-        EmailField(email = email, onTextFieldChanged = { registerModel.onEmailChanged(it) })
-        Spacer(modifier = Modifier.padding(8.dp))
-        NameField(name = name,"Nombre" ,onTextFieldChanged = { registerModel.onNameChanged(it) })
-        Spacer(modifier = Modifier.padding(8.dp))
-        PasswordField(
-            password = password,
-            onPasswordChanged = { registerModel.onPasswordChanged(it) })
-        Spacer(modifier = Modifier.padding(8.dp))
-        ConfirmPasswordField(
-            confirmPassword = confirmPassword,
-            onConfirmPasswordChanged = { registerModel.onConfirmPasswordChanged(it) })
-        Button(
-            onClick = {
-                registerModel.createUser(email, password, name) {
-                    navController.navigate("Main")
-                }
-            }, modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
-        ) {
-            Text(text = "Registrarse")
-        }
-        if (registerModel.showAlert) {
-            Alert(
-                title = "Alerta",
-                msg = "Usuario no creado",
-                confirmText = "Aceptar",
-                onConfirmClick = { registerModel.closeAlert() }) {
-            }
-        }
     }
 }

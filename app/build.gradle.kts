@@ -68,16 +68,16 @@ dependencies {
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
-    //implementation("androidx.compose.material3:material3")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
     implementation("androidx.compose.runtime:runtime-livedata:1.6.7")
 
     //Convertir dirección en coordenadas
-    implementation ("com.google.android.gms:play-services-maps:17.0.1")
-    implementation ("com.google.android.gms:play-services-location:17.1.0")
-
+    implementation ("com.google.android.gms:play-services-maps:18.2.0")
+    implementation ("com.google.android.gms:play-services-location:21.2.0")
     //Google services
     implementation("com.google.android.gms:play-services-auth:21.1.1")
+    //Google Pay API
+    implementation ("com.google.android.gms:play-services-wallet:19.3.0")
     //Navitagion
     implementation("androidx.navigation:navigation-compose:2.7.7")
     //FireBase

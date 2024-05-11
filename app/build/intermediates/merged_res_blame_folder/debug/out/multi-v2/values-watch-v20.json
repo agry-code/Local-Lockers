@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.locallockers.app-mergeDebugResources-70:/values-watch-v20/values-watch-v20.xml",
+            "outputFile": "com.example.locallockers.app-mergeDebugResources-71:/values-watch-v20/values-watch-v20.xml",
             "map": [
                 {
                     "source": "C:\\Users\\adria\\.gradle\\caches\\transforms-3\\174db79d4fb66c3cc526119495d85ee3\\transformed\\play-services-auth-21.1.1\\res\\values-watch-v20\\values.xml",

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.locallockers.app-mergeDebugResources-70:/values-v23/values-v23.xml",
+            "outputFile": "com.example.locallockers.app-mergeDebugResources-71:/values-v23/values-v23.xml",
             "map": [
                 {
                     "source": "C:\\Users\\adria\\.gradle\\caches\\transforms-3\\22e2c8b7b37dad32ff0d439445736156\\transformed\\cardview-1.0.0\\res\\values-v23\\values-v23.xml",

@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\adria\Desktop\Local-Lockers\app\src\main\AndroidManifest.xml:2:1-31:12
-INJECTED from C:\Users\adria\Desktop\Local-Lockers\app\src\main\AndroidManifest.xml:2:1-31:12
-INJECTED from C:\Users\adria\Desktop\Local-Lockers\app\src\main\AndroidManifest.xml:2:1-31:12
-INJECTED from C:\Users\adria\Desktop\Local-Lockers\app\src\main\AndroidManifest.xml:2:1-31:12
+ADDED from C:\Users\adria\Desktop\Local-Lockers\app\src\main\AndroidManifest.xml:2:1-34:12
+INJECTED from C:\Users\adria\Desktop\Local-Lockers\app\src\main\AndroidManifest.xml:2:1-34:12
+INJECTED from C:\Users\adria\Desktop\Local-Lockers\app\src\main\AndroidManifest.xml:2:1-34:12
+INJECTED from C:\Users\adria\Desktop\Local-Lockers\app\src\main\AndroidManifest.xml:2:1-34:12
 MERGED from [com.google.firebase:firebase-firestore-ktx:25.0.0] C:\Users\adria\.gradle\caches\transforms-3\40643181256587ee3682cb5da0e52bed\transformed\firebase-firestore-ktx-25.0.0\AndroidManifest.xml:2:1-18:12
 MERGED from [com.google.firebase:firebase-auth-ktx:23.0.0] C:\Users\adria\.gradle\caches\transforms-3\e6f7c6cdf202fb0aa8a06bbcfb7f832c\transformed\firebase-auth-ktx-23.0.0\AndroidManifest.xml:2:1-17:12
 MERGED from [com.google.firebase:firebase-auth:23.0.0] C:\Users\adria\.gradle\caches\transforms-3\45df944e7efbf97a3f599b7de7fc5afb\transformed\firebase-auth-23.0.0\AndroidManifest.xml:17:1-75:12
@@ -14,9 +14,6 @@ MERGED from [com.google.firebase:firebase-analytics:21.6.1] C:\Users\adria\.grad
 MERGED from [com.google.android.gms:play-services-measurement-api:21.6.1] C:\Users\adria\.gradle\caches\transforms-3\e2542d20576acc3872d3f21e7631aad3\transformed\play-services-measurement-api-21.6.1\AndroidManifest.xml:17:1-43:12
 MERGED from [com.google.firebase:firebase-installations:17.2.0] C:\Users\adria\.gradle\caches\transforms-3\f091a91ef2fa4bf5f7d3ca1f4150ead5\transformed\firebase-installations-17.2.0\AndroidManifest.xml:2:1-24:12
 MERGED from [com.google.firebase:firebase-common-ktx:21.0.0] C:\Users\adria\.gradle\caches\transforms-3\aa82ce68dc1378947aa098b8579a16fe\transformed\firebase-common-ktx-21.0.0\AndroidManifest.xml:2:1-18:12
-MERGED from [androidx.credentials:credentials:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\f19afc61d69f75d9f7ac03870a74e48d\transformed\credentials-1.2.0-rc01\AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\8f7c665c9a915ee0edac3f71284291bb\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:17:1-44:12
-MERGED from [com.google.android.libraries.identity.googleid:googleid:1.1.0] C:\Users\adria\.gradle\caches\transforms-3\7ed510295b075bee839cd661a23cffb2\transformed\googleid-1.1.0\AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.android.libraries.places:places:3.4.0] C:\Users\adria\.gradle\caches\transforms-3\28cc598c1c4b93aee4d0a7b80f015e6c\transformed\places-3.4.0\AndroidManifest.xml:2:1-24:12
 MERGED from [androidx.navigation:navigation-common:2.7.7] C:\Users\adria\.gradle\caches\transforms-3\fb7429cc079dfe52157e2001e61b3db9\transformed\navigation-common-2.7.7\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.navigation:navigation-runtime:2.7.7] C:\Users\adria\.gradle\caches\transforms-3\fcaf5b942411a1960fde9bbd8a67b349\transformed\navigation-runtime-2.7.7\AndroidManifest.xml:17:1-22:12
@@ -25,13 +22,17 @@ MERGED from [androidx.navigation:navigation-runtime-ktx:2.7.7] C:\Users\adria\.g
 MERGED from [androidx.navigation:navigation-compose:2.7.7] C:\Users\adria\.gradle\caches\transforms-3\efa2996d57d2df1c8198e87189ff3982\transformed\navigation-compose-2.7.7\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.compose.material3:material3-android:1.2.1] C:\Users\adria\.gradle\caches\transforms-3\67f37c0258d35256943fafcaa5c54ed4\transformed\material3-release\AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.maps.android:maps-compose:2.11.2] C:\Users\adria\.gradle\caches\transforms-3\d1d86f4bb75f565f9cfd3ecf2408fc67\transformed\maps-compose-2.11.2\AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.gms:play-services-wallet:19.3.0] C:\Users\adria\.gradle\caches\transforms-3\048dfbaf60f5e5671fb70eea64e339f3\transformed\play-services-wallet-19.3.0\AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.maps.android:maps-ktx:3.3.0] C:\Users\adria\.gradle\caches\transforms-3\ffbacd20d66c50abb0b2be8462b8142e\transformed\maps-ktx-3.3.0\AndroidManifest.xml:18:1-25:12
 MERGED from [com.google.android.gms:play-services-maps:18.2.0] C:\Users\adria\.gradle\caches\transforms-3\7b38a8f34893908b7e0e206e735fef8e\transformed\play-services-maps-18.2.0\AndroidManifest.xml:17:1-44:12
+MERGED from [androidx.credentials:credentials:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\f19afc61d69f75d9f7ac03870a74e48d\transformed\credentials-1.2.0-rc01\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\8f7c665c9a915ee0edac3f71284291bb\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:17:1-44:12
 MERGED from [com.google.android.gms:play-services-auth:21.1.1] C:\Users\adria\.gradle\caches\transforms-3\174db79d4fb66c3cc526119495d85ee3\transformed\play-services-auth-21.1.1\AndroidManifest.xml:17:1-40:12
+MERGED from [com.google.android.gms:play-services-location:21.2.0] C:\Users\adria\.gradle\caches\transforms-3\f901cdd6617ddd9f9c54fc9f1b1f4e8e\transformed\play-services-location-21.2.0\AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.android.gms:play-services-safetynet:18.0.0] C:\Users\adria\.gradle\caches\transforms-3\fb1b0c3fa616a64a1e4ab12e6c665543\transformed\play-services-safetynet-18.0.0\AndroidManifest.xml:17:1-24:12
-MERGED from [com.google.android.gms:play-services-location:20.0.0] C:\Users\adria\.gradle\caches\transforms-3\3baea1c8c7b8ff2b08897e4f0308c62e\transformed\play-services-location-20.0.0\AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.android.gms:play-services-auth-api-phone:18.0.2] C:\Users\adria\.gradle\caches\transforms-3\6027e1dfd013880270f66b4364e57a7c\transformed\play-services-auth-api-phone-18.0.2\AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.android.gms:play-services-auth-base:18.0.10] C:\Users\adria\.gradle\caches\transforms-3\ca9df0c6cde0b6eb114fe3dee806a95c\transformed\play-services-auth-base-18.0.10\AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.android.gms:play-services-identity:18.0.1] C:\Users\adria\.gradle\caches\transforms-3\c20207d56ba410593fea86bd329d3318\transformed\play-services-identity-18.0.1\AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.firebase:firebase-appcheck-interop:17.1.0] C:\Users\adria\.gradle\caches\transforms-3\a3f2959dbc5b99b8009869af7d2670de\transformed\firebase-appcheck-interop-17.1.0\AndroidManifest.xml:15:1-23:12
 MERGED from [com.google.firebase:firebase-database-collection:18.0.1] C:\Users\adria\.gradle\caches\transforms-3\38b99337425ac053230ddc8fbe842a29\transformed\firebase-database-collection-18.0.1\AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.android.gms:play-services-fido:20.1.0] C:\Users\adria\.gradle\caches\transforms-3\568d0839ad36327770b56ceee182e360\transformed\play-services-fido-20.1.0\AndroidManifest.xml:2:1-10:12
@@ -109,6 +110,7 @@ MERGED from [androidx.activity:activity-ktx:1.9.0] C:\Users\adria\.gradle\caches
 MERGED from [androidx.activity:activity-compose:1.9.0] C:\Users\adria\.gradle\caches\transforms-3\d52f93024d15e8f84ed108f99848ab40\transformed\activity-compose-1.9.0\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.7.0] C:\Users\adria\.gradle\caches\transforms-3\52878379e1ee1374e33617e55a017164\transformed\lifecycle-viewmodel-2.7.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.7.0] C:\Users\adria\.gradle\caches\transforms-3\5562e8a4d537c6d69a80cb467d0a4a3c\transformed\lifecycle-runtime-ktx-2.7.0\AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.android.libraries.identity.googleid:googleid:1.1.0] C:\Users\adria\.gradle\caches\transforms-3\7ed510295b075bee839cd661a23cffb2\transformed\googleid-1.1.0\AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.android.datatransport:transport-backend-cct:3.2.0] C:\Users\adria\.gradle\caches\transforms-3\bd73a02875d7d592ebeeb3a24d1f2e48\transformed\transport-backend-cct-3.2.0\AndroidManifest.xml:15:1-35:12
 MERGED from [com.google.android.datatransport:transport-runtime:3.2.0] C:\Users\adria\.gradle\caches\transforms-3\e14b6d1e6858863192127d41f7f9bce3\transformed\transport-runtime-3.2.0\AndroidManifest.xml:15:1-39:12
 MERGED from [com.google.firebase:firebase-encoders-json:18.0.0] C:\Users\adria\.gradle\caches\transforms-3\d9dc7a4f98db32db4d16135cb912935d\transformed\firebase-encoders-json-18.0.0\AndroidManifest.xml:15:1-23:12
@@ -166,8 +168,8 @@ MERGED from [com.google.android.datatransport:transport-backend-cct:3.2.0] C:\Us
 	android:name
 		ADDED from C:\Users\adria\Desktop\Local-Lockers\app\src\main\AndroidManifest.xml:4:22-64
 application
-ADDED from C:\Users\adria\Desktop\Local-Lockers\app\src\main\AndroidManifest.xml:6:5-29:19
-INJECTED from C:\Users\adria\Desktop\Local-Lockers\app\src\main\AndroidManifest.xml:6:5-29:19
+ADDED from C:\Users\adria\Desktop\Local-Lockers\app\src\main\AndroidManifest.xml:6:5-32:19
+INJECTED from C:\Users\adria\Desktop\Local-Lockers\app\src\main\AndroidManifest.xml:6:5-32:19
 MERGED from [com.google.firebase:firebase-firestore-ktx:25.0.0] C:\Users\adria\.gradle\caches\transforms-3\40643181256587ee3682cb5da0e52bed\transformed\firebase-firestore-ktx-25.0.0\AndroidManifest.xml:8:5-16:19
 MERGED from [com.google.firebase:firebase-firestore-ktx:25.0.0] C:\Users\adria\.gradle\caches\transforms-3\40643181256587ee3682cb5da0e52bed\transformed\firebase-firestore-ktx-25.0.0\AndroidManifest.xml:8:5-16:19
 MERGED from [com.google.firebase:firebase-auth-ktx:23.0.0] C:\Users\adria\.gradle\caches\transforms-3\e6f7c6cdf202fb0aa8a06bbcfb7f832c\transformed\firebase-auth-ktx-23.0.0\AndroidManifest.xml:7:5-15:19
@@ -188,18 +190,20 @@ MERGED from [com.google.firebase:firebase-installations:17.2.0] C:\Users\adria\.
 MERGED from [com.google.firebase:firebase-installations:17.2.0] C:\Users\adria\.gradle\caches\transforms-3\f091a91ef2fa4bf5f7d3ca1f4150ead5\transformed\firebase-installations-17.2.0\AndroidManifest.xml:11:5-22:19
 MERGED from [com.google.firebase:firebase-common-ktx:21.0.0] C:\Users\adria\.gradle\caches\transforms-3\aa82ce68dc1378947aa098b8579a16fe\transformed\firebase-common-ktx-21.0.0\AndroidManifest.xml:8:5-16:19
 MERGED from [com.google.firebase:firebase-common-ktx:21.0.0] C:\Users\adria\.gradle\caches\transforms-3\aa82ce68dc1378947aa098b8579a16fe\transformed\firebase-common-ktx-21.0.0\AndroidManifest.xml:8:5-16:19
-MERGED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\8f7c665c9a915ee0edac3f71284291bb\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:23:5-42:19
-MERGED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\8f7c665c9a915ee0edac3f71284291bb\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:23:5-42:19
 MERGED from [com.google.android.libraries.places:places:3.4.0] C:\Users\adria\.gradle\caches\transforms-3\28cc598c1c4b93aee4d0a7b80f015e6c\transformed\places-3.4.0\AndroidManifest.xml:14:5-22:19
 MERGED from [com.google.android.libraries.places:places:3.4.0] C:\Users\adria\.gradle\caches\transforms-3\28cc598c1c4b93aee4d0a7b80f015e6c\transformed\places-3.4.0\AndroidManifest.xml:14:5-22:19
 MERGED from [com.google.android.gms:play-services-maps:18.2.0] C:\Users\adria\.gradle\caches\transforms-3\7b38a8f34893908b7e0e206e735fef8e\transformed\play-services-maps-18.2.0\AndroidManifest.xml:36:5-42:19
 MERGED from [com.google.android.gms:play-services-maps:18.2.0] C:\Users\adria\.gradle\caches\transforms-3\7b38a8f34893908b7e0e206e735fef8e\transformed\play-services-maps-18.2.0\AndroidManifest.xml:36:5-42:19
+MERGED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\8f7c665c9a915ee0edac3f71284291bb\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:23:5-42:19
+MERGED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\8f7c665c9a915ee0edac3f71284291bb\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:23:5-42:19
 MERGED from [com.google.android.gms:play-services-auth:21.1.1] C:\Users\adria\.gradle\caches\transforms-3\174db79d4fb66c3cc526119495d85ee3\transformed\play-services-auth-21.1.1\AndroidManifest.xml:22:5-38:19
 MERGED from [com.google.android.gms:play-services-auth:21.1.1] C:\Users\adria\.gradle\caches\transforms-3\174db79d4fb66c3cc526119495d85ee3\transformed\play-services-auth-21.1.1\AndroidManifest.xml:22:5-38:19
+MERGED from [com.google.android.gms:play-services-location:21.2.0] C:\Users\adria\.gradle\caches\transforms-3\f901cdd6617ddd9f9c54fc9f1b1f4e8e\transformed\play-services-location-21.2.0\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-location:21.2.0] C:\Users\adria\.gradle\caches\transforms-3\f901cdd6617ddd9f9c54fc9f1b1f4e8e\transformed\play-services-location-21.2.0\AndroidManifest.xml:7:5-20
 MERGED from [com.google.android.gms:play-services-safetynet:18.0.0] C:\Users\adria\.gradle\caches\transforms-3\fb1b0c3fa616a64a1e4ab12e6c665543\transformed\play-services-safetynet-18.0.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.gms:play-services-safetynet:18.0.0] C:\Users\adria\.gradle\caches\transforms-3\fb1b0c3fa616a64a1e4ab12e6c665543\transformed\play-services-safetynet-18.0.0\AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-location:20.0.0] C:\Users\adria\.gradle\caches\transforms-3\3baea1c8c7b8ff2b08897e4f0308c62e\transformed\play-services-location-20.0.0\AndroidManifest.xml:7:5-20
-MERGED from [com.google.android.gms:play-services-location:20.0.0] C:\Users\adria\.gradle\caches\transforms-3\3baea1c8c7b8ff2b08897e4f0308c62e\transformed\play-services-location-20.0.0\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-identity:18.0.1] C:\Users\adria\.gradle\caches\transforms-3\c20207d56ba410593fea86bd329d3318\transformed\play-services-identity-18.0.1\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-identity:18.0.1] C:\Users\adria\.gradle\caches\transforms-3\c20207d56ba410593fea86bd329d3318\transformed\play-services-identity-18.0.1\AndroidManifest.xml:22:5-20
 MERGED from [com.google.firebase:firebase-appcheck-interop:17.1.0] C:\Users\adria\.gradle\caches\transforms-3\a3f2959dbc5b99b8009869af7d2670de\transformed\firebase-appcheck-interop-17.1.0\AndroidManifest.xml:21:5-20
 MERGED from [com.google.firebase:firebase-appcheck-interop:17.1.0] C:\Users\adria\.gradle\caches\transforms-3\a3f2959dbc5b99b8009869af7d2670de\transformed\firebase-appcheck-interop-17.1.0\AndroidManifest.xml:21:5-20
 MERGED from [com.google.android.gms:play-services-fido:20.1.0] C:\Users\adria\.gradle\caches\transforms-3\568d0839ad36327770b56ceee182e360\transformed\play-services-fido-20.1.0\AndroidManifest.xml:7:5-8:19
@@ -280,26 +284,32 @@ ADDED from C:\Users\adria\Desktop\Local-Lockers\app\src\main\AndroidManifest.xml
 		ADDED from C:\Users\adria\Desktop\Local-Lockers\app\src\main\AndroidManifest.xml:17:13-68
 	android:name
 		ADDED from C:\Users\adria\Desktop\Local-Lockers\app\src\main\AndroidManifest.xml:16:20-65
+meta-data#com.google.android.gms.wallet.api.enabled
+ADDED from C:\Users\adria\Desktop\Local-Lockers\app\src\main\AndroidManifest.xml:18:9-20:36
+	android:value
+		ADDED from C:\Users\adria\Desktop\Local-Lockers\app\src\main\AndroidManifest.xml:20:13-33
+	android:name
+		ADDED from C:\Users\adria\Desktop\Local-Lockers\app\src\main\AndroidManifest.xml:19:13-69
 activity#com.example.locallockers.MainActivity
-ADDED from C:\Users\adria\Desktop\Local-Lockers\app\src\main\AndroidManifest.xml:18:9-28:20
+ADDED from C:\Users\adria\Desktop\Local-Lockers\app\src\main\AndroidManifest.xml:21:9-31:20
 	android:label
-		ADDED from C:\Users\adria\Desktop\Local-Lockers\app\src\main\AndroidManifest.xml:21:13-45
+		ADDED from C:\Users\adria\Desktop\Local-Lockers\app\src\main\AndroidManifest.xml:24:13-45
 	android:exported
-		ADDED from C:\Users\adria\Desktop\Local-Lockers\app\src\main\AndroidManifest.xml:20:13-36
+		ADDED from C:\Users\adria\Desktop\Local-Lockers\app\src\main\AndroidManifest.xml:23:13-36
 	android:theme
-		ADDED from C:\Users\adria\Desktop\Local-Lockers\app\src\main\AndroidManifest.xml:22:13-54
+		ADDED from C:\Users\adria\Desktop\Local-Lockers\app\src\main\AndroidManifest.xml:25:13-54
 	android:name
-		ADDED from C:\Users\adria\Desktop\Local-Lockers\app\src\main\AndroidManifest.xml:19:13-41
+		ADDED from C:\Users\adria\Desktop\Local-Lockers\app\src\main\AndroidManifest.xml:22:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\adria\Desktop\Local-Lockers\app\src\main\AndroidManifest.xml:23:13-27:29
+ADDED from C:\Users\adria\Desktop\Local-Lockers\app\src\main\AndroidManifest.xml:26:13-30:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\adria\Desktop\Local-Lockers\app\src\main\AndroidManifest.xml:24:17-69
+ADDED from C:\Users\adria\Desktop\Local-Lockers\app\src\main\AndroidManifest.xml:27:17-69
 	android:name
-		ADDED from C:\Users\adria\Desktop\Local-Lockers\app\src\main\AndroidManifest.xml:24:25-66
+		ADDED from C:\Users\adria\Desktop\Local-Lockers\app\src\main\AndroidManifest.xml:27:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\adria\Desktop\Local-Lockers\app\src\main\AndroidManifest.xml:26:17-77
+ADDED from C:\Users\adria\Desktop\Local-Lockers\app\src\main\AndroidManifest.xml:29:17-77
 	android:name
-		ADDED from C:\Users\adria\Desktop\Local-Lockers\app\src\main\AndroidManifest.xml:26:27-74
+		ADDED from C:\Users\adria\Desktop\Local-Lockers\app\src\main\AndroidManifest.xml:29:27-74
 uses-sdk
 INJECTED from C:\Users\adria\Desktop\Local-Lockers\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\adria\Desktop\Local-Lockers\app\src\main\AndroidManifest.xml
@@ -324,12 +334,6 @@ MERGED from [com.google.firebase:firebase-installations:17.2.0] C:\Users\adria\.
 MERGED from [com.google.firebase:firebase-installations:17.2.0] C:\Users\adria\.gradle\caches\transforms-3\f091a91ef2fa4bf5f7d3ca1f4150ead5\transformed\firebase-installations-17.2.0\AndroidManifest.xml:5:5-44
 MERGED from [com.google.firebase:firebase-common-ktx:21.0.0] C:\Users\adria\.gradle\caches\transforms-3\aa82ce68dc1378947aa098b8579a16fe\transformed\firebase-common-ktx-21.0.0\AndroidManifest.xml:5:5-44
 MERGED from [com.google.firebase:firebase-common-ktx:21.0.0] C:\Users\adria\.gradle\caches\transforms-3\aa82ce68dc1378947aa098b8579a16fe\transformed\firebase-common-ktx-21.0.0\AndroidManifest.xml:5:5-44
-MERGED from [androidx.credentials:credentials:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\f19afc61d69f75d9f7ac03870a74e48d\transformed\credentials-1.2.0-rc01\AndroidManifest.xml:5:5-44
-MERGED from [androidx.credentials:credentials:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\f19afc61d69f75d9f7ac03870a74e48d\transformed\credentials-1.2.0-rc01\AndroidManifest.xml:5:5-44
-MERGED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\8f7c665c9a915ee0edac3f71284291bb\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:21:5-44
-MERGED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\8f7c665c9a915ee0edac3f71284291bb\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:21:5-44
-MERGED from [com.google.android.libraries.identity.googleid:googleid:1.1.0] C:\Users\adria\.gradle\caches\transforms-3\7ed510295b075bee839cd661a23cffb2\transformed\googleid-1.1.0\AndroidManifest.xml:5:5-44
-MERGED from [com.google.android.libraries.identity.googleid:googleid:1.1.0] C:\Users\adria\.gradle\caches\transforms-3\7ed510295b075bee839cd661a23cffb2\transformed\googleid-1.1.0\AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.libraries.places:places:3.4.0] C:\Users\adria\.gradle\caches\transforms-3\28cc598c1c4b93aee4d0a7b80f015e6c\transformed\places-3.4.0\AndroidManifest.xml:7:5-44
 MERGED from [com.google.android.libraries.places:places:3.4.0] C:\Users\adria\.gradle\caches\transforms-3\28cc598c1c4b93aee4d0a7b80f015e6c\transformed\places-3.4.0\AndroidManifest.xml:7:5-44
 MERGED from [androidx.navigation:navigation-common:2.7.7] C:\Users\adria\.gradle\caches\transforms-3\fb7429cc079dfe52157e2001e61b3db9\transformed\navigation-common-2.7.7\AndroidManifest.xml:20:5-44
@@ -346,20 +350,28 @@ MERGED from [androidx.compose.material3:material3-android:1.2.1] C:\Users\adria\
 MERGED from [androidx.compose.material3:material3-android:1.2.1] C:\Users\adria\.gradle\caches\transforms-3\67f37c0258d35256943fafcaa5c54ed4\transformed\material3-release\AndroidManifest.xml:20:5-44
 MERGED from [com.google.maps.android:maps-compose:2.11.2] C:\Users\adria\.gradle\caches\transforms-3\d1d86f4bb75f565f9cfd3ecf2408fc67\transformed\maps-compose-2.11.2\AndroidManifest.xml:20:5-22:41
 MERGED from [com.google.maps.android:maps-compose:2.11.2] C:\Users\adria\.gradle\caches\transforms-3\d1d86f4bb75f565f9cfd3ecf2408fc67\transformed\maps-compose-2.11.2\AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.gms:play-services-wallet:19.3.0] C:\Users\adria\.gradle\caches\transforms-3\048dfbaf60f5e5671fb70eea64e339f3\transformed\play-services-wallet-19.3.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-wallet:19.3.0] C:\Users\adria\.gradle\caches\transforms-3\048dfbaf60f5e5671fb70eea64e339f3\transformed\play-services-wallet-19.3.0\AndroidManifest.xml:20:5-44
 MERGED from [com.google.maps.android:maps-ktx:3.3.0] C:\Users\adria\.gradle\caches\transforms-3\ffbacd20d66c50abb0b2be8462b8142e\transformed\maps-ktx-3.3.0\AndroidManifest.xml:21:5-23:41
 MERGED from [com.google.maps.android:maps-ktx:3.3.0] C:\Users\adria\.gradle\caches\transforms-3\ffbacd20d66c50abb0b2be8462b8142e\transformed\maps-ktx-3.3.0\AndroidManifest.xml:21:5-23:41
 MERGED from [com.google.android.gms:play-services-maps:18.2.0] C:\Users\adria\.gradle\caches\transforms-3\7b38a8f34893908b7e0e206e735fef8e\transformed\play-services-maps-18.2.0\AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-maps:18.2.0] C:\Users\adria\.gradle\caches\transforms-3\7b38a8f34893908b7e0e206e735fef8e\transformed\play-services-maps-18.2.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.credentials:credentials:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\f19afc61d69f75d9f7ac03870a74e48d\transformed\credentials-1.2.0-rc01\AndroidManifest.xml:5:5-44
+MERGED from [androidx.credentials:credentials:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\f19afc61d69f75d9f7ac03870a74e48d\transformed\credentials-1.2.0-rc01\AndroidManifest.xml:5:5-44
+MERGED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\8f7c665c9a915ee0edac3f71284291bb\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:21:5-44
+MERGED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\8f7c665c9a915ee0edac3f71284291bb\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:21:5-44
 MERGED from [com.google.android.gms:play-services-auth:21.1.1] C:\Users\adria\.gradle\caches\transforms-3\174db79d4fb66c3cc526119495d85ee3\transformed\play-services-auth-21.1.1\AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-auth:21.1.1] C:\Users\adria\.gradle\caches\transforms-3\174db79d4fb66c3cc526119495d85ee3\transformed\play-services-auth-21.1.1\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-location:21.2.0] C:\Users\adria\.gradle\caches\transforms-3\f901cdd6617ddd9f9c54fc9f1b1f4e8e\transformed\play-services-location-21.2.0\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-location:21.2.0] C:\Users\adria\.gradle\caches\transforms-3\f901cdd6617ddd9f9c54fc9f1b1f4e8e\transformed\play-services-location-21.2.0\AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-safetynet:18.0.0] C:\Users\adria\.gradle\caches\transforms-3\fb1b0c3fa616a64a1e4ab12e6c665543\transformed\play-services-safetynet-18.0.0\AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-safetynet:18.0.0] C:\Users\adria\.gradle\caches\transforms-3\fb1b0c3fa616a64a1e4ab12e6c665543\transformed\play-services-safetynet-18.0.0\AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-location:20.0.0] C:\Users\adria\.gradle\caches\transforms-3\3baea1c8c7b8ff2b08897e4f0308c62e\transformed\play-services-location-20.0.0\AndroidManifest.xml:5:5-44
-MERGED from [com.google.android.gms:play-services-location:20.0.0] C:\Users\adria\.gradle\caches\transforms-3\3baea1c8c7b8ff2b08897e4f0308c62e\transformed\play-services-location-20.0.0\AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-auth-api-phone:18.0.2] C:\Users\adria\.gradle\caches\transforms-3\6027e1dfd013880270f66b4364e57a7c\transformed\play-services-auth-api-phone-18.0.2\AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-auth-api-phone:18.0.2] C:\Users\adria\.gradle\caches\transforms-3\6027e1dfd013880270f66b4364e57a7c\transformed\play-services-auth-api-phone-18.0.2\AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-auth-base:18.0.10] C:\Users\adria\.gradle\caches\transforms-3\ca9df0c6cde0b6eb114fe3dee806a95c\transformed\play-services-auth-base-18.0.10\AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-auth-base:18.0.10] C:\Users\adria\.gradle\caches\transforms-3\ca9df0c6cde0b6eb114fe3dee806a95c\transformed\play-services-auth-base-18.0.10\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-identity:18.0.1] C:\Users\adria\.gradle\caches\transforms-3\c20207d56ba410593fea86bd329d3318\transformed\play-services-identity-18.0.1\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-identity:18.0.1] C:\Users\adria\.gradle\caches\transforms-3\c20207d56ba410593fea86bd329d3318\transformed\play-services-identity-18.0.1\AndroidManifest.xml:20:5-44
 MERGED from [com.google.firebase:firebase-appcheck-interop:17.1.0] C:\Users\adria\.gradle\caches\transforms-3\a3f2959dbc5b99b8009869af7d2670de\transformed\firebase-appcheck-interop-17.1.0\AndroidManifest.xml:18:5-44
 MERGED from [com.google.firebase:firebase-appcheck-interop:17.1.0] C:\Users\adria\.gradle\caches\transforms-3\a3f2959dbc5b99b8009869af7d2670de\transformed\firebase-appcheck-interop-17.1.0\AndroidManifest.xml:18:5-44
 MERGED from [com.google.firebase:firebase-database-collection:18.0.1] C:\Users\adria\.gradle\caches\transforms-3\38b99337425ac053230ddc8fbe842a29\transformed\firebase-database-collection-18.0.1\AndroidManifest.xml:5:5-7:41
@@ -514,6 +526,8 @@ MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.7.0] C:\Users\adria\.gradl
 MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.7.0] C:\Users\adria\.gradle\caches\transforms-3\52878379e1ee1374e33617e55a017164\transformed\lifecycle-viewmodel-2.7.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.7.0] C:\Users\adria\.gradle\caches\transforms-3\5562e8a4d537c6d69a80cb467d0a4a3c\transformed\lifecycle-runtime-ktx-2.7.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.7.0] C:\Users\adria\.gradle\caches\transforms-3\5562e8a4d537c6d69a80cb467d0a4a3c\transformed\lifecycle-runtime-ktx-2.7.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.libraries.identity.googleid:googleid:1.1.0] C:\Users\adria\.gradle\caches\transforms-3\7ed510295b075bee839cd661a23cffb2\transformed\googleid-1.1.0\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.libraries.identity.googleid:googleid:1.1.0] C:\Users\adria\.gradle\caches\transforms-3\7ed510295b075bee839cd661a23cffb2\transformed\googleid-1.1.0\AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.datatransport:transport-backend-cct:3.2.0] C:\Users\adria\.gradle\caches\transforms-3\bd73a02875d7d592ebeeb3a24d1f2e48\transformed\transport-backend-cct-3.2.0\AndroidManifest.xml:18:5-44
 MERGED from [com.google.android.datatransport:transport-backend-cct:3.2.0] C:\Users\adria\.gradle\caches\transforms-3\bd73a02875d7d592ebeeb3a24d1f2e48\transformed\transport-backend-cct-3.2.0\AndroidManifest.xml:18:5-44
 MERGED from [com.google.android.datatransport:transport-runtime:3.2.0] C:\Users\adria\.gradle\caches\transforms-3\e14b6d1e6858863192127d41f7f9bce3\transformed\transport-runtime-3.2.0\AndroidManifest.xml:18:5-44
@@ -772,36 +786,6 @@ ADDED from [com.google.firebase:firebase-common-ktx:21.0.0] C:\Users\adria\.grad
 		ADDED from [com.google.firebase:firebase-common-ktx:21.0.0] C:\Users\adria\.gradle\caches\transforms-3\aa82ce68dc1378947aa098b8579a16fe\transformed\firebase-common-ktx-21.0.0\AndroidManifest.xml:14:17-82
 	android:name
 		ADDED from [com.google.firebase:firebase-common-ktx:21.0.0] C:\Users\adria\.gradle\caches\transforms-3\aa82ce68dc1378947aa098b8579a16fe\transformed\firebase-common-ktx-21.0.0\AndroidManifest.xml:13:17-116
-service#androidx.credentials.playservices.CredentialProviderMetadataHolder
-ADDED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\8f7c665c9a915ee0edac3f71284291bb\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:24:9-32:19
-	android:enabled
-		ADDED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\8f7c665c9a915ee0edac3f71284291bb\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:26:13-35
-	android:exported
-		ADDED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\8f7c665c9a915ee0edac3f71284291bb\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:27:13-37
-	tools:ignore
-		ADDED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\8f7c665c9a915ee0edac3f71284291bb\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:28:13-60
-	android:name
-		ADDED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\8f7c665c9a915ee0edac3f71284291bb\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:25:13-94
-meta-data#androidx.credentials.CREDENTIAL_PROVIDER_KEY
-ADDED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\8f7c665c9a915ee0edac3f71284291bb\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:29:13-31:104
-	android:value
-		ADDED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\8f7c665c9a915ee0edac3f71284291bb\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:31:17-101
-	android:name
-		ADDED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\8f7c665c9a915ee0edac3f71284291bb\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:30:17-76
-activity#androidx.credentials.playservices.HiddenActivity
-ADDED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\8f7c665c9a915ee0edac3f71284291bb\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:34:9-41:20
-	android:fitsSystemWindows
-		ADDED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\8f7c665c9a915ee0edac3f71284291bb\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:39:13-45
-	android:enabled
-		ADDED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\8f7c665c9a915ee0edac3f71284291bb\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:37:13-35
-	android:exported
-		ADDED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\8f7c665c9a915ee0edac3f71284291bb\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:38:13-37
-	android:configChanges
-		ADDED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\8f7c665c9a915ee0edac3f71284291bb\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:36:13-87
-	android:theme
-		ADDED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\8f7c665c9a915ee0edac3f71284291bb\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:40:13-48
-	android:name
-		ADDED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\8f7c665c9a915ee0edac3f71284291bb\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:35:13-76
 uses-permission#android.permission.ACCESS_COARSE_LOCATION
 ADDED from [com.google.android.libraries.places:places:3.4.0] C:\Users\adria\.gradle\caches\transforms-3\28cc598c1c4b93aee4d0a7b80f015e6c\transformed\places-3.4.0\AndroidManifest.xml:9:5-81
 	android:name
@@ -844,6 +828,36 @@ ADDED from [com.google.android.gms:play-services-maps:18.2.0] C:\Users\adria\.gr
 		ADDED from [com.google.android.gms:play-services-maps:18.2.0] C:\Users\adria\.gradle\caches\transforms-3\7b38a8f34893908b7e0e206e735fef8e\transformed\play-services-maps-18.2.0\AndroidManifest.xml:41:13-37
 	android:name
 		ADDED from [com.google.android.gms:play-services-maps:18.2.0] C:\Users\adria\.gradle\caches\transforms-3\7b38a8f34893908b7e0e206e735fef8e\transformed\play-services-maps-18.2.0\AndroidManifest.xml:40:13-50
+service#androidx.credentials.playservices.CredentialProviderMetadataHolder
+ADDED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\8f7c665c9a915ee0edac3f71284291bb\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:24:9-32:19
+	android:enabled
+		ADDED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\8f7c665c9a915ee0edac3f71284291bb\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:26:13-35
+	android:exported
+		ADDED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\8f7c665c9a915ee0edac3f71284291bb\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:27:13-37
+	tools:ignore
+		ADDED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\8f7c665c9a915ee0edac3f71284291bb\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:28:13-60
+	android:name
+		ADDED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\8f7c665c9a915ee0edac3f71284291bb\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:25:13-94
+meta-data#androidx.credentials.CREDENTIAL_PROVIDER_KEY
+ADDED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\8f7c665c9a915ee0edac3f71284291bb\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:29:13-31:104
+	android:value
+		ADDED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\8f7c665c9a915ee0edac3f71284291bb\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:31:17-101
+	android:name
+		ADDED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\8f7c665c9a915ee0edac3f71284291bb\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:30:17-76
+activity#androidx.credentials.playservices.HiddenActivity
+ADDED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\8f7c665c9a915ee0edac3f71284291bb\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:34:9-41:20
+	android:fitsSystemWindows
+		ADDED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\8f7c665c9a915ee0edac3f71284291bb\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:39:13-45
+	android:enabled
+		ADDED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\8f7c665c9a915ee0edac3f71284291bb\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:37:13-35
+	android:exported
+		ADDED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\8f7c665c9a915ee0edac3f71284291bb\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:38:13-37
+	android:configChanges
+		ADDED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\8f7c665c9a915ee0edac3f71284291bb\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:36:13-87
+	android:theme
+		ADDED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\8f7c665c9a915ee0edac3f71284291bb\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:40:13-48
+	android:name
+		ADDED from [androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\adria\.gradle\caches\transforms-3\8f7c665c9a915ee0edac3f71284291bb\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:35:13-76
 activity#com.google.android.gms.auth.api.signin.internal.SignInHubActivity
 ADDED from [com.google.android.gms:play-services-auth:21.1.1] C:\Users\adria\.gradle\caches\transforms-3\174db79d4fb66c3cc526119495d85ee3\transformed\play-services-auth-21.1.1\AndroidManifest.xml:23:9-27:75
 	android:excludeFromRecents

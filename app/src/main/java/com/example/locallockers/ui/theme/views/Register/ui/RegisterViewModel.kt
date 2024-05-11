@@ -20,33 +20,41 @@ class RegisterViewModel : ViewModel() {
     private val auth: FirebaseAuth = Firebase.auth
     var showAlert by mutableStateOf(false)
 
+    // Variables de estado para latitud y longitud
+    private val _latitude = MutableLiveData<Double>()
+    val latitude: LiveData<Double> = _latitude
+
+    private val _longitude = MutableLiveData<Double>()
+    val longitude: LiveData<Double> = _longitude
+
     private val _email = MutableLiveData<String>()
+
     val email: LiveData<String> = _email
-
     private val _name = MutableLiveData<String>()
+
     val name: LiveData<String> = _name
-
     private val _password = MutableLiveData<String>()
+
     val password: LiveData<String> = _password
-    
     private val _confirmPassword = MutableLiveData<String>()
+
     val confirmPassword: LiveData<String> = _confirmPassword
-
-    // Nuevos estados para Huesped
-    private val _location = MutableLiveData<String>()
-    val location: LiveData<String> = _location
-
     private val _openHours = MutableLiveData<String>()
-    val openHours: LiveData<String> = _openHours
 
+    val openHours: LiveData<String> = _openHours
     private val _localName = MutableLiveData<String>()
+
     val localName: LiveData<String> = _localName
+    fun onLatitudeChanged(lat: Double) {
+        _latitude.value = lat
+    }
+
+    fun onLongitudeChanged(long: Double) {
+        _longitude.value = long
+    }
 
     fun onLocalNameChanged(localName: String){
         _localName.value = localName
-    }
-    fun onLocationChanged(location: String) {
-        _location.value = location
     }
 
     fun onOpenHoursChanged(openHours: String) {
@@ -78,7 +86,7 @@ class RegisterViewModel : ViewModel() {
     }
 
 
-    fun createUser(email: String, password: String, userName: String, onSuccess: () -> Unit) {
+    fun createUser(email: String, password: String, userName: String,lat: Double,long: Double, onSuccess: () -> Unit) {
         viewModelScope.launch {
             try {
                 auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
@@ -87,7 +95,7 @@ class RegisterViewModel : ViewModel() {
                         if (currentUser != null) {
                             if (_role.value == "Huesped") {
                                 saveUser(userName, "Huesped", currentUser.uid) {
-                                    saveLocker(currentUser.uid) { lockerId ->
+                                    saveLocker(currentUser.uid,lat,long) { lockerId ->
                                         updateUserWithLockerId(currentUser.uid, lockerId, onSuccess)
                                     }
                                 }
@@ -128,15 +136,18 @@ class RegisterViewModel : ViewModel() {
                 showAlert = true
             }
     }
-    private fun saveLocker(ownerId: String, onSuccess: (String) -> Unit) {
+    private fun saveLocker(ownerId: String,lat: Double,long: Double, onSuccess: (String) -> Unit) {
+        //Pasamos location a coordenadas
+
         // Crear un LockerModel sin ID específico
         val locker = LockerModel(
             name = _localName.value ?: "",
-            latitude = 0.0,  // Estos valores deben ser establecidos de alguna manera antes de guardar
-            longitude = 0.0,
+            latitude = lat,  // Estos valores deben ser establecidos de alguna manera antes de guardar
+            longitude = long,
             openHours = _openHours.value ?: "",
             owner = ownerId
         )
+        Log.d("RegisterViewModel","${locker.toString()}")
 
         FirebaseFirestore.getInstance().collection("Lockers")
             .add(locker.toMap())

@@ -19,6 +19,7 @@ import androidx.navigation.NavController
 import com.example.locallockers.ui.theme.views.Register.ui.RegisterViewModel
 import com.example.locallockers.ui.theme.views.login.ui.LoginScreen
 import com.example.locallockers.ui.theme.views.login.ui.LoginViewModel
+import com.example.locallockers.ui.theme.views.turista.main.views.maps.SearchViewModel
 
 @Composable
 fun TabsViews(navController: NavController) {
@@ -42,7 +43,7 @@ fun TabsViews(navController: NavController) {
         }
         when(selectedTab){
             0 -> LoginScreen(viewModel = LoginViewModel(), navController = navController)
-            1 -> RegisterScreen(registerModel = RegisterViewModel(), navController = navController)
+            1 -> RegisterScreen(searchViewModel = SearchViewModel(), registerModel = RegisterViewModel(), navController = navController)
         }
     }
 }
