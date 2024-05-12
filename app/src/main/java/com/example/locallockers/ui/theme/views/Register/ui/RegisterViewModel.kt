@@ -45,13 +45,6 @@ class RegisterViewModel : ViewModel() {
     private val _localName = MutableLiveData<String>()
 
     val localName: LiveData<String> = _localName
-    fun onLatitudeChanged(lat: Double) {
-        _latitude.value = lat
-    }
-
-    fun onLongitudeChanged(long: Double) {
-        _longitude.value = long
-    }
 
     fun onLocalNameChanged(localName: String){
         _localName.value = localName

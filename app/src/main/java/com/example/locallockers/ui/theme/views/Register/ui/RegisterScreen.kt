@@ -55,7 +55,6 @@ fun RegisterScreen(
         val roles = listOf("Turista", "Huesped")
         var selectedRole by remember {
             mutableStateOf("Turista")
-
         }
         var expanded by remember { mutableStateOf(false) }  // Inicializa el estado 'expanded'
         // Un botón que cuando se presiona, cambia el estado de 'expanded' para mostrar u ocultar el menú
@@ -77,7 +76,10 @@ fun RegisterScreen(
             Spacer(modifier = Modifier.padding(40.dp))
             EmailField(email = email, onTextFieldChanged = { registerModel.onEmailChanged(it) })
             Spacer(modifier = Modifier.padding(8.dp))
-            NameField(name = name, "Nombre",onTextFieldChanged = { registerModel.onNameChanged(it) })
+            NameField(
+                name = name,
+                "Nombre",
+                onTextFieldChanged = { registerModel.onNameChanged(it) })
             Spacer(modifier = Modifier.padding(8.dp))
             PasswordField(
                 password = password,
@@ -85,7 +87,12 @@ fun RegisterScreen(
             Spacer(modifier = Modifier.padding(8.dp))
             ConfirmPasswordField(
                 confirmPassword = confirmPassword,
-                onConfirmPasswordChanged = { registerModel.onConfirmPasswordChanged(it) })
+                onConfirmPasswordChanged = { registerModel.onConfirmPasswordChanged(it) }
+            )
+
+            /*            ConfirmPasswordField(
+                confirmPassword = confirmPassword,
+                onConfirmPasswordChanged = { registerModel.onConfirmPasswordChanged(it) })*/
             Spacer(modifier = Modifier.padding(8.dp))
 
 
@@ -100,37 +107,50 @@ fun RegisterScreen(
         }
         // Mostrar los campos adicionales si el usuario es "Huesped/Local"
         if (registerModel.userType == "Huesped") {
-            NameField(name = localName, text = "Nombre del local", onTextFieldChanged = registerModel::onLocalNameChanged )
+            NameField(
+                name = localName,
+                text = "Nombre del local",
+                onTextFieldChanged = registerModel::onLocalNameChanged
+            )
             Spacer(modifier = Modifier.padding(8.dp))
-            LocationField(location = location, onLocationChanged = searchViewModel::onLocationChanged)
+            LocationField(
+                location = location,
+                onLocationChanged = searchViewModel::onLocationChanged
+            )
             Spacer(modifier = Modifier.padding(8.dp))
-            OpenHoursField(openHours = openHours, onOpenHoursChanged = registerModel::onOpenHoursChanged)
+            OpenHoursField(
+                openHours = openHours,
+                onOpenHoursChanged = registerModel::onOpenHoursChanged
+            )
         }
+
         Button(onClick = {
-            if(location.isNotEmpty()) {
-                searchViewModel.getLocation(location)
-            }
-            if(lat != null && long != null) {
+            if (password != confirmPassword) {
+                registerModel.showAlert =
+                    true // Asegúrate de tener un estado que controle la visibilidad de la alerta.
+                registerModel.showError("Las contraseñas no coinciden") // Mensaje de alerta
+            } else if (location.isNotEmpty() && lat != null && long != null) {
                 registerModel.createUser(email, password, name, lat!!, long!!) {
-                    if(registerModel.userType == "Turista") {
+                    if (registerModel.userType == "Turista") {
                         navController.navigate("Main")
                     } else {
                         navController.navigate("Request")
                     }
                 }
             }
-        }
-        , modifier = Modifier.fillMaxWidth().padding(8.dp)) {
+        }, modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp)) {
             Text(text = "Registrarse")
         }
-
-        // Alerta de errores
         if (registerModel.showAlert) {
             Alert(
-                title = "Alerta",
-                msg = "Usuario no creado",
+                title = "Error de Registro",
+                msg = "La constraseñas no coinciden",
                 confirmText = "Aceptar",
-                onConfirmClick = { registerModel.closeAlert() }) {
-            }        }
+                onConfirmClick = { registerModel.closeAlert() },
+                onDismissClick = { registerModel.closeAlert() }
+            )
+        }
     }
 }
