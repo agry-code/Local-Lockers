@@ -1,16 +1,22 @@
 package com.example.locallockers.ui.theme.views.turista.main.views.maps
 
 import UserViewModel
+import android.app.DatePickerDialog
+import android.content.Context
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Build
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -20,6 +26,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.locallockers.model.LockerModel
 import com.example.locallockers.model.Reservation
@@ -32,6 +39,7 @@ import com.google.maps.android.compose.rememberCameraPositionState
 import com.google.maps.android.compose.rememberMarkerState
 import java.text.ParseException
 import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
@@ -114,57 +122,79 @@ fun MapsView(lockers: List<LockerModel>, lockerViewModel: LockerViewModel) {
         )
     }
 }
-
 @Composable
 fun ShowReservationDialog(
     locker: LockerModel,
-    reservation: Reservation?, // Asume que este es el modelo de datos para la reserva
+    reservation: Reservation?,
     onDismiss: () -> Unit,
-    onConfirm: (Int, Date, Date) -> Unit
+    onConfirm: (Int, Date, Date) -> Unit,
+    context: Context = LocalContext.current  // Obtiene el contexto actual
 ) {
     if (reservation != null) {
-        var numberOfBags by remember { mutableStateOf(1) } // Estado inicial
-        val (startDateText, setStartDateText) = remember { mutableStateOf("") }
-        val (endDateText, setEndDateText) = remember { mutableStateOf("") }
+        var numberOfBags by remember { mutableStateOf(1) }
+        var startDate by remember { mutableStateOf<Date?>(null) }
+        var endDate by remember { mutableStateOf<Date?>(null) }
+        val startDateText = remember { mutableStateOf("") }
+        val endDateText = remember { mutableStateOf("") }
 
         AlertDialog(
             onDismissRequest = onDismiss,
             title = { Text("Reserva para ${locker.name}") },
             text = {
                 Column {
-                    if (reservation != null) {
-                        Text("Capacidad disponible: ${reservation.capacidad}")
-                        Text("Precio por bolsa: ${reservation.precio}")
-                        TextField(
-                            value = numberOfBags.toString(),
-                            onValueChange = { numberOfBags = it.toIntOrNull() ?: 1 },
-                            label = { Text("Número de bolsas") }
-                        )
-                        Text("Fecha de entrada:")
-                        TextField(
-                            value = startDateText,
-                            onValueChange = setStartDateText,
-                            label = { Text("DD/MM/AAAA") }
-                        )
-                        Text("Fecha de salida:")
-                        TextField(
-                            value = endDateText,
-                            onValueChange = setEndDateText,
-                            label = { Text("DD/MM/AAAA") }
-                        )
-                    } else {
-                        Text("No hay reservas disponibles para hoy.")
-                    }
+                    Text("Capacidad disponible: ${reservation.capacidad}")
+                    Text("Precio por bolsa: ${reservation.precio}")
+                    TextField(
+                        value = numberOfBags.toString(),
+                        onValueChange = { numberOfBags = it.toIntOrNull() ?: 1 },
+                        label = { Text("Número de bolsas") }
+                    )
+                    Text("Fecha de entrada:")
+                    // Selector de fecha de entrada como ejemplo
+                    TextField(
+                        value = startDateText.value,
+                        onValueChange = { },
+                        readOnly = true,
+                        label = { Text("DD/MM/AAAA") },
+                        trailingIcon = {
+                            Icon(
+                                Icons.Default.Build, contentDescription = "Seleccionar fecha",
+                                modifier = Modifier.clickable {
+                                    // Pasa null para minDate o simplemente omite el argumento si has configurado la función para usar el valor por defecto
+                                    showDatePicker(context, null, startDate ?: Date()) { newDate ->
+                                        startDate = newDate
+                                        startDateText.value = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(newDate)
+                                    }
+                                }
+                            )
+                        }
+                    )
+                    Text("Fecha de salida:")
+                    TextField(
+                        value = endDateText.value,
+                        onValueChange = { },
+                        readOnly = true,
+                        label = { Text("DD/MM/AAAA") },
+                        trailingIcon = {
+                            Icon(Icons.Default.Build, contentDescription = "Seleccionar fecha",
+                                modifier = Modifier.clickable {
+                                    startDate?.let {
+                                        showDatePicker(context, it, endDate ?: it) { newDate ->
+                                            endDate = newDate
+                                            endDateText.value = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(newDate)
+                                        }
+                                    }
+                                }
+                            )
+                        }
+                    )
+
                 }
             },
             confirmButton = {
                 Button(onClick = {
-                    val startDate = parseDate(startDateText)
-                    val endDate = parseDate(endDateText)
                     if (startDate != null && endDate != null && numberOfBags > 0) {
-                        onConfirm(numberOfBags, startDate, endDate)
-                    } else {
-                        // Aquí puedes manejar un error si las fechas no son válidas
+                        onConfirm(numberOfBags, startDate!!, endDate!!)
                     }
                     onDismiss()
                 }) {
@@ -178,7 +208,7 @@ fun ShowReservationDialog(
             }
         )
     } else {
-        // Código para manejar la situación donde no hay reserva para hoy
+        // Manejo cuando no hay reservas
         AlertDialog(
             onDismissRequest = onDismiss,
             title = { Text("No hay reservas disponibles hoy para ${locker.name}") },
@@ -190,11 +220,23 @@ fun ShowReservationDialog(
         )
     }
 }
-// Función de ayuda para parsear fechas
-fun parseDate(dateStr: String): Date? {
-    return try {
-        SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).parse(dateStr)
-    } catch (e: ParseException) {
-        null
+
+fun showDatePicker(context: Context, minDate: Date? = null, currentDate: Date, onDateSelected: (Date) -> Unit) {
+    val calendar = Calendar.getInstance().apply {
+        time = currentDate
     }
+    val datePickerDialog = DatePickerDialog(
+        context,
+        { _, year, monthOfYear, dayOfMonth ->
+            calendar.set(year, monthOfYear, dayOfMonth)
+            onDateSelected(calendar.time)
+        },
+        calendar.get(Calendar.YEAR),
+        calendar.get(Calendar.MONTH),
+        calendar.get(Calendar.DAY_OF_MONTH)
+    ).apply {
+        datePicker.minDate = minDate?.time ?: System.currentTimeMillis() // Establece la fecha mínima a hoy si minDate es null
+    }
+    datePickerDialog.show()
 }
+
