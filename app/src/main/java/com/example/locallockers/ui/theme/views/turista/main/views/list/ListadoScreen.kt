@@ -39,16 +39,11 @@ import com.example.locallockers.navigation.BottomNav
 import com.example.locallockers.ui.theme.views.turista.main.views.maps.MapViewModel
 import com.example.locallockers.ui.theme.views.turista.main.views.maps.ShowReservationDialog
 import java.sql.Timestamp
-import java.text.ParseException
-import java.text.SimpleDateFormat
 import java.time.LocalDate
-import java.util.Date
-import java.util.Locale
 import androidx.compose.ui.platform.LocalContext
 import android.app.DatePickerDialog
 import android.content.Context
 import androidx.compose.foundation.layout.Spacer
-import java.time.ZoneId
 import java.util.*
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -197,7 +192,9 @@ fun showDatePicker(context: Context, currentDate: LocalDate, onDateSelected: (Lo
         calendar.get(Calendar.YEAR),
         calendar.get(Calendar.MONTH),
         calendar.get(Calendar.DAY_OF_MONTH)
-    )
+    ).apply {
+        datePicker.minDate =  System.currentTimeMillis() // Establece la fecha mínima a hoy si minDate es null
+    }
 
     datePickerDialog.show()
 }
