@@ -78,7 +78,10 @@ dependencies {
     implementation("com.google.android.gms:play-services-auth:21.1.1")
     //Google Pay API
     implementation ("com.google.android.gms:play-services-wallet:19.3.0")
-    //Navitagion
+    implementation ("com.google.pay.button:compose-pay-button:1.0.0")
+    //Corutine
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.3")
+
     implementation("androidx.navigation:navigation-compose:2.7.7")
     //FireBase
     implementation("com.google.firebase:firebase-firestore-ktx:25.0.0")

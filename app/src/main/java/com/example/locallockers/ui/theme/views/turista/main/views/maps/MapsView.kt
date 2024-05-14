@@ -24,14 +24,16 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.locallockers.model.LockerModel
 import com.example.locallockers.model.Reservation
 import com.example.locallockers.ui.theme.views.turista.main.views.list.LockerViewModel
-import com.example.locallockers.ui.theme.views.turista.main.views.list.parseDate
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.rememberCameraPositionState
 import com.google.maps.android.compose.rememberMarkerState
+import java.text.ParseException
+import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
 
 @Composable
 fun MapsView(lockers: List<LockerModel>, lockerViewModel: LockerViewModel) {
@@ -186,5 +188,13 @@ fun ShowReservationDialog(
                 }
             }
         )
+    }
+}
+// Función de ayuda para parsear fechas
+fun parseDate(dateStr: String): Date? {
+    return try {
+        SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).parse(dateStr)
+    } catch (e: ParseException) {
+        null
     }
 }

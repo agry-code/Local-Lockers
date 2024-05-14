@@ -4,6 +4,23 @@
             "outputFile": "com.example.locallockers.app-mergeDebugResources-71:/values-kn/values-kn.xml",
             "map": [
                 {
+                    "source": "C:\\Users\\adria\\.gradle\\caches\\transforms-3\\f38e2ebd10f98b532255bd40ee761056\\transformed\\ui-release\\res\\values-kn\\values-kn.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,202,286,382,482,571,655,748,839,924,995,1066,1148,1234,1313,1390,1459",
+                        "endColumns": "96,83,95,99,88,83,92,90,84,70,70,81,85,78,76,68,117",
+                        "endOffsets": "197,281,377,477,566,650,743,834,919,990,1061,1143,1229,1308,1385,1454,1572"
+                    },
+                    "to": {
+                        "startLines": "38,39,59,60,61,66,67,124,125,126,127,136,137,139,141,142,143",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "3839,3936,6370,6466,6566,7033,7117,13508,13599,13684,13755,14444,14526,14694,14874,14951,15020",
+                        "endColumns": "96,83,95,99,88,83,92,90,84,70,70,81,85,78,76,68,117",
+                        "endOffsets": "3931,4015,6461,6561,6650,7112,7205,13594,13679,13750,13821,14521,14607,14768,14946,15015,15133"
+                    }
+                },
+                {
                     "source": "C:\\Users\\adria\\.gradle\\caches\\transforms-3\\f19afc61d69f75d9f7ac03870a74e48d\\transformed\\credentials-1.2.0-rc01\\res\\values-kn\\values-kn.xml",
                     "from": {
                         "startLines": "2,3",
@@ -52,23 +69,6 @@
                         "startOffsets": "6972,15321",
                         "endColumns": "60,79",
                         "endOffsets": "7028,15396"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\adria\\.gradle\\caches\\transforms-3\\9ecf0fdf01fbb76d184e08dfaec28f5c\\transformed\\ui-release\\res\\values-kn\\values-kn.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,202,286,382,482,571,655,748,839,924,995,1066,1148,1234,1313,1390,1459",
-                        "endColumns": "96,83,95,99,88,83,92,90,84,70,70,81,85,78,76,68,117",
-                        "endOffsets": "197,281,377,477,566,650,743,834,919,990,1061,1143,1229,1308,1385,1454,1572"
-                    },
-                    "to": {
-                        "startLines": "38,39,59,60,61,66,67,124,125,126,127,136,137,139,141,142,143",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "3839,3936,6370,6466,6566,7033,7117,13508,13599,13684,13755,14444,14526,14694,14874,14951,15020",
-                        "endColumns": "96,83,95,99,88,83,92,90,84,70,70,81,85,78,76,68,117",
-                        "endOffsets": "3931,4015,6461,6561,6650,7112,7205,13594,13679,13750,13821,14521,14607,14768,14946,15015,15133"
                     }
                 },
                 {
@@ -123,23 +123,6 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\adria\\.gradle\\caches\\transforms-3\\8d1c58926e8f845cc718b153dd170a80\\transformed\\foundation-release\\res\\values-kn\\values-kn.xml",
-                    "from": {
-                        "startLines": "2,3",
-                        "startColumns": "4,4",
-                        "startOffsets": "55,143",
-                        "endColumns": "87,94",
-                        "endOffsets": "138,233"
-                    },
-                    "to": {
-                        "startLines": "144,145",
-                        "startColumns": "4,4",
-                        "startOffsets": "15138,15226",
-                        "endColumns": "87,94",
-                        "endOffsets": "15221,15316"
-                    }
-                },
-                {
                     "source": "C:\\Users\\adria\\.gradle\\caches\\transforms-3\\63a09e06c6aaaede947b7060824dcda1\\transformed\\core-1.13.1\\res\\values-kn\\values-kn.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
@@ -154,6 +137,23 @@
                         "startOffsets": "3094,3192,3295,3396,3502,3603,3711,14773",
                         "endColumns": "97,102,100,105,100,107,127,100",
                         "endOffsets": "3187,3290,3391,3497,3598,3706,3834,14869"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\adria\\.gradle\\caches\\transforms-3\\fc71542ec1fd6f6be49d65669fa6a297\\transformed\\foundation-release\\res\\values-kn\\values-kn.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,143",
+                        "endColumns": "87,94",
+                        "endOffsets": "138,233"
+                    },
+                    "to": {
+                        "startLines": "144,145",
+                        "startColumns": "4,4",
+                        "startOffsets": "15138,15226",
+                        "endColumns": "87,94",
+                        "endOffsets": "15221,15316"
                     }
                 },
                 {

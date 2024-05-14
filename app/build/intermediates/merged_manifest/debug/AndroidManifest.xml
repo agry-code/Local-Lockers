@@ -74,16 +74,16 @@
             android:directBootAware="true"
             android:exported="false" >
             <meta-data
-                android:name="com.google.firebase.components:com.google.firebase.firestore.ktx.FirebaseFirestoreLegacyRegistrar"
-                android:value="com.google.firebase.components.ComponentRegistrar" />
-            <meta-data
                 android:name="com.google.firebase.components:com.google.firebase.auth.ktx.FirebaseAuthLegacyRegistrar"
                 android:value="com.google.firebase.components.ComponentRegistrar" />
             <meta-data
-                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
+                android:name="com.google.firebase.components:com.google.firebase.appcheck.safetynet.FirebaseAppCheckSafetyNetRegistrar"
                 android:value="com.google.firebase.components.ComponentRegistrar" />
             <meta-data
-                android:name="com.google.firebase.components:com.google.firebase.appcheck.safetynet.FirebaseAppCheckSafetyNetRegistrar"
+                android:name="com.google.firebase.components:com.google.firebase.firestore.ktx.FirebaseFirestoreLegacyRegistrar"
+                android:value="com.google.firebase.components.ComponentRegistrar" />
+            <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
                 android:value="com.google.firebase.components.ComponentRegistrar" />
             <meta-data
                 android:name="com.google.firebase.components:com.google.firebase.appcheck.FirebaseAppCheckKtxRegistrar"
@@ -155,6 +155,13 @@
             android:name="android.adservices.AD_SERVICES_CONFIG"
             android:resource="@xml/ga_ad_services_config" />
 
+        <provider
+            android:name="com.google.firebase.provider.FirebaseInitProvider"
+            android:authorities="com.example.locallockers.firebaseinitprovider"
+            android:directBootAware="true"
+            android:exported="false"
+            android:initOrder="100" />
+
         <activity
             android:name="com.google.android.libraries.places.widget.AutocompleteActivity"
             android:exported="false"
@@ -203,13 +210,6 @@
             android:exported="false"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
-        <provider
-            android:name="com.google.firebase.provider.FirebaseInitProvider"
-            android:authorities="com.example.locallockers.firebaseinitprovider"
-            android:directBootAware="true"
-            android:exported="false"
-            android:initOrder="100" />
-
         <receiver
             android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
             android:enabled="true"
@@ -226,9 +226,10 @@
             android:exported="false"
             android:permission="android.permission.BIND_JOB_SERVICE" />
 
-        <activity
-            android:name="androidx.activity.ComponentActivity"
-            android:exported="true" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
         <activity
             android:name="androidx.compose.ui.tooling.PreviewActivity"
             android:exported="true" />
@@ -252,9 +253,9 @@
             android:name="android.ext.adservices"
             android:required="false" />
 
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
+        <activity
+            android:name="androidx.activity.ComponentActivity"
+            android:exported="true" />
 
         <service
             android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"

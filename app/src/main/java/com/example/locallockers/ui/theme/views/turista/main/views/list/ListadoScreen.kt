@@ -44,6 +44,12 @@ import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.util.Date
 import java.util.Locale
+import androidx.compose.ui.platform.LocalContext
+import android.app.DatePickerDialog
+import android.content.Context
+import androidx.compose.foundation.layout.Spacer
+import java.time.ZoneId
+import java.util.*
 
 @RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
@@ -53,13 +59,14 @@ fun ListadoScreen(
     mapViewModel: MapViewModel = viewModel(),
     lockerViewModel: LockerViewModel = viewModel()
 ) {
+    // Aquí estamos dentro del contexto composable, por lo que es seguro obtener el contexto local
+    val context = LocalContext.current
     val lockers by lockerViewModel.lockers.observeAsState(initial = emptyList())
     val userViewModel: UserViewModel = viewModel()
     val user by userViewModel.currentUser.observeAsState()
     var showDialog by remember { mutableStateOf(false) }
     var selectedLocker by remember { mutableStateOf<LockerModel?>(null) }
     var selectedDate by remember { mutableStateOf(LocalDate.now()) }
-    var neededCapacity by remember { mutableStateOf(0) }
     var dateText by remember { mutableStateOf("") }
 
     Scaffold(
@@ -81,17 +88,28 @@ fun ListadoScreen(
         }
     ) { padding ->
         Column(modifier = Modifier.padding(padding)) {
+            Spacer(modifier = Modifier.padding(8.dp))
             TextField(
                 value = dateText,
                 onValueChange = { dateText = it },
                 label = { Text("Fecha (YYYY-MM-DD)") },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                readOnly = true,
+                enabled = false,
+                modifier = Modifier.fillMaxWidth()
             )
+            Spacer(modifier = Modifier.padding(8.dp))
+
             Button(onClick = {
-                selectedDate = LocalDate.parse(dateText)
+                showDatePicker(context, selectedDate) { newDate ->
+                    selectedDate = newDate
+                    dateText = newDate.toString()
+                }
+                Modifier.fillMaxWidth()
             }) {
-                Text("Filtrar Lockers")
+                Text("Seleccionar Fecha para filtrar")
             }
+            Spacer(modifier = Modifier.padding(8.dp))
             LazyColumn {
                 items(lockers) { locker ->
                     LockerItem(locker,selectedDate,lockerViewModel) {
@@ -163,13 +181,25 @@ fun LockerItem(locker: LockerModel, date: LocalDate, lockerViewModel: LockerView
     }
 }
 
-// Función de ayuda para parsear fechas
-fun parseDate(dateStr: String): Date? {
-    return try {
-        SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).parse(dateStr)
-    } catch (e: ParseException) {
-        null
+@RequiresApi(Build.VERSION_CODES.O)
+fun showDatePicker(context: Context, currentDate: LocalDate, onDateSelected: (LocalDate) -> Unit) {
+    val calendar = Calendar.getInstance().apply {
+        set(Calendar.YEAR, currentDate.year)
+        set(Calendar.MONTH, currentDate.monthValue - 1)
+        set(Calendar.DAY_OF_MONTH, currentDate.dayOfMonth)
     }
+
+    val datePickerDialog = DatePickerDialog(
+        context,
+        { _, year, monthOfYear, dayOfMonth ->
+            onDateSelected(LocalDate.of(year, monthOfYear + 1, dayOfMonth))
+        },
+        calendar.get(Calendar.YEAR),
+        calendar.get(Calendar.MONTH),
+        calendar.get(Calendar.DAY_OF_MONTH)
+    )
+
+    datePickerDialog.show()
 }
 
 

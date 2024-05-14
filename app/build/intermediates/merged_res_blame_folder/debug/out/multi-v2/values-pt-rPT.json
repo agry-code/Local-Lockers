@@ -89,20 +89,20 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\adria\\.gradle\\caches\\transforms-3\\9ecf0fdf01fbb76d184e08dfaec28f5c\\transformed\\ui-release\\res\\values-pt-rPT\\values-pt-rPT.xml",
+                    "source": "C:\\Users\\adria\\.gradle\\caches\\transforms-3\\fc71542ec1fd6f6be49d65669fa6a297\\transformed\\foundation-release\\res\\values-pt-rPT\\values-pt-rPT.xml",
                     "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,200,283,380,479,565,644,741,832,919,991,1060,1145,1235,1311,1387,1459",
-                        "endColumns": "94,82,96,98,85,78,96,90,86,71,68,84,89,75,75,71,121",
-                        "endOffsets": "195,278,375,474,560,639,736,827,914,986,1055,1140,1230,1306,1382,1454,1576"
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,142",
+                        "endColumns": "86,88",
+                        "endOffsets": "137,226"
                     },
                     "to": {
-                        "startLines": "38,39,59,60,61,66,67,124,125,126,127,136,137,139,141,142,143",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "3835,3930,6463,6560,6659,7120,7199,13583,13674,13761,13833,14518,14603,14778,14955,15031,15103",
-                        "endColumns": "94,82,96,98,85,78,96,90,86,71,68,84,89,75,75,71,121",
-                        "endOffsets": "3925,4008,6555,6654,6740,7194,7291,13669,13756,13828,13897,14598,14688,14849,15026,15098,15220"
+                        "startLines": "144,145",
+                        "startColumns": "4,4",
+                        "startOffsets": "15225,15312",
+                        "endColumns": "86,88",
+                        "endOffsets": "15307,15396"
                     }
                 },
                 {
@@ -157,20 +157,20 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\adria\\.gradle\\caches\\transforms-3\\8d1c58926e8f845cc718b153dd170a80\\transformed\\foundation-release\\res\\values-pt-rPT\\values-pt-rPT.xml",
+                    "source": "C:\\Users\\adria\\.gradle\\caches\\transforms-3\\f38e2ebd10f98b532255bd40ee761056\\transformed\\ui-release\\res\\values-pt-rPT\\values-pt-rPT.xml",
                     "from": {
-                        "startLines": "2,3",
-                        "startColumns": "4,4",
-                        "startOffsets": "55,142",
-                        "endColumns": "86,88",
-                        "endOffsets": "137,226"
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,200,283,380,479,565,644,741,832,919,991,1060,1145,1235,1311,1387,1459",
+                        "endColumns": "94,82,96,98,85,78,96,90,86,71,68,84,89,75,75,71,121",
+                        "endOffsets": "195,278,375,474,560,639,736,827,914,986,1055,1140,1230,1306,1382,1454,1576"
                     },
                     "to": {
-                        "startLines": "144,145",
-                        "startColumns": "4,4",
-                        "startOffsets": "15225,15312",
-                        "endColumns": "86,88",
-                        "endOffsets": "15307,15396"
+                        "startLines": "38,39,59,60,61,66,67,124,125,126,127,136,137,139,141,142,143",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "3835,3930,6463,6560,6659,7120,7199,13583,13674,13761,13833,14518,14603,14778,14955,15031,15103",
+                        "endColumns": "94,82,96,98,85,78,96,90,86,71,68,84,89,75,75,71,121",
+                        "endOffsets": "3925,4008,6555,6654,6740,7194,7291,13669,13756,13828,13897,14598,14688,14849,15026,15098,15220"
                     }
                 },
                 {

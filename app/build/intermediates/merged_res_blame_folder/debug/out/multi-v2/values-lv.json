@@ -89,6 +89,23 @@
                     }
                 },
                 {
+                    "source": "C:\\Users\\adria\\.gradle\\caches\\transforms-3\\fc71542ec1fd6f6be49d65669fa6a297\\transformed\\foundation-release\\res\\values-lv\\values-lv.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,145",
+                        "endColumns": "89,89",
+                        "endOffsets": "140,230"
+                    },
+                    "to": {
+                        "startLines": "144,145",
+                        "startColumns": "4,4",
+                        "startOffsets": "15264,15354",
+                        "endColumns": "89,89",
+                        "endOffsets": "15349,15439"
+                    }
+                },
+                {
                     "source": "C:\\Users\\adria\\.gradle\\caches\\transforms-3\\63a09e06c6aaaede947b7060824dcda1\\transformed\\core-1.13.1\\res\\values-lv\\values-lv.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
@@ -106,6 +123,23 @@
                     }
                 },
                 {
+                    "source": "C:\\Users\\adria\\.gradle\\caches\\transforms-3\\f38e2ebd10f98b532255bd40ee761056\\transformed\\ui-release\\res\\values-lv\\values-lv.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,203,292,388,491,581,667,755,848,932,1002,1072,1157,1244,1317,1395,1463",
+                        "endColumns": "97,88,95,102,89,85,87,92,83,69,69,84,86,72,77,67,121",
+                        "endOffsets": "198,287,383,486,576,662,750,843,927,997,1067,1152,1239,1312,1390,1458,1580"
+                    },
+                    "to": {
+                        "startLines": "38,39,59,60,61,66,67,124,125,126,127,136,137,139,141,142,143",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "3959,4057,6553,6649,6752,7220,7306,13643,13736,13820,13890,14568,14653,14822,14996,15074,15142",
+                        "endColumns": "97,88,95,102,89,85,87,92,83,69,69,84,86,72,77,67,121",
+                        "endOffsets": "4052,4141,6644,6747,6837,7301,7389,13731,13815,13885,13955,14648,14735,14890,15069,15137,15259"
+                    }
+                },
+                {
                     "source": "C:\\Users\\adria\\.gradle\\caches\\transforms-3\\d71b576622cb27a5495dc5b943df82be\\transformed\\browser-1.4.0\\res\\values-lv\\values-lv.xml",
                     "from": {
                         "startLines": "2,3,4,5",
@@ -120,23 +154,6 @@
                         "startOffsets": "6450,6842,6941,7057",
                         "endColumns": "102,98,115,101",
                         "endOffsets": "6548,6936,7052,7154"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\adria\\.gradle\\caches\\transforms-3\\9ecf0fdf01fbb76d184e08dfaec28f5c\\transformed\\ui-release\\res\\values-lv\\values-lv.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,203,292,388,491,581,667,755,848,932,1002,1072,1157,1244,1317,1395,1463",
-                        "endColumns": "97,88,95,102,89,85,87,92,83,69,69,84,86,72,77,67,121",
-                        "endOffsets": "198,287,383,486,576,662,750,843,927,997,1067,1152,1239,1312,1390,1458,1580"
-                    },
-                    "to": {
-                        "startLines": "38,39,59,60,61,66,67,124,125,126,127,136,137,139,141,142,143",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "3959,4057,6553,6649,6752,7220,7306,13643,13736,13820,13890,14568,14653,14822,14996,15074,15142",
-                        "endColumns": "97,88,95,102,89,85,87,92,83,69,69,84,86,72,77,67,121",
-                        "endOffsets": "4052,4141,6644,6747,6837,7301,7389,13731,13815,13885,13955,14648,14735,14890,15069,15137,15259"
                     }
                 },
                 {
@@ -171,23 +188,6 @@
                         "startOffsets": "13960,14050,14118,14219,14295,14344,14422,14507",
                         "endColumns": "89,67,100,75,48,77,84,60",
                         "endOffsets": "14045,14113,14214,14290,14339,14417,14502,14563"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\adria\\.gradle\\caches\\transforms-3\\8d1c58926e8f845cc718b153dd170a80\\transformed\\foundation-release\\res\\values-lv\\values-lv.xml",
-                    "from": {
-                        "startLines": "2,3",
-                        "startColumns": "4,4",
-                        "startOffsets": "55,145",
-                        "endColumns": "89,89",
-                        "endOffsets": "140,230"
-                    },
-                    "to": {
-                        "startLines": "144,145",
-                        "startColumns": "4,4",
-                        "startOffsets": "15264,15354",
-                        "endColumns": "89,89",
-                        "endOffsets": "15349,15439"
                     }
                 }
             ]
