@@ -17,6 +17,7 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -131,11 +132,12 @@ fun ShowReservationDialog(
     context: Context = LocalContext.current  // Obtiene el contexto actual
 ) {
     if (reservation != null) {
-        var numberOfBags by remember { mutableStateOf(1) }
+        var numberOfBagsText by remember { mutableStateOf("1") } // Manejo del número de bolsas como texto para entrada flexible
         var startDate by remember { mutableStateOf<Date?>(null) }
         var endDate by remember { mutableStateOf<Date?>(null) }
         val startDateText = remember { mutableStateOf("") }
         val endDateText = remember { mutableStateOf("") }
+        var errorText by remember { mutableStateOf("") } // Para mostrar mensajes de error
 
         AlertDialog(
             onDismissRequest = onDismiss,
@@ -145,12 +147,23 @@ fun ShowReservationDialog(
                     Text("Capacidad disponible: ${reservation.capacidad}")
                     Text("Precio por bolsa: ${reservation.precio}")
                     TextField(
-                        value = numberOfBags.toString(),
-                        onValueChange = { numberOfBags = it.toIntOrNull() ?: 1 },
-                        label = { Text("Número de bolsas") }
+                        value = numberOfBagsText,
+                        onValueChange = { newValue ->
+                            numberOfBagsText = newValue
+                            val num = newValue.toIntOrNull()
+                            if (num != null && num > 0 && num <= reservation.capacidad) {
+                                errorText = "" // No hay error, limpiar cualquier mensaje anterior
+                            } else {
+                                errorText = "Introduzca un número válido (1 a ${reservation.capacidad})"
+                            }
+                        },
+                        label = { Text("Número de bolsas") },
+                        isError = errorText.isNotEmpty() // Se activa el estado de error si hay un mensaje
                     )
+                    if (errorText.isNotEmpty()) {
+                        Text(errorText, color = MaterialTheme.colorScheme.error) // Muestra el mensaje de error
+                    }
                     Text("Fecha de entrada:")
-                    // Selector de fecha de entrada como ejemplo
                     TextField(
                         value = startDateText.value,
                         onValueChange = { },
@@ -160,7 +173,6 @@ fun ShowReservationDialog(
                             Icon(
                                 Icons.Default.Build, contentDescription = "Seleccionar fecha",
                                 modifier = Modifier.clickable {
-                                    // Pasa null para minDate o simplemente omite el argumento si has configurado la función para usar el valor por defecto
                                     showDatePicker(context, null, startDate ?: Date()) { newDate ->
                                         startDate = newDate
                                         startDateText.value = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(newDate)
@@ -193,8 +205,11 @@ fun ShowReservationDialog(
             },
             confirmButton = {
                 Button(onClick = {
-                    if (startDate != null && endDate != null && numberOfBags > 0) {
+                    val numberOfBags = numberOfBagsText.toIntOrNull()
+                    if (startDate != null && endDate != null && numberOfBags != null && numberOfBags > 0 && errorText.isEmpty()) {
                         onConfirm(numberOfBags, startDate!!, endDate!!)
+                    } else {
+                        errorText = "Revise los datos introducidos."
                     }
                     onDismiss()
                 }) {
@@ -220,6 +235,7 @@ fun ShowReservationDialog(
         )
     }
 }
+
 
 fun showDatePicker(context: Context, minDate: Date? = null, currentDate: Date, onDateSelected: (Date) -> Unit) {
     val calendar = Calendar.getInstance().apply {

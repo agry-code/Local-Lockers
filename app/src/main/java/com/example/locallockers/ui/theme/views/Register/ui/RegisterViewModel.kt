@@ -79,7 +79,10 @@ class RegisterViewModel : ViewModel() {
     }
 
 
-    fun createUser(email: String, password: String, userName: String,lat: Double,long: Double, onSuccess: () -> Unit) {
+    fun createUser(
+        email: String, password: String, userName: String,
+        lat: Double,
+        long: Double, onSuccess: () -> Unit) {
         viewModelScope.launch {
             try {
                 auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
@@ -114,7 +117,7 @@ class RegisterViewModel : ViewModel() {
             email = auth.currentUser?.email ?: "",
             userName = userName,
             role = role,
-            lockerId = "" //puede probocar problemas
+            lockerId = ""
         ).toMap()
 
         FirebaseFirestore.getInstance().collection("Users")
@@ -130,7 +133,6 @@ class RegisterViewModel : ViewModel() {
             }
     }
     private fun saveLocker(ownerId: String,lat: Double,long: Double, onSuccess: (String) -> Unit) {
-        //Pasamos location a coordenadas
 
         // Crear un LockerModel sin ID específico
         val locker = LockerModel(
@@ -188,4 +190,8 @@ class RegisterViewModel : ViewModel() {
         showAlert = true
     }
 
+    var isLoading by mutableStateOf(false)
+    fun showLoading(show: Boolean) {
+        isLoading = show
+    }
 }

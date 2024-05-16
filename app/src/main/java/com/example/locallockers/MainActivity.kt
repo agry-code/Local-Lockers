@@ -32,10 +32,10 @@ import com.google.android.gms.wallet.PaymentDataRequest
 
 //AIzaSyBTA_bquHKAeJfOOLKNX-RxaA4_Cr7iPao
 class MainActivity : ComponentActivity() {
-
     private val googlePayRequestCode = 99942
     val checkoutViewModel: CheckoutViewModel by viewModels()
     val bookViewModel: BookViewModel by viewModels()
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,33 +47,43 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    NavManager(loginViewModel)
+                    NavManager(loginViewModel,bookViewModel, checkoutViewModel)
                 }
             }
         }
     }
-    // En tu Activity
-    @Deprecated("This method has been deprecated in favor of using the Activity Result API\n      which brings increased type safety via an {@link ActivityResultContract} and the prebuilt\n      contracts for common intents available in\n      {@link androidx.activity.result.contract.ActivityResultContracts}, provides hooks for\n      testing, and allow receiving results in separate, testable classes independent from your\n      activity. Use\n      {@link #registerForActivityResult(ActivityResultContract, ActivityResultCallback)}\n      with the appropriate {@link ActivityResultContract} and handling the result in the\n      {@link ActivityResultCallback#onActivityResult(Object) callback}.")
+
+    @Deprecated("This method has been deprecated in favor of using the Activity Result API...")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
         if (requestCode == googlePayRequestCode) {
-            Log.d("Pago","$resultCode y el de googlePayRequestCode es $googlePayRequestCode")
+            Log.d("Pago", "onActivityResult llamado con requestCode: $requestCode y resultCode: $resultCode")
             when (resultCode) {
                 RESULT_OK -> {
                     data?.let {
                         val paymentData = PaymentData.getFromIntent(it)
                         paymentData?.let {
-                            Log.d("Pago","Pago aceptado")
-                            // Aquí puedes procesar los datos del pago
+                            // Procesa los datos del pago
                             checkoutViewModel.setPaymentData(paymentData)
-                            //quiero cambiar aqui el estado de reserva
+
+                            // Obtén el bookId desde CheckoutViewModel
+                            val bookId = checkoutViewModel.bookId
+                            Log.d("Pago", "BookId obtenido en onActivityResult: $bookId")
+                            if (bookId != null) {
+                                // Actualiza el estado de la reserva
+                                bookViewModel.updateReservationStatus(bookId, "Pagado")
+                                Log.d("Pago", "Reserva $bookId actualizada a 'Pagado'")
+                            } else {
+                                Log.e("Pago", "El bookId es null después de la transacción")
+                            }
                         }
                     }
                 }
+
                 RESULT_CANCELED -> {
-                    Log.d("Pago","Se ha cancelado la transacción")
+                    Log.d("Pago", "Se ha cancelado la transacción")
                 }
+
                 else -> {
                     val status = AutoResolveHelper.getStatusFromIntent(data)
                     status?.let {
@@ -83,6 +93,4 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-
 }
-

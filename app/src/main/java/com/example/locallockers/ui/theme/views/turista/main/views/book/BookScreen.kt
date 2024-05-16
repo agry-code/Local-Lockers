@@ -49,7 +49,7 @@ fun BookScreen(
     navController: NavController,
     mapViewModel: MapViewModel = viewModel(),
     bookViewModel: BookViewModel = viewModel(),
-    checkoutViewModel: CheckoutViewModel = viewModel(),
+    checkoutViewModel: CheckoutViewModel,
 ) {
     val userViewModel: UserViewModel = viewModel()
     val user by userViewModel.currentUser.observeAsState()
@@ -57,16 +57,6 @@ fun BookScreen(
     val context = LocalContext.current
     val activity = context as? Activity
 
-    val paymentState by checkoutViewModel.paymentUiState.collectAsState()
-
-    LaunchedEffect(paymentState) {
-        Log.d("Pago", "Estado de payment ${paymentState.toString()}")
-        if (paymentState is PaymentUiState.PaymentCompleted) {
-            // Aquí puedes llamar a updateReservationStatus directamente si lo mueves al ViewModel
-            // o manejarlo según la arquitectura de tu aplicación.
-
-        }
-    }
 
     LaunchedEffect(user?.userId, user?.role) {
         if (user?.userId != null && user?.role != null) {
@@ -160,6 +150,7 @@ fun onGooglePayButtonClick(
     price: Long,
     bookId: String
 ) {
+    Log.d("Pago", "Estableciendo bookId: $bookId")
     checkoutViewModel.setBookId(bookId)  // Asegúrate de que esto se llama antes del proceso de pago
     AutoResolveHelper.resolveTask(
         checkoutViewModel.getLoadPaymentDataTask(price),

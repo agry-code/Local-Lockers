@@ -46,11 +46,14 @@ import kotlin.coroutines.resume
 
 class CheckoutViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val _bookId = MutableLiveData<String>()
-    val bookId: LiveData<String> = _bookId
+    private var _bookId: String? = null
+    val bookId: String?
+        get() = _bookId
 
     fun setBookId(id: String) {
-        _bookId.value = id
+        Log.d("Pago", "BookId establecido en chechoutViewModel: $id")
+
+        _bookId = id
     }
 
     private val _paymentUiState: MutableStateFlow<PaymentUiState> =
@@ -124,12 +127,6 @@ class CheckoutViewModel(application: Application) : AndroidViewModel(application
         } ?: PaymentUiState.Error(CommonStatusCodes.INTERNAL_ERROR)
 
         _paymentUiState.update { payState }
-
-        if (_paymentUiState.value is PaymentUiState.PaymentCompleted) {
-            _bookId.value?.let { bookId ->
-                updateReservationStatus(bookId, "Pagado")
-            }
-        }
     }
 
     fun updateReservationStatus(reservationId: String, newStatus: String) {
