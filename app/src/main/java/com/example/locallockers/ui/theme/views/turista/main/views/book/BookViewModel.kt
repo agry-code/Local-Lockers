@@ -14,9 +14,6 @@ class BookViewModel : ViewModel() {
     private val reservationsFlow = MutableStateFlow<List<BookModel>>(emptyList())
     val reservations = reservationsFlow.asLiveData()
     fun loadReservations(userId: String, role: String) {
-        Log.d("ProblemaReserva", "Role loadReservations ${role}")
-        Log.d("ProblemaReserva", "UserId loadReservations ${userId}")
-
         if (role == "Huesped") {
             loadReservationsForGuest(userId)
         } else {
@@ -129,6 +126,5 @@ class BookViewModel : ViewModel() {
             }
         }
     }
-
 
 }

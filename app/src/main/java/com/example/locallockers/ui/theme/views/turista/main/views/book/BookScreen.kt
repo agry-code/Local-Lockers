@@ -90,7 +90,6 @@ fun BookScreen(
                             onGooglePayButtonClick(
                                 it,
                                 checkoutViewModel,
-                                bookViewModel,
                                 price = 1,
                                 book.id
                             )
@@ -146,7 +145,6 @@ private val googlePayRequestCode = 99942
 fun onGooglePayButtonClick(
     activity: Activity,
     checkoutViewModel: CheckoutViewModel,
-    bookViewModel: BookViewModel,
     price: Long,
     bookId: String
 ) {
@@ -157,7 +155,6 @@ fun onGooglePayButtonClick(
         activity,
         googlePayRequestCode
     )
-   // bookViewModel.updateReservationStatus(bookId, "Pagado")
 }
 
 

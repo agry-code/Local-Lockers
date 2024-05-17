@@ -106,7 +106,7 @@ fun MapsView(lockers: List<LockerModel>, lockerViewModel: LockerViewModel) {
                 val startTime = java.sql.Timestamp(startDate.time)
                 val endTime = java.sql.Timestamp(endDate.time)
 
-                lockerViewModel.updateReservationCapacity(selectedLocker!!.id,numberOfBags, startTime)
+                lockerViewModel.updateReservationCapacity(selectedLocker!!.id,numberOfBags, startTime, endTime)
                 lockerViewModel.createReservation(
                     user!!.userId,
                     user!!.email,

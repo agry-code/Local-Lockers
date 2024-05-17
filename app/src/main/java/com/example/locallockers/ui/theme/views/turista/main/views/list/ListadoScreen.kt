@@ -128,7 +128,8 @@ fun ListadoScreen(
                         lockerViewModel.updateReservationCapacity(
                             selectedLocker!!.id,
                             numberOfBags,
-                            startTime
+                            startTime,
+                            endTime
                         )
                         lockerViewModel.createReservation(
                             user!!.userId,

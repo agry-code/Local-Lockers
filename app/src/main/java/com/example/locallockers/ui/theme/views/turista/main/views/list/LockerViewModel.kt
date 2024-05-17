@@ -17,6 +17,7 @@ import kotlinx.coroutines.tasks.await
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.ZoneId
+import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
@@ -61,41 +62,64 @@ class LockerViewModel : ViewModel() {
             }
     }
 
-    fun updateReservationCapacity(lockerId: String, numberOfBags: Int, reservationDate: Date) {
+    fun updateReservationCapacity(lockerId: String, numberOfBags: Int, startDate: Date, endDate: Date) {
         val db = Firebase.firestore
         val lockerRef = db.collection("Lockers").document(lockerId)
         val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-        val dateStr = dateFormat.format(reservationDate)
+        val calendar = Calendar.getInstance()
+
+        // Lista de fechas para las que se debe actualizar la capacidad
+        val reservationDates = mutableListOf<String>()
+        calendar.time = startDate
+        while (!calendar.time.after(endDate)) {
+            reservationDates.add(dateFormat.format(calendar.time))
+            calendar.add(Calendar.DATE, 1)
+        }
 
         lockerRef.get().addOnSuccessListener { document ->
             if (document.exists()) {
                 val reservas = document.data?.get("reservas") as? Map<String, Map<String, Any>>
-                reservas?.let {
-                    val dayReservation = it[dateStr]
-                    dayReservation?.let {
-                        val currentCapacity = (it["capacidad"]?.toString()?.toIntOrNull() ?: 0)
-                        if (currentCapacity >= numberOfBags) {
-                            val newCapacity = currentCapacity - numberOfBags
-                            val updatedReservations = HashMap(it)
-                            updatedReservations["capacidad"] = newCapacity
+                if (reservas != null) {
+                    val updates = mutableMapOf<String, Any>()
+                    var allDaysHaveCapacity = true
 
-                            // Actualizar solo el mapa de la reserva del día específico
-                            lockerRef.update("reservas.$dateStr.capacidad", newCapacity)
-                                .addOnSuccessListener {
-                                    Log.d("UpdateCapacity", "Capacidad actualizada con éxito")
-                                }
-                                .addOnFailureListener { e ->
-                                    Log.e(
-                                        "UpdateCapacityError",
-                                        "Error actualizando la capacidad",
-                                        e
-                                    )
-                                }
+                    // Primero verificamos que todos los días tengan suficiente capacidad
+                    for (dateStr in reservationDates) {
+                        val dayReservation = reservas[dateStr]
+                        if (dayReservation != null) {
+                            val currentCapacity = (dayReservation["capacidad"]?.toString()?.toIntOrNull() ?: 0)
+                            if (currentCapacity < numberOfBags) {
+                                allDaysHaveCapacity = false
+                                break
+                            }
                         } else {
-                            Log.d("UpdateCapacity", "No hay suficiente capacidad")
+                            allDaysHaveCapacity = false
+                            break
                         }
-                    } ?: Log.d("UpdateCapacity", "No reservation found for this day")
-                } ?: Log.d("UpdateCapacity", "No reservations map found")
+                    }
+
+                    // Si todos los días tienen suficiente capacidad, procedemos a actualizar
+                    if (allDaysHaveCapacity) {
+                        for (dateStr in reservationDates) {
+                            val dayReservation = reservas[dateStr]!!
+                            val currentCapacity = (dayReservation["capacidad"]?.toString()?.toIntOrNull() ?: 0)
+                            val newCapacity = currentCapacity - numberOfBags
+                            updates["reservas.$dateStr.capacidad"] = newCapacity
+                        }
+
+                        lockerRef.update(updates)
+                            .addOnSuccessListener {
+                                Log.d("UpdateCapacity", "Capacidad actualizada con éxito para todos los días")
+                            }
+                            .addOnFailureListener { e ->
+                                Log.e("UpdateCapacityError", "Error actualizando la capacidad", e)
+                            }
+                    } else {
+                        Log.d("UpdateCapacity", "No hay suficiente capacidad para todos los días")
+                    }
+                } else {
+                    Log.d("UpdateCapacity", "No reservations map found")
+                }
             } else {
                 Log.d("UpdateCapacity", "Document not found")
             }
@@ -103,6 +127,8 @@ class LockerViewModel : ViewModel() {
             Log.e("FirestoreError", "Error getting document", e)
         }
     }
+
+
     @RequiresApi(Build.VERSION_CODES.O)
     fun getReservationForDate(lockerId: String, date: LocalDate): LiveData<Reservation?> {
         val result = MutableLiveData<Reservation?>()

@@ -1,4 +1,4 @@
-#Fri May 17 18:28:32 CEST 2024
+#Fri May 17 19:01:41 CEST 2024
 base.0=C\:\\Users\\adria\\Desktop\\Local-Lockers\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 base.1=C\:\\Users\\adria\\Desktop\\Local-Lockers\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
 base.10=C\:\\Users\\adria\\Desktop\\Local-Lockers\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\5\\classes.dex
