@@ -33,26 +33,31 @@ class SearchViewModel : ViewModel(){
 
     fun onLocationChanged(location: String) {
         _location.value = location
+        getLocation(location)
     }
 
-    fun getLocation(search:String){
+    fun getLocation(search: String) {
         viewModelScope.launch {
-            val apiKey = "AIzaSyBTA_bquHKAeJfOOLKNX-RxaA4_Cr7iPao"
+            try {
+                val apiKey = "AIzaSyBTA_bquHKAeJfOOLKNX-RxaA4_Cr7iPao"
 
-            val url = "https://maps.googleapis.com/maps/api/geocode/json?address=$search&key=$apiKey"
-            val response = withContext(Dispatchers.IO){
-                URL(url).readText()
-            }
+                val url = "https://maps.googleapis.com/maps/api/geocode/json?address=$search&key=$apiKey"
+                val response = withContext(Dispatchers.IO) {
+                    URL(url).readText()
+                }
 
-            val results = Gson().fromJson(response,GoogleGeoResults::class.java)
+                val results = Gson().fromJson(response, GoogleGeoResults::class.java)
 
-            if(results.results.isNotEmpty()){
-                show = true
-                _lat.value = results.results[0].geometry.location.lat
-                _long.value = results.results[0].geometry.location.lng
-                address = results.results[0].formatted_address
-            }else{
-                Log.d("SearchViewModel","No funciona")
+                if (results.results.isNotEmpty()) {
+                    show = true
+                    _lat.value = results.results[0].geometry.location.lat
+                    _long.value = results.results[0].geometry.location.lng
+                    address = results.results[0].formatted_address
+                } else {
+                    Log.d("SearchViewModel", "No se encontraron resultados para la búsqueda")
+                }
+            } catch (e: Exception) {
+                Log.e("SearchViewModel", "Error al obtener la ubicación", e)
             }
         }
     }

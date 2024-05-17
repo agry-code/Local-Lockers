@@ -12,7 +12,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EmailField(email: String, onTextFieldChanged: (String) -> Unit) {
@@ -31,6 +30,7 @@ fun EmailField(email: String, onTextFieldChanged: (String) -> Unit) {
         )
     )
 }
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

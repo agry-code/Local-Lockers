@@ -15,10 +15,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
-
 class RegisterViewModel : ViewModel() {
     private val auth: FirebaseAuth = Firebase.auth
     var showAlert by mutableStateOf(false)
+    var alertMessage by mutableStateOf("")
 
     // Variables de estado para latitud y longitud
     private val _latitude = MutableLiveData<Double>()
@@ -28,25 +28,24 @@ class RegisterViewModel : ViewModel() {
     val longitude: LiveData<Double> = _longitude
 
     private val _email = MutableLiveData<String>()
-
     val email: LiveData<String> = _email
+
     private val _name = MutableLiveData<String>()
-
     val name: LiveData<String> = _name
+
     private val _password = MutableLiveData<String>()
-
     val password: LiveData<String> = _password
+
     private val _confirmPassword = MutableLiveData<String>()
-
     val confirmPassword: LiveData<String> = _confirmPassword
+
     private val _openHours = MutableLiveData<String>()
-
     val openHours: LiveData<String> = _openHours
-    private val _localName = MutableLiveData<String>()
 
+    private val _localName = MutableLiveData<String>()
     val localName: LiveData<String> = _localName
 
-    fun onLocalNameChanged(localName: String){
+    fun onLocalNameChanged(localName: String) {
         _localName.value = localName
     }
 
@@ -62,36 +61,36 @@ class RegisterViewModel : ViewModel() {
         _role.value = role
         userType = role  // Asegura que userType y role están sincronizados
     }
+
     fun onEmailChanged(email: String) {
         _email.value = email
     }
 
-    fun onNameChanged(it: String) {
-        _name.value = it
+    fun onNameChanged(name: String) {
+        _name.value = name
     }
 
-    fun onPasswordChanged(it: String) {
-        _password.value = it
+    fun onPasswordChanged(password: String) {
+        _password.value = password
     }
 
-    fun onConfirmPasswordChanged(it: String) {
-        _confirmPassword.value = it
+    fun onConfirmPasswordChanged(confirmPassword: String) {
+        _confirmPassword.value = confirmPassword
     }
-
 
     fun createUser(
         email: String, password: String, userName: String,
-        lat: Double,
-        long: Double, onSuccess: () -> Unit) {
+        lat: Double, long: Double, onSuccess: () -> Unit
+    ) {
         viewModelScope.launch {
             try {
                 auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         val currentUser = auth.currentUser
                         if (currentUser != null) {
-                            if (_role.value == "Huesped") {
-                                saveUser(userName, "Huesped", currentUser.uid) {
-                                    saveLocker(currentUser.uid,lat,long) { lockerId ->
+                            if (_role.value == "Huésped") {
+                                saveUser(userName, "Huésped", currentUser.uid) {
+                                    saveLocker(currentUser.uid, lat, long) { lockerId ->
                                         updateUserWithLockerId(currentUser.uid, lockerId, onSuccess)
                                     }
                                 }
@@ -100,13 +99,13 @@ class RegisterViewModel : ViewModel() {
                             }
                         }
                     } else {
+                        showError("Error al crear usuario en Firebase, el email debe ser válido")
                         Log.d("Error en Firebase", "Error al crear usuario")
-                        showAlert = true
                     }
                 }
             } catch (e: Exception) {
+                showError("Error en Jetpack Compose: ${e.localizedMessage}")
                 Log.d("Error en Jetpack", "Error ${e.localizedMessage}")
-                showAlert = true
             }
         }
     }
@@ -128,22 +127,20 @@ class RegisterViewModel : ViewModel() {
                 onSuccess()
             }
             .addOnFailureListener { e ->
+                showError("Error al guardar usuario en Firestore")
                 Log.d("Error al guardar", "Error al guardar en Firestore", e)
-                showAlert = true
             }
     }
-    private fun saveLocker(ownerId: String,lat: Double,long: Double, onSuccess: (String) -> Unit) {
 
+    private fun saveLocker(ownerId: String, lat: Double, long: Double, onSuccess: (String) -> Unit) {
         // Crear un LockerModel sin ID específico
         val locker = LockerModel(
             name = _localName.value ?: "",
-            latitude = lat,  // Estos valores deben ser establecidos de alguna manera antes de guardar
+            latitude = lat,
             longitude = long,
             openHours = _openHours.value ?: "",
             owner = ownerId
         )
-        Log.d("RegisterViewModel","${locker.toString()}")
-
         FirebaseFirestore.getInstance().collection("Lockers")
             .add(locker.toMap())
             .addOnSuccessListener { documentReference ->
@@ -154,17 +151,16 @@ class RegisterViewModel : ViewModel() {
                         Log.d("DocumentUpdate", "Documento actualizado con su propio ID")
                         onSuccess(generatedId)
                     } else {
+                        showError("Error al actualizar documento con su propio ID")
                         Log.e("DocumentUpdateError", "Error al actualizar documento con su propio ID")
                     }
                 }
             }
             .addOnFailureListener { e ->
+                showError("Error al guardar Locker en Firestore")
                 Log.e("Error al guardar", "Error al guardar Locker en Firestore", e)
-                showAlert = true
             }
-
     }
-
 
     fun updateUserWithLockerId(userId: String, lockerId: String, onSuccess: () -> Unit) {
         // Obtener la referencia al documento del usuario
@@ -177,16 +173,19 @@ class RegisterViewModel : ViewModel() {
                 onSuccess()  // Llamar al callback de éxito
             }
             .addOnFailureListener { e ->
+                showError("Error al actualizar usuario con locker ID")
                 Log.e("UpdateUser", "Error al actualizar usuario", e)
-                showAlert = true  // Mostrar alerta en la UI si es necesario
             }
     }
+
     fun closeAlert() {
         showAlert = false
+        alertMessage = ""
     }
 
     fun showError(message: String) {
         Log.e("RegistrationError", message)
+        alertMessage = message
         showAlert = true
     }
 
