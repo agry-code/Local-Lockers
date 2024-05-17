@@ -44,6 +44,8 @@ import androidx.compose.ui.platform.LocalContext
 import android.app.DatePickerDialog
 import android.content.Context
 import androidx.compose.foundation.layout.Spacer
+import dateFormat
+import java.text.SimpleDateFormat
 import java.util.*
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -63,6 +65,11 @@ fun ListadoScreen(
     var selectedLocker by remember { mutableStateOf<LockerModel?>(null) }
     var selectedDate by remember { mutableStateOf(LocalDate.now()) }
     var dateText by remember { mutableStateOf("") }
+
+
+    var showInformativeDialog by remember { mutableStateOf(false) }
+    var dialogTitle by remember { mutableStateOf("") }
+    var dialogMessage by remember { mutableStateOf("") }
 
     Scaffold(
         topBar = {
@@ -129,7 +136,18 @@ fun ListadoScreen(
                             selectedLocker!!.id,
                             numberOfBags,
                             startTime,
-                            endTime
+                            endTime,
+                            onSuccess = {
+                                val dateOnlyFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                                dialogTitle = "Reserva Exitosa"
+                                dialogMessage = "Reserva realizada con éxito para los días ${dateOnlyFormat.format(startDate)} al ${dateOnlyFormat.format(endDate)}."
+                                showInformativeDialog = true
+                            },
+                            onFailure = { insufficientDate ->
+                                dialogTitle = "Capacidad Insuficiente"
+                                dialogMessage = "No hay suficiente capacidad para el día $insufficientDate."
+                                showInformativeDialog = true
+                            }
                         )
                         lockerViewModel.createReservation(
                             user!!.userId,
@@ -144,6 +162,13 @@ fun ListadoScreen(
                         // Cerrar el diálogo
                         showDialog = false
                     }
+                )
+            }
+            if(showInformativeDialog){
+                InformativeDialog(
+                    title = dialogTitle,
+                    message = dialogMessage,
+                    onDismiss = { showInformativeDialog = false }
                 )
             }
         }
@@ -201,3 +226,24 @@ fun showDatePicker(context: Context, currentDate: LocalDate, onDateSelected: (Lo
 }
 
 
+@Composable
+fun InformativeDialog(
+    title: String,
+    message: String,
+    onDismiss: () -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        confirmButton = {
+            Button(onClick = onDismiss) {
+                Text("OK")
+            }
+        },
+        title = {
+            Text(text = title)
+        },
+        text = {
+            Text(text = message)
+        }
+    )
+}

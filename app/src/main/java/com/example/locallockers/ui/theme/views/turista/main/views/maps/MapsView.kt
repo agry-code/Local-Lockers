@@ -38,6 +38,7 @@ import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.rememberCameraPositionState
 import com.google.maps.android.compose.rememberMarkerState
+import dateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -55,6 +56,10 @@ fun MapsView(lockers: List<LockerModel>, lockerViewModel: LockerViewModel) {
     var selectedLocker by remember { mutableStateOf<LockerModel?>(null) }
     val userViewModel: UserViewModel = viewModel()
     val user by userViewModel.currentUser.observeAsState()
+
+    var showInformativeDialog by remember { mutableStateOf(false) }
+    var dialogTitle by remember { mutableStateOf("") }
+    var dialogMessage by remember { mutableStateOf("") }
 
     Box(modifier = Modifier.fillMaxSize()) {
         GoogleMap(
@@ -106,7 +111,19 @@ fun MapsView(lockers: List<LockerModel>, lockerViewModel: LockerViewModel) {
                 val startTime = java.sql.Timestamp(startDate.time)
                 val endTime = java.sql.Timestamp(endDate.time)
 
-                lockerViewModel.updateReservationCapacity(selectedLocker!!.id,numberOfBags, startTime, endTime)
+                lockerViewModel.updateReservationCapacity(selectedLocker!!.id,numberOfBags, startTime, endTime,
+                    onSuccess = {
+                        val dateOnlyFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                        dialogTitle = "Reserva Exitosa"
+                        dialogMessage = "Reserva realizada con éxito para los días ${dateOnlyFormat.format(startDate)} al ${dateOnlyFormat.format(endDate)}."
+                        showInformativeDialog = true
+                    },
+                    onFailure = { insufficientDate ->
+                        dialogTitle = "Capacidad Insuficiente"
+                        dialogMessage = "No hay suficiente capacidad para el día $insufficientDate."
+                        showInformativeDialog = true
+                    }
+                )
                 lockerViewModel.createReservation(
                     user!!.userId,
                     user!!.email,
@@ -256,3 +273,24 @@ fun showDatePicker(context: Context, minDate: Date? = null, currentDate: Date, o
     datePickerDialog.show()
 }
 
+@Composable
+fun InformativeDialog(
+    title: String,
+    message: String,
+    onDismiss: () -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        confirmButton = {
+            Button(onClick = onDismiss) {
+                Text("OK")
+            }
+        },
+        title = {
+            Text(text = title)
+        },
+        text = {
+            Text(text = message)
+        }
+    )
+}
