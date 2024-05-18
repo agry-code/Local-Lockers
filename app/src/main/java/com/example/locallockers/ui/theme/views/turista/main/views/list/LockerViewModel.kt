@@ -39,7 +39,6 @@ class LockerViewModel : ViewModel() {
                 for (document in result) {
                     val id = document.id
                     val name = document.getString("name") ?: ""
-                    val capacity = document.getLong("capacity")?.toInt() ?: 0
                     val openHours = document.getString("openHours") ?: ""
                     val owner = document.getString("owner") ?: ""  // Extracción del campo 'owner'
                     val longitude = document.getDouble("longitude")
@@ -222,8 +221,8 @@ class LockerViewModel : ViewModel() {
         userEmail: String,
         lockerId: String,
         lockerName: String,
-        startTime: java.sql.Timestamp,
-        endTime: java.sql.Timestamp,
+        startTime: Timestamp,
+        endTime: Timestamp,
         userName: String
     ) {
         // Crear un nuevo documento con un ID generado automáticamente

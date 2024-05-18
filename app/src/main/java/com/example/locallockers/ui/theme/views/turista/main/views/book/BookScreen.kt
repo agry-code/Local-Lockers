@@ -90,7 +90,7 @@ fun BookScreen(
                             onGooglePayButtonClick(
                                 it,
                                 checkoutViewModel,
-                                price = 1,
+                                price = 1, // toca arreglarlo pixita
                                 book.id
                             )
                         }
@@ -106,6 +106,7 @@ fun BookItem(
     book: BookModel, userRole: String, checkoutViewModel: CheckoutViewModel,
     onGooglePayButtonClick: () -> Unit,
 ) {
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
