@@ -90,7 +90,7 @@ fun BookScreen(
                             onGooglePayButtonClick(
                                 it,
                                 checkoutViewModel,
-                                price = 1, // toca arreglarlo pixita
+                                price = 1,
                                 book.id
                             )
                         }
