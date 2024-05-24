@@ -1,11 +1,11 @@
 package com.example.locallockers.model
 
 data class UserModel(
-    val email: String,
-    val role: String,
-    val userId: String,
-    val userName: String,
-    val lockerId: String
+    val email: String = "",
+    val role: String = "",
+    val userId: String = "",
+    val userName: String = "",
+    val lockerId: String = ""
 ){
     fun toMap() : MutableMap<String,Any>{
         return mutableMapOf(

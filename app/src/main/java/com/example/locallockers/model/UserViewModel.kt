@@ -13,6 +13,7 @@ import kotlinx.coroutines.launch
 class UserViewModel : ViewModel() {
     val currentUser = MutableLiveData<UserModel?>()
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+    val guests = MutableLiveData<List<UserModel>>()  // LiveData para la lista de huéspedes
 
     private val db = FirebaseFirestore.getInstance()
     var showCustomizationDialog by mutableStateOf(false)
@@ -22,6 +23,7 @@ class UserViewModel : ViewModel() {
     init {
         //updateUser() Neceistamos aplicar una lógica para que no se pueda moficiar el rol del user. Creo que si lo dejamos en blanco no se modifica pero tengo que mirarlo
         loadUserInfo()
+        //loadGuests()
     }
 
     private fun loadUserInfo() {
@@ -49,7 +51,18 @@ class UserViewModel : ViewModel() {
             Log.d("UserVM", "No user is currently logged in")
         }
     }
-
+    fun loadGuests() {
+        db.collection("Users").whereEqualTo("role", "Huesped").get()
+            .addOnSuccessListener { result ->
+                val guestList = result.mapNotNull { document ->
+                    document.toObject(UserModel::class.java)
+                }
+                guests.value = guestList
+            }
+            .addOnFailureListener { exception ->
+                Log.d("Firestore", "Error getting guests: ", exception)
+            }
+    }
     private fun updateUser() {
         val firebaseUser = auth.currentUser
         if (firebaseUser != null) {

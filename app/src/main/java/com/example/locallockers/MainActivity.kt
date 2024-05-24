@@ -1,34 +1,25 @@
 package com.example.locallockers
 
-import android.app.Activity
+
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.IntentSenderRequest
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.locallockers.navigation.NavManager
 import com.example.locallockers.ui.theme.LocalLockersTheme
 import com.example.locallockers.ui.theme.views.login.ui.LoginViewModel
 import com.example.locallockers.ui.theme.views.turista.main.views.book.BookViewModel
-import com.example.locallockers.ui.theme.views.turista.main.views.maps.MapViewModel
-import com.google.android.gms.samples.pay.util.PaymentsUtil
 import com.google.android.gms.samples.pay.viewmodel.CheckoutViewModel
 import com.google.android.gms.wallet.AutoResolveHelper
 import com.google.android.gms.wallet.PaymentData
-import com.google.android.gms.wallet.PaymentDataRequest
 
 //AIzaSyBTA_bquHKAeJfOOLKNX-RxaA4_Cr7iPao
 class MainActivity : ComponentActivity() {

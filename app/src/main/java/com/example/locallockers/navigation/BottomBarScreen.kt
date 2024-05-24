@@ -47,12 +47,19 @@ sealed class BottomBarScreen (
         icon = R.drawable.request,
         icon_focused = R.drawable.request_focus
     )
-
+    //for CalendarScreen
     object Calendar: BottomBarScreen(
         "Calendar",
         "Calendario",
         icon = R.drawable.calendar,
         icon_focused = R.drawable.calendar_focus
+    )
+    //for DeleteScreen
+    object Delete: BottomBarScreen(
+        "Delete",
+        "Delete",
+        icon = R.drawable.about_confi,
+        icon_focused = R.drawable.about_confi
     )
 
 }

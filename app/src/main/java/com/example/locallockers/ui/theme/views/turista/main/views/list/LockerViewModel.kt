@@ -62,6 +62,34 @@ class LockerViewModel : ViewModel() {
             }
     }
 
+    fun getLockerByGuest(guestId: String): LiveData<LockerModel?> {
+        val result = MutableLiveData<LockerModel?>()
+        db.collection("Lockers")
+            .whereEqualTo("owner", guestId)
+            .get()
+            .addOnSuccessListener { documents ->
+                if (documents != null && !documents.isEmpty) {
+                    val document = documents.documents[0]
+                    val locker = LockerModel(
+                        id = document.id,
+                        name = document.getString("name") ?: "",
+                        openHours = document.getString("openHours") ?: "",
+                        owner = document.getString("owner") ?: "",
+                        longitude = document.getDouble("longitude"),
+                        latitude = document.getDouble("latitude")
+                    )
+                    result.value = locker
+                } else {
+                    result.value = null
+                    Log.d("LockerViewModel", "No locker found for guestId: $guestId")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.e("LockerViewModel", "Error getting locker by guestId: $guestId", exception)
+                result.value = null
+            }
+        return result
+    }
     fun updateReservationCapacity(
         lockerId: String,
         numberOfBags: Int,

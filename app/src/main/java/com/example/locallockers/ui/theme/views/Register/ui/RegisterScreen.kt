@@ -35,7 +35,7 @@ fun RegisterScreen(
             .fillMaxWidth()
             .padding(16.dp)
     ) {
-        val roles = listOf("Turista", "Huésped")
+        val roles = listOf("Turista", "Huesped")
         var selectedRole by remember { mutableStateOf("Turista") }
         var expanded by remember { mutableStateOf(false) }
 
@@ -76,7 +76,7 @@ fun RegisterScreen(
         }
 
         // Mostrar los campos adicionales si el usuario es "Huésped"
-        if (registerModel.userType == "Huésped") {
+        if (registerModel.userType == "Huesped") {
             NameField(
                 name = localName,
                 text = "Nombre del local",
@@ -103,7 +103,7 @@ fun RegisterScreen(
             registerModel.closeAlert()
 
             // Validación de campos vacíos
-            if (email.isBlank() || password.isBlank() || name.isBlank() || (selectedRole == "Huésped" && location.isBlank())) {
+            if (email.isBlank() || password.isBlank() || name.isBlank() || (selectedRole == "Huesped" && location.isBlank())) {
                 registerModel.showAlert = true
                 registerModel.showError("Todos los campos son obligatorios")
                 Log.d("RegisterScreen", "Validación Fallida: Campos vacíos")
@@ -125,18 +125,18 @@ fun RegisterScreen(
                         navController.navigate("Main")
                         Log.d("RegisterScreen", "Usuario registrado como Turista")
                     }
-                } else if (selectedRole == "Huésped") {
+                } else if (selectedRole == "Huesped") {
                     searchViewModel.getLocation(location) // Sólo si location no es vacío
                     if (lat == null || long == null) {
                         registerModel.showAlert = true
-                        registerModel.showError("Es necesario completar la información de ubicación para 'Huésped'")
+                        registerModel.showError("Es necesario completar la información de ubicación para 'Huesped'")
                         Log.d("RegisterScreen", "Validación Fallida: Coordenadas de ubicación faltantes")
                     } else {
                         registerModel.showLoading(true)
                         registerModel.createUser(email, password, name, lat!!, long!!) {
                             registerModel.showLoading(false)
                             navController.navigate("Request")
-                            Log.d("RegisterScreen", "Usuario registrado como Huésped con lat: $lat, long: $long")
+                            Log.d("RegisterScreen", "Usuario registrado como Huesped con lat: $lat, long: $long")
                         }
                     }
                 }

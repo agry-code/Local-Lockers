@@ -88,8 +88,8 @@ class RegisterViewModel : ViewModel() {
                     if (task.isSuccessful) {
                         val currentUser = auth.currentUser
                         if (currentUser != null) {
-                            if (_role.value == "Huésped") {
-                                saveUser(userName, "Huésped", currentUser.uid) {
+                            if (_role.value == "Huesped") {
+                                saveUser(userName, "Huesped", currentUser.uid) {
                                     saveLocker(currentUser.uid, lat, long) { lockerId ->
                                         updateUserWithLockerId(currentUser.uid, lockerId, onSuccess)
                                     }

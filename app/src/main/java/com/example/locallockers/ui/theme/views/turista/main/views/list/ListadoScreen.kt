@@ -131,7 +131,6 @@ fun ListadoScreen(
                         // Convertir las fechas al tipo java.sql.Timestamp
                         val startTime = Timestamp(startDate.time)
                         val endTime = Timestamp(endDate.time)
-
                         lockerViewModel.updateReservationCapacity(
                             selectedLocker!!.id,
                             numberOfBags,
@@ -142,25 +141,26 @@ fun ListadoScreen(
                                 dialogTitle = "Reserva Exitosa"
                                 dialogMessage = "Reserva realizada con éxito para los días ${dateOnlyFormat.format(startDate)} al ${dateOnlyFormat.format(endDate)}."
                                 showInformativeDialog = true
+                                lockerViewModel.createReservation(
+                                    user!!.userId,
+                                    user!!.email,
+                                    selectedLocker!!.id,
+                                    selectedLocker!!.name,
+                                    startTime,
+                                    endTime,
+                                    user!!.userName
+                                )
                             },
                             onFailure = { insufficientDate ->
                                 dialogTitle = "Capacidad Insuficiente"
                                 dialogMessage = "No hay suficiente capacidad para el día $insufficientDate."
                                 showInformativeDialog = true
+                                // hay que salir para que no se cree la reserva. No se debe crear porque no hay capacidad
                             }
                         )
-                        lockerViewModel.createReservation(
-                            user!!.userId,
-                            user!!.email,
-                            selectedLocker!!.id,
-                            selectedLocker!!.name,
-                            startTime,
-                            endTime,
-                            user!!.userName
-                        )
-
                         // Cerrar el diálogo
                         showDialog = false
+
                     }
                 )
             }
