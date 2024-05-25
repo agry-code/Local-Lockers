@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -27,6 +28,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -54,13 +56,19 @@ fun SupportConfiUI() {
                 Text(text = dialogContent!!.second)
             },
             confirmButton = {
-                Button(onClick = {
-                    showDialog = false
-                    if (dialogContent!!.first == "Feedback") {
-                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/search?q=local+lockers"))
-                        context.startActivity(intent)
-                    }
-                }) {
+                Button(
+                    onClick = {
+                        showDialog = false
+                        if (dialogContent!!.first == "Feedback") {
+                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/search?q=local+lockers"))
+                            context.startActivity(intent)
+                        }
+                    },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = colorResource(id = R.color.primary),
+                        contentColor = colorResource(id = R.color.white)
+                    )
+                ) {
                     Text("OK")
                 }
             }
@@ -119,8 +127,12 @@ fun SupportItem(icon: Int, mainText: String, onClick: () -> Unit) {
         modifier = Modifier
             .padding(bottom = 8.dp)
             .fillMaxWidth(),
-        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
-    ) {
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = colorResource(id = R.color.white),
+            contentColor = colorResource(id = R.color.primary)
+        )
+    )  {
         Row(
             modifier = Modifier.padding(vertical = 10.dp, horizontal = 14.dp),
             verticalAlignment = Alignment.CenterVertically,

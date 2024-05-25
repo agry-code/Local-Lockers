@@ -22,6 +22,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
@@ -56,7 +57,11 @@ fun ProfileCardUI(user: UserModel?) {
             },
             confirmButton = {
                 Button(
-                    onClick = { showDialog = false }
+                    onClick = { showDialog = false },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = colorResource(id = R.color.primary),
+                        contentColor = colorResource(id = R.color.white)
+                    )
                 ) {
                     Text("Cerrar")
                 }
@@ -69,7 +74,7 @@ fun ProfileCardUI(user: UserModel?) {
             .fillMaxWidth()
             .height(150.dp)
             .padding(10.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White),
+        colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.white)),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         shape = MaterialTheme.shapes.large
     ) {
@@ -77,10 +82,10 @@ fun ProfileCardUI(user: UserModel?) {
             modifier = Modifier.padding(20.dp),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Column() {
+            Column {
                 Text(
                     text = stringResource(R.string.tu_perfil),
-                    color = MaterialTheme.colorScheme.onSurface,
+                    color = colorResource(id = R.color.primary),
                     fontSize = UiConstants.fontSizeL,
                     fontWeight = FontWeight.Bold,
                     fontFamily = FontFamily(Font(R.font.poppins))
@@ -88,7 +93,7 @@ fun ProfileCardUI(user: UserModel?) {
                 Text(
                     text = user?.email ?: stringResource(R.string.email_no_disponible),
                     fontFamily = FontFamily(Font(R.font.poppins)),
-                    color = Color.Gray,
+                    color = colorResource(id = R.color.secundary),
                     fontSize = UiConstants.fontSizeS,
                     fontWeight = FontWeight.SemiBold,
                 )
@@ -98,24 +103,24 @@ fun ProfileCardUI(user: UserModel?) {
                     onClick = {
                         showDialog = true
                     },
-                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = colorResource(id = R.color.primary),
+                        contentColor = colorResource(id = R.color.white)
+                    ),
                     contentPadding = PaddingValues(horizontal = 30.dp),
                     elevation = ButtonDefaults.elevatedButtonElevation(
                         defaultElevation = 4.dp,
                         pressedElevation = 8.dp
                     )
-
                 ) {
                     Text(
                         text = "View",
                         fontFamily = FontFamily(Font(R.font.poppins)),
-                        //color = SecondaryColor,
                         fontSize = UiConstants.fontSizeM,
                         fontWeight = FontWeight.Bold
                     )
                 }
             }
-            // Spacer(modifier = Modifier.width(82.dp)) // Ajusta el ancho según sea necesario
             Image(
                 painter = painterResource(id = R.drawable.ic_profile_card_image),
                 contentDescription = "",
@@ -126,4 +131,3 @@ fun ProfileCardUI(user: UserModel?) {
         }
     }
 }
-

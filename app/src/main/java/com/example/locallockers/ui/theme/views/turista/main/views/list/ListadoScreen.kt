@@ -44,6 +44,14 @@ import androidx.compose.ui.platform.LocalContext
 import android.app.DatePickerDialog
 import android.content.Context
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
+import com.example.locallockers.R
 import dateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -82,7 +90,12 @@ fun ListadoScreen(
                     }) {
                         Icon(imageVector = Icons.Default.ExitToApp, contentDescription = "")
                     }
-                }
+                },
+                colors = TopAppBarDefaults.smallTopAppBarColors(
+                    containerColor = colorResource(id = R.color.white),
+                    titleContentColor = colorResource(id = R.color.primary),
+                    navigationIconContentColor = colorResource(id = R.color.primary)
+                )
             )
         },
         bottomBar = {
@@ -93,28 +106,41 @@ fun ListadoScreen(
             Spacer(modifier = Modifier.padding(8.dp))
             TextField(
                 value = dateText,
-                onValueChange = { dateText = it },
-                label = { Text("Fecha (YYYY-MM-DD)") },
+                onValueChange = { /* No se permite cambiar el valor porque es de solo lectura */ },
+                label = { Text("Fecha (YYYY-MM-DD)", color = colorResource(id = R.color.primary)) },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 readOnly = true,
-                enabled = false,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                colors = TextFieldDefaults.textFieldColors(
+                    containerColor = Color.Transparent,
+                    focusedIndicatorColor = colorResource(id = R.color.primary),
+                    unfocusedIndicatorColor = colorResource(id = R.color.secundary),
+                    cursorColor = colorResource(id = R.color.primary),
+                    disabledTextColor = colorResource(id = R.color.primary),
+                    disabledLabelColor = colorResource(id = R.color.primary)
+                )
             )
             Spacer(modifier = Modifier.padding(8.dp))
 
-            Button(onClick = {
-                showDatePicker(context, selectedDate) { newDate ->
-                    selectedDate = newDate
-                    dateText = newDate.toString()
-                }
-                Modifier.fillMaxWidth()
-            }) {
+            Button(
+                onClick = {
+                    showDatePicker(context, selectedDate) { newDate ->
+                        selectedDate = newDate
+                        dateText = newDate.toString()
+                    }
+                    Modifier.fillMaxWidth()
+                },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = colorResource(id = R.color.primary),
+                    contentColor = colorResource(id = R.color.white)
+                )
+            ) {
                 Text("Seleccionar Fecha para filtrar")
             }
             Spacer(modifier = Modifier.padding(8.dp))
             LazyColumn {
                 items(lockers) { locker ->
-                    LockerItem(locker,selectedDate,lockerViewModel) {
+                    LockerItem(locker, selectedDate, lockerViewModel) {
                         selectedLocker = locker
                         showDialog = true
                     }
@@ -137,9 +163,12 @@ fun ListadoScreen(
                             startTime,
                             endTime,
                             onSuccess = {
-                                val dateOnlyFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                                val dateOnlyFormat =
+                                    SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
                                 dialogTitle = "Reserva Exitosa"
-                                dialogMessage = "Reserva realizada con éxito para los días ${dateOnlyFormat.format(startDate)} al ${dateOnlyFormat.format(endDate)}."
+                                dialogMessage = "Reserva realizada con éxito para los días ${
+                                    dateOnlyFormat.format(startDate)
+                                } al ${dateOnlyFormat.format(endDate)}."
                                 showInformativeDialog = true
                                 lockerViewModel.createReservation(
                                     user!!.userId,
@@ -153,7 +182,8 @@ fun ListadoScreen(
                             },
                             onFailure = { insufficientDate ->
                                 dialogTitle = "Capacidad Insuficiente"
-                                dialogMessage = "No hay suficiente capacidad para el día $insufficientDate."
+                                dialogMessage =
+                                    "No hay suficiente capacidad para el día $insufficientDate."
                                 showInformativeDialog = true
                                 // hay que salir para que no se cree la reserva. No se debe crear porque no hay capacidad
                             }
@@ -164,7 +194,7 @@ fun ListadoScreen(
                     }
                 )
             }
-            if(showInformativeDialog){
+            if (showInformativeDialog) {
                 InformativeDialog(
                     title = dialogTitle,
                     message = dialogMessage,
@@ -177,17 +207,25 @@ fun ListadoScreen(
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun LockerItem(locker: LockerModel, date: LocalDate, lockerViewModel: LockerViewModel, onItemClicked: (LockerModel) -> Unit) {
+fun LockerItem(
+    locker: LockerModel,
+    date: LocalDate,
+    lockerViewModel: LockerViewModel,
+    onItemClicked: (LockerModel) -> Unit
+) {
     val reservation by lockerViewModel.getReservationForDate(locker.id, date).observeAsState()
 
     Card(
         modifier = Modifier
             .fillMaxWidth()
-//            .clickable { onItemClicked(locker) }
             .clickable(enabled = reservation != null && reservation!!.capacidad > 0) {
                 onItemClicked(locker)
             }
-            .padding(8.dp)
+            .padding(8.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = colorResource(id = R.color.item),
+            contentColor = colorResource(id = R.color.primary)
+        )
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             Text("Nombre: ${locker.name}", style = MaterialTheme.typography.titleMedium)
@@ -219,7 +257,8 @@ fun showDatePicker(context: Context, currentDate: LocalDate, onDateSelected: (Lo
         calendar.get(Calendar.MONTH),
         calendar.get(Calendar.DAY_OF_MONTH)
     ).apply {
-        datePicker.minDate =  System.currentTimeMillis() // Establece la fecha mínima a hoy si minDate es null
+        datePicker.minDate =
+            System.currentTimeMillis() // Establece la fecha mínima a hoy si minDate es null
     }
 
     datePickerDialog.show()
@@ -235,7 +274,13 @@ fun InformativeDialog(
     AlertDialog(
         onDismissRequest = onDismiss,
         confirmButton = {
-            Button(onClick = onDismiss) {
+            Button(
+                onClick = onDismiss,
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = colorResource(id = R.color.primary),
+                    contentColor = colorResource(id = R.color.white)
+                )
+            ) {
                 Text("OK")
             }
         },

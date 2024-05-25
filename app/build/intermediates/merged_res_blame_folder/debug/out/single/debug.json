@@ -1,186 +1,198 @@
 [
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/drawable_list.png.flat",
-        "source": "com.example.locallockers.app-main-75:/drawable/list.png"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\drawable_calendar.png.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\drawable\\calendar.png"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.locallockers.app-main-75:/mipmap-xxhdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\drawable_localocker.png.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\drawable\\localocker.png"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/drawable_flecha_derecha.png.flat",
-        "source": "com.example.locallockers.app-main-75:/drawable/flecha_derecha.png"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\font_reemkufi.ttf.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\font\\reemkufi.ttf"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/mipmap-xxxhdpi_ic_launcher.webp.flat",
-        "source": "com.example.locallockers.app-main-75:/mipmap-xxxhdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\drawable_confi.png.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\drawable\\confi.png"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/drawable_map.png.flat",
-        "source": "com.example.locallockers.app-main-75:/drawable/map.png"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\drawable_ojo.jpg.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\drawable\\ojo.jpg"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/drawable_confi.png.flat",
-        "source": "com.example.locallockers.app-main-75:/drawable/confi.png"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\drawable_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\drawable\\ic_launcher_foreground.xml"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/mipmap-xhdpi_ic_launcher.webp.flat",
-        "source": "com.example.locallockers.app-main-75:/mipmap-xhdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\font_font.xml.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\font\\font.xml"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/drawable_calendar.png.flat",
-        "source": "com.example.locallockers.app-main-75:/drawable/calendar.png"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\drawable_flecha_derecha.png.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\drawable\\flecha_derecha.png"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/drawable_more_customization_confi.png.flat",
-        "source": "com.example.locallockers.app-main-75:/drawable/more_customization_confi.png"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\mipmap-hdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "com.example.locallockers.app-main-75:/mipmap-anydpi-v26/ic_launcher.xml"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\mipmap-mdpi\\ic_launcher.webp"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/font_poppins.ttf.flat",
-        "source": "com.example.locallockers.app-main-75:/font/poppins.ttf"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\mipmap-xhdpi\\ic_launcher.webp"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/drawable_icon_google.png.flat",
-        "source": "com.example.locallockers.app-main-75:/drawable/icon_google.png"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\drawable_logo.png.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\drawable\\logo.png"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/mipmap-mdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.locallockers.app-main-75:/mipmap-mdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\mipmap-xxhdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/drawable_ojo.jpg.flat",
-        "source": "com.example.locallockers.app-main-75:/drawable/ojo.jpg"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\drawable_more_customization_confi.png.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\drawable\\more_customization_confi.png"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/drawable_privacy_confi.png.flat",
-        "source": "com.example.locallockers.app-main-75:/drawable/privacy_confi.png"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\drawable\\ic_launcher_background.xml"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/drawable_book.png.flat",
-        "source": "com.example.locallockers.app-main-75:/drawable/book.png"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\mipmap-xxhdpi\\ic_launcher.webp"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/drawable_contact_confi.png.flat",
-        "source": "com.example.locallockers.app-main-75:/drawable/contact_confi.png"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\drawable_list_focus.png.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\drawable\\list_focus.png"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/drawable_calendar_focus.png.flat",
-        "source": "com.example.locallockers.app-main-75:/drawable/calendar_focus.png"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\drawable_sardina2.png.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\drawable\\sardina2.png"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/drawable_sardina2.png.flat",
-        "source": "com.example.locallockers.app-main-75:/drawable/sardina2.png"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\mipmap-hdpi\\ic_launcher.webp"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/drawable_request.png.flat",
-        "source": "com.example.locallockers.app-main-75:/drawable/request.png"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\drawable_list.png.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\drawable\\list.png"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/font_font.xml.flat",
-        "source": "com.example.locallockers.app-main-75:/font/font.xml"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\drawable_map_focus.png.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\drawable\\map_focus.png"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/mipmap-xxhdpi_ic_launcher.webp.flat",
-        "source": "com.example.locallockers.app-main-75:/mipmap-xxhdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\mipmap-anydpi-v26\\ic_launcher.xml"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/font_reemkufi.ttf.flat",
-        "source": "com.example.locallockers.app-main-75:/font/reemkufi.ttf"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\xml_data_extraction_rules.xml.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\xml\\data_extraction_rules.xml"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "com.example.locallockers.app-main-75:/mipmap-anydpi-v26/ic_launcher_round.xml"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\drawable_ojo_negativo.png.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\drawable\\ojo_negativo.png"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/mipmap-xhdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.locallockers.app-main-75:/mipmap-xhdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\drawable_map.png.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\drawable\\map.png"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.locallockers.app-main-75:/mipmap-xxxhdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\drawable_icon_google.png.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\drawable\\icon_google.png"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/drawable_feedback_confi.png.flat",
-        "source": "com.example.locallockers.app-main-75:/drawable/feedback_confi.png"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/drawable_request_focus.png.flat",
-        "source": "com.example.locallockers.app-main-75:/drawable/request_focus.png"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\drawable_confi_focus.png.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\drawable\\confi_focus.png"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/drawable_arrow_forward.png.flat",
-        "source": "com.example.locallockers.app-main-75:/drawable/arrow_forward.png"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\font_poppins.ttf.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\font\\poppins.ttf"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/drawable_ojo_negativo.png.flat",
-        "source": "com.example.locallockers.app-main-75:/drawable/ojo_negativo.png"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\mipmap-xhdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/mipmap-hdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.locallockers.app-main-75:/mipmap-hdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\drawable_request_focus.png.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\drawable\\request_focus.png"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/drawable_arrow_back.png.flat",
-        "source": "com.example.locallockers.app-main-75:/drawable/arrow_back.png"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\drawable_book.png.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\drawable\\book.png"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/xml_backup_rules.xml.flat",
-        "source": "com.example.locallockers.app-main-75:/xml/backup_rules.xml"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\xml_backup_rules.xml.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\xml\\backup_rules.xml"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/mipmap-mdpi_ic_launcher.webp.flat",
-        "source": "com.example.locallockers.app-main-75:/mipmap-mdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\drawable_calendar_focus.png.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\drawable\\calendar_focus.png"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/mipmap-hdpi_ic_launcher.webp.flat",
-        "source": "com.example.locallockers.app-main-75:/mipmap-hdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\mipmap-mdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/drawable_sardina.jpg.flat",
-        "source": "com.example.locallockers.app-main-75:/drawable/sardina.jpg"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\drawable_contact_confi.png.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\drawable\\contact_confi.png"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/drawable_about_confi.png.flat",
-        "source": "com.example.locallockers.app-main-75:/drawable/about_confi.png"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\drawable_about_confi.png.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\drawable\\about_confi.png"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/drawable_ic_launcher_background.xml.flat",
-        "source": "com.example.locallockers.app-main-75:/drawable/ic_launcher_background.xml"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\drawable_arrow_forward.png.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\drawable\\arrow_forward.png"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/drawable_confi_focus.png.flat",
-        "source": "com.example.locallockers.app-main-75:/drawable/confi_focus.png"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\drawable_request.png.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\drawable\\request.png"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/drawable_notification_confi.png.flat",
-        "source": "com.example.locallockers.app-main-75:/drawable/notification_confi.png"
+        "merged": "com.example.locallockers.app-merged_res-73:/drawable_localocker_sinfondo.png.flat",
+        "source": "com.example.locallockers.app-main-75:/drawable/localocker_sinfondo.png"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/drawable_book_focus.png.flat",
-        "source": "com.example.locallockers.app-main-75:/drawable/book_focus.png"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\mipmap-xxxhdpi\\ic_launcher.webp"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/drawable_ic_launcher_foreground.xml.flat",
-        "source": "com.example.locallockers.app-main-75:/drawable/ic_launcher_foreground.xml"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\drawable_book_focus.png.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\drawable\\book_focus.png"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/drawable_ic_profile_card_image.png.flat",
-        "source": "com.example.locallockers.app-main-75:/drawable/ic_profile_card_image.png"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\drawable_privacy_confi.png.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\drawable\\privacy_confi.png"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/drawable_list_focus.png.flat",
-        "source": "com.example.locallockers.app-main-75:/drawable/list_focus.png"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\drawable_feedback_confi.png.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\drawable\\feedback_confi.png"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/xml_data_extraction_rules.xml.flat",
-        "source": "com.example.locallockers.app-main-75:/xml/data_extraction_rules.xml"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\drawable_arrow_back.png.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\drawable\\arrow_back.png"
     },
     {
-        "merged": "com.example.locallockers.app-merged_res-73:/drawable_map_focus.png.flat",
-        "source": "com.example.locallockers.app-main-75:/drawable/map_focus.png"
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\drawable_ic_profile_card_image.png.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\drawable\\ic_profile_card_image.png"
+    },
+    {
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\drawable_sardina.jpg.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\drawable\\sardina.jpg"
+    },
+    {
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\drawable_notification_confi.png.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\drawable\\notification_confi.png"
+    },
+    {
+        "merged": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-merged_res-73:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\adria\\.gradle\\daemon\\8.2\\com.example.locallockers.app-main-75:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
     }
 ]

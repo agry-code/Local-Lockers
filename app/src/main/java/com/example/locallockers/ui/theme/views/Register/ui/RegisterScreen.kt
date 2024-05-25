@@ -6,8 +6,11 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.locallockers.R
 import com.example.locallockers.ui.theme.Composable.*
 import com.example.locallockers.ui.theme.views.Register.ui.RegisterViewModel
 import com.example.locallockers.ui.theme.views.turista.main.views.maps.SearchViewModel
@@ -41,7 +44,13 @@ fun RegisterScreen(
 
         // Un botón que cuando se presiona, cambia el estado de 'expanded' para mostrar u ocultar el menú
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Button(onClick = { expanded = true }) {
+            Button(onClick = { expanded = true },
+                colors = ButtonDefaults.buttonColors(
+                    contentColor = Color.White,
+                    containerColor = colorResource(id = R.color.primary),
+                    disabledContainerColor = colorResource(id = R.color.secundary),
+                )
+                ) {
                 Text("Seleccione su rol: $selectedRole")
             }
             DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
@@ -141,7 +150,15 @@ fun RegisterScreen(
                     }
                 }
             }
-        }, modifier = Modifier.fillMaxWidth().padding(8.dp)) {
+        },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = colorResource(id = R.color.primary),
+                contentColor = colorResource(id = R.color.white)
+            )
+        ) {
             Text(text = "Registrarse")
         }
     }

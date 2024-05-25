@@ -20,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -27,6 +28,7 @@ import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.example.locallockers.R
 
 @Composable
 fun BottomNav(navController: NavController, userRole: String) {
@@ -68,7 +70,7 @@ fun RowScope.AddItem(
     navController: NavController
 ) {
     val selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true
-    val background = if (selected) Color.DarkGray else Color.Transparent
+    val background = if (selected) colorResource(id = R.color.primary)else Color.Transparent
     val contentColor =
         if (selected) Color.White else Color.Black
 
@@ -94,7 +96,8 @@ fun RowScope.AddItem(
                 painter = painterResource(id = if (selected) screen.icon_focused else screen.icon),
                 contentDescription = "icon",
                 tint = contentColor,
-                modifier = Modifier.size(30.dp)
+                modifier = Modifier.size(30.dp),
+                
             )
             AnimatedVisibility(visible = selected) {
                 Text(text = screen.title, color = contentColor)

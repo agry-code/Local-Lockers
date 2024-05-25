@@ -15,6 +15,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Build
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -28,7 +29,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.locallockers.R
 import com.example.locallockers.model.LockerModel
 import com.example.locallockers.model.Reservation
 import com.example.locallockers.ui.theme.views.turista.main.views.list.LockerViewModel
@@ -77,8 +80,8 @@ fun MapsView(lockers: List<LockerModel>, lockerViewModel: LockerViewModel) {
                     title = locker.name,
                     snippet = "Horario: ${locker.openHours}",
                     onClick = {
-                            selectedLocker = locker
-                            showDialog = true
+                        selectedLocker = locker
+                        showDialog = true
                         true // Indica que el evento de clic ha sido manejado
                     }
                 )
@@ -111,11 +114,16 @@ fun MapsView(lockers: List<LockerModel>, lockerViewModel: LockerViewModel) {
                 val startTime = java.sql.Timestamp(startDate.time)
                 val endTime = java.sql.Timestamp(endDate.time)
 
-                lockerViewModel.updateReservationCapacity(selectedLocker!!.id,numberOfBags, startTime, endTime,
+                lockerViewModel.updateReservationCapacity(selectedLocker!!.id,
+                    numberOfBags,
+                    startTime,
+                    endTime,
                     onSuccess = {
                         val dateOnlyFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
                         dialogTitle = "Reserva Exitosa"
-                        dialogMessage = "Reserva realizada con éxito para los días ${dateOnlyFormat.format(startDate)} al ${dateOnlyFormat.format(endDate)}."
+                        dialogMessage = "Reserva realizada con éxito para los días ${
+                            dateOnlyFormat.format(startDate)
+                        } al ${dateOnlyFormat.format(endDate)}."
                         showInformativeDialog = true
                     },
                     onFailure = { insufficientDate ->
@@ -140,6 +148,7 @@ fun MapsView(lockers: List<LockerModel>, lockerViewModel: LockerViewModel) {
         )
     }
 }
+
 @Composable
 fun ShowReservationDialog(
     locker: LockerModel,
@@ -171,14 +180,18 @@ fun ShowReservationDialog(
                             if (num != null && num > 0 && num <= reservation.capacidad) {
                                 errorText = "" // No hay error, limpiar cualquier mensaje anterior
                             } else {
-                                errorText = "Introduzca un número válido (1 a ${reservation.capacidad})"
+                                errorText =
+                                    "Introduzca un número válido (1 a ${reservation.capacidad})"
                             }
                         },
                         label = { Text("Número de bolsas") },
                         isError = errorText.isNotEmpty() // Se activa el estado de error si hay un mensaje
                     )
                     if (errorText.isNotEmpty()) {
-                        Text(errorText, color = MaterialTheme.colorScheme.error) // Muestra el mensaje de error
+                        Text(
+                            errorText,
+                            color = MaterialTheme.colorScheme.error
+                        ) // Muestra el mensaje de error
                     }
                     Text("Fecha de entrada:")
                     TextField(
@@ -192,7 +205,10 @@ fun ShowReservationDialog(
                                 modifier = Modifier.clickable {
                                     showDatePicker(context, null, startDate ?: Date()) { newDate ->
                                         startDate = newDate
-                                        startDateText.value = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(newDate)
+                                        startDateText.value = SimpleDateFormat(
+                                            "dd/MM/yyyy",
+                                            Locale.getDefault()
+                                        ).format(newDate)
                                     }
                                 }
                             )
@@ -210,7 +226,10 @@ fun ShowReservationDialog(
                                     startDate?.let {
                                         showDatePicker(context, it, endDate ?: it) { newDate ->
                                             endDate = newDate
-                                            endDateText.value = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(newDate)
+                                            endDateText.value = SimpleDateFormat(
+                                                "dd/MM/yyyy",
+                                                Locale.getDefault()
+                                            ).format(newDate)
                                         }
                                     }
                                 }
@@ -221,20 +240,32 @@ fun ShowReservationDialog(
                 }
             },
             confirmButton = {
-                Button(onClick = {
-                    val numberOfBags = numberOfBagsText.toIntOrNull()
-                    if (startDate != null && endDate != null && numberOfBags != null && numberOfBags > 0 && errorText.isEmpty()) {
-                        onConfirm(numberOfBags, startDate!!, endDate!!)
-                    } else {
-                        errorText = "Revise los datos introducidos."
-                    }
-                    onDismiss()
-                }) {
+                Button(
+                    onClick = {
+                        val numberOfBags = numberOfBagsText.toIntOrNull()
+                        if (startDate != null && endDate != null && numberOfBags != null && numberOfBags > 0 && errorText.isEmpty()) {
+                            onConfirm(numberOfBags, startDate!!, endDate!!)
+                        } else {
+                            errorText = "Revise los datos introducidos."
+                        }
+                        onDismiss()
+                    },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = colorResource(id = R.color.primary),
+                        contentColor = colorResource(id = R.color.white)
+                    )
+                ) {
                     Text("Confirmar")
                 }
             },
             dismissButton = {
-                Button(onClick = onDismiss) {
+                Button(
+                    onClick = onDismiss,
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = colorResource(id = R.color.primary),
+                        contentColor = colorResource(id = R.color.white)
+                    )
+                ) {
                     Text("Cancelar")
                 }
             }
@@ -245,7 +276,11 @@ fun ShowReservationDialog(
             onDismissRequest = onDismiss,
             title = { Text("No hay reservas disponibles hoy para ${locker.name}") },
             confirmButton = {
-                Button(onClick = onDismiss) {
+                Button(onClick = onDismiss,
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = colorResource(id = R.color.primary),
+                        contentColor = colorResource(id = R.color.white)
+                    )) {
                     Text("Cerrar")
                 }
             }
@@ -254,7 +289,12 @@ fun ShowReservationDialog(
 }
 
 
-fun showDatePicker(context: Context, minDate: Date? = null, currentDate: Date, onDateSelected: (Date) -> Unit) {
+fun showDatePicker(
+    context: Context,
+    minDate: Date? = null,
+    currentDate: Date,
+    onDateSelected: (Date) -> Unit
+) {
     val calendar = Calendar.getInstance().apply {
         time = currentDate
     }
@@ -268,7 +308,8 @@ fun showDatePicker(context: Context, minDate: Date? = null, currentDate: Date, o
         calendar.get(Calendar.MONTH),
         calendar.get(Calendar.DAY_OF_MONTH)
     ).apply {
-        datePicker.minDate = minDate?.time ?: System.currentTimeMillis() // Establece la fecha mínima a hoy si minDate es null
+        datePicker.minDate = minDate?.time
+            ?: System.currentTimeMillis() // Establece la fecha mínima a hoy si minDate es null
     }
     datePickerDialog.show()
 }
@@ -282,7 +323,13 @@ fun InformativeDialog(
     AlertDialog(
         onDismissRequest = onDismiss,
         confirmButton = {
-            Button(onClick = onDismiss) {
+            Button(
+                onClick = onDismiss,
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = colorResource(id = R.color.primary),
+                    contentColor = colorResource(id = R.color.white)
+                )
+            ) {
                 Text("OK")
             }
         },

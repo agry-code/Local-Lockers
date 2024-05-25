@@ -468,6 +468,7 @@ int color foreground_material_dark 0x7f050044
 int color foreground_material_light 0x7f050045
 int color highlighted_text_material_dark 0x7f050046
 int color highlighted_text_material_light 0x7f050047
+int color item 0x7f0501f2
 int color material_blue_grey_800 0x7f050048
 int color material_blue_grey_900 0x7f050049
 int color material_blue_grey_950 0x7f05004a
@@ -505,6 +506,7 @@ int color places_text_white_alpha_26 0x7f050069
 int color places_text_white_alpha_87 0x7f05006a
 int color places_ui_default_primary 0x7f05006b
 int color places_ui_default_primary_dark 0x7f05006c
+int color primary 0x7f0501ef
 int color primary_dark_material_dark 0x7f05006d
 int color primary_dark_material_light 0x7f05006e
 int color primary_material_dark 0x7f05006f
@@ -865,6 +867,7 @@ int color secondary_text_default_material_dark 0x7f0501d1
 int color secondary_text_default_material_light 0x7f0501d2
 int color secondary_text_disabled_material_dark 0x7f0501d3
 int color secondary_text_disabled_material_light 0x7f0501d4
+int color secundary 0x7f0501f0
 int color switch_thumb_disabled_material_dark 0x7f0501d5
 int color switch_thumb_disabled_material_light 0x7f0501d6
 int color switch_thumb_material_dark 0x7f0501d7
@@ -875,6 +878,7 @@ int color teal_200 0x7f0501db
 int color teal_700 0x7f0501dc
 int color tooltip_background_dark 0x7f0501dd
 int color tooltip_background_light 0x7f0501de
+int color transparent 0x7f0501f1
 int color vector_tint_color 0x7f0501df
 int color vector_tint_theme_color 0x7f0501e0
 int color wallet_bright_foreground_disabled_holo_light 0x7f0501e1
@@ -1168,6 +1172,9 @@ int drawable ic_profile_card_image 0x7f070083
 int drawable icon_google 0x7f070084
 int drawable list 0x7f070085
 int drawable list_focus 0x7f070086
+int drawable localocker 0x7f0700ac
+int drawable localocker_sinfondo 0x7f0700ae
+int drawable logo 0x7f0700ad
 int drawable map 0x7f070087
 int drawable map_focus 0x7f070088
 int drawable more_customization_confi 0x7f070089

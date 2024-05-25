@@ -12,14 +12,17 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.locallockers.R
 import com.example.locallockers.model.LockerModel
 import com.example.locallockers.navigation.BottomBarScreen
 import com.example.locallockers.navigation.BottomNav
@@ -41,7 +44,7 @@ fun MainScreen(navController: NavController,
 
     Scaffold(
         topBar = {
-            TopAppBar(title = { Text(text = "Turista") },
+            TopAppBar(title = { Text(text = "Mapa") },
                 navigationIcon = {
                     IconButton(onClick = {
                         mapViewModel.signOut()
@@ -49,7 +52,12 @@ fun MainScreen(navController: NavController,
                     }) {
                         Icon(imageVector = Icons.Default.ExitToApp, contentDescription = "")
                     }
-                }
+                },
+                colors = TopAppBarDefaults.smallTopAppBarColors(
+                    containerColor = colorResource(id = R.color.white),
+                    titleContentColor = colorResource(id = R.color.primary),
+                    navigationIconContentColor = colorResource(id = R.color.primary)
+                )
             )
         },
         bottomBar = {

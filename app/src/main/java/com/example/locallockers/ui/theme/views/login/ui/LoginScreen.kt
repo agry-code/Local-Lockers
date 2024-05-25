@@ -33,6 +33,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -41,6 +42,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.locallockers.R
 import com.example.locallockers.ui.theme.Composable.Alert
+import com.example.locallockers.ui.theme.Composable.EmailField
+import com.example.locallockers.ui.theme.Composable.PasswordField
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
@@ -91,11 +94,11 @@ fun Login(modifier: Modifier, viewModel: LoginViewModel, navController: NavContr
     Column(modifier = modifier) {
         HeaderImage(Modifier.align(Alignment.CenterHorizontally))
         Spacer(modifier = Modifier.padding(16.dp))
-        EmailField(email, { viewModel.onLoginChanged(it, password)}, viewModel )
+        EmailField(email, { viewModel.onLoginChanged(it, password)})
         Spacer(modifier = Modifier.padding(4.dp))
         PasswordField(password, { viewModel.onLoginChanged(email, it) })
         Spacer(modifier = Modifier.padding(8.dp))
-        ForgotPassword(Modifier.align(Alignment.End))
+        //ForgotPassword(Modifier.align(Alignment.End)) FUTURA IMPLEMENTACIÓN
         Spacer(modifier = Modifier.padding(16.dp))
         LogginButton(loginEnable) {
             coroutineScope.launch {
@@ -104,7 +107,7 @@ fun Login(modifier: Modifier, viewModel: LoginViewModel, navController: NavContr
                 }
             }
         }
-        GoogleSignInButton(launcher)
+       // GoogleSignInButton(launcher) Futura implementación para tomar los datos del cliente
         if (viewModel.showAlert) {
             Alert(title = "Alerta",
                 msg = "Usuario o contraseña erronea",
@@ -154,7 +157,6 @@ fun GoogleSignInButton(
 fun LogginButton(loginEnable: Boolean, login: () -> Unit) {
     Button(
         onClick = {
-            Log.d("Login", "Se ha hecho click al boton")
             login()
         },
         modifier = Modifier
@@ -162,9 +164,8 @@ fun LogginButton(loginEnable: Boolean, login: () -> Unit) {
             .height(48.dp),
         colors = ButtonDefaults.buttonColors(
             contentColor = Color.White,
-            containerColor = Color(0xFFFF4303),
-            disabledContainerColor = Color(0xfff78058),
-
+            containerColor = colorResource(id = R.color.primary),
+            disabledContainerColor = colorResource(id = R.color.secundary),
             ), enabled = loginEnable
     ) {
         Text(text = "Iniciar sesion")
@@ -182,56 +183,10 @@ fun ForgotPassword(align: Modifier) {
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun PasswordField(password: String, onTextFieldChanged: (String) -> Unit) {
-    TextField(
-        value = password, onValueChange = { onTextFieldChanged(it) },
-        placeholder = { Text(text = "Contraseña") },
-        modifier = Modifier.fillMaxWidth(),
-        visualTransformation = PasswordVisualTransformation(),
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-        singleLine = true,
-        textStyle = LocalTextStyle.current.copy(color = Color(0xFF636262)),
-        colors = TextFieldDefaults.textFieldColors(
-            containerColor = Color(0xFFDEDDDD),
-            focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent
-        )
-    )
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun EmailField(email: String, onTextFieldChanged: (String) -> Unit, viewModel: LoginViewModel) {
-    TextField(
-        value = email,
-        onValueChange = {
-          /*Este metodo reinicia cada vez qe se escribe la pantalla*/
-            onTextFieldChanged(it)
-            //viewModel.fetchUserDetailsByEmail(it)
-            //Y este es mas warro porqe lo hace cada 10 segundos
-//            onTextFieldChanged(it)
-//            viewModel.onEmailChangedDebounced(it)
-
-        },
-        modifier = Modifier.fillMaxWidth(),
-        placeholder = { Text(text = "Email") },
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
-        singleLine = true,
-        textStyle = LocalTextStyle.current.copy(color = Color(0xFF636262)),
-        colors = TextFieldDefaults.textFieldColors(
-            containerColor = Color(0xFFDEDDDD),
-            focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent
-        )
-    )
-}
-
 @Composable
 fun HeaderImage(modifier: Modifier) {
     Image(
-        painter = painterResource(id = R.drawable.ojo_negativo),
+        painter = painterResource(id = R.drawable.localocker_sinfondo),
         contentDescription = "Header",
         modifier = modifier
     )

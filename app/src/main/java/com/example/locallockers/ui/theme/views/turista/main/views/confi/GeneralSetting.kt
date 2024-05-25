@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -22,6 +23,7 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -31,6 +33,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -52,9 +55,9 @@ fun GeneralConfiUI(userViewModel: UserViewModel) {
         Text(
             text = "General",
             fontFamily = FontFamily(Font(R.font.poppins)),
-            //color = SecondaryColor,
             fontSize = UiConstants.fontSizeM,
             fontWeight = FontWeight.Bold,
+            color = colorResource(id = R.color.primary),
             modifier = Modifier
                 .padding(vertical = 8.dp)
         )
@@ -65,7 +68,6 @@ fun GeneralConfiUI(userViewModel: UserViewModel) {
             onClick = {
 
             }
-
         )
         GeneralSettingItem(
             icon = R.drawable.more_customization_confi,
@@ -96,11 +98,14 @@ fun GeneralConfiUI(userViewModel: UserViewModel) {
 fun GeneralSettingItem(icon: Int, mainText: String, subText: String, onClick: () -> Unit) {
     Card(
         onClick = { onClick() },
-        //backgroundColor = Color.White,
         modifier = Modifier
             .padding(bottom = 8.dp)
             .fillMaxWidth(),
-        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = colorResource(id = R.color.white),
+            contentColor = colorResource(id = R.color.primary)
+        )
     ) {
         Row(
             modifier = Modifier.padding(vertical = 10.dp, horizontal = 14.dp),
@@ -111,8 +116,6 @@ fun GeneralSettingItem(icon: Int, mainText: String, subText: String, onClick: ()
                 Box(
                     modifier = Modifier
                         .size(UiConstants.boxSize)
-                    //.clip(shape = Shapes.medium)
-                    //.background(LightPrimaryColor)
                 ) {
                     Icon(
                         painter = painterResource(id = icon),
@@ -124,20 +127,20 @@ fun GeneralSettingItem(icon: Int, mainText: String, subText: String, onClick: ()
 
                 Spacer(modifier = Modifier.width(14.dp))
                 Column(
-                    modifier = Modifier.offset(y = (2).dp)
+                    modifier = Modifier.offset(y = 2.dp)
                 ) {
                     Text(
                         text = mainText,
                         fontFamily = FontFamily(Font(R.font.poppins)),
-                        // color = SecondaryColor,
                         fontSize = UiConstants.fontSizeM,
                         fontWeight = FontWeight.Bold,
+                        color = colorResource(id = R.color.primary)
                     )
 
                     Text(
                         text = subText,
                         fontFamily = FontFamily(Font(R.font.poppins)),
-                        color = Color.Gray,
+                        color = colorResource(id = R.color.secundary),
                         fontSize = UiConstants.fontSizeS,
                         fontWeight = FontWeight.SemiBold,
                         modifier = Modifier.offset(y = (-4).dp)
@@ -147,25 +150,31 @@ fun GeneralSettingItem(icon: Int, mainText: String, subText: String, onClick: ()
             Icon(
                 painter = painterResource(id = R.drawable.flecha_derecha),
                 contentDescription = "",
-                modifier = Modifier.size(UiConstants.ArrowIconSize)
+                modifier = Modifier.size(UiConstants.ArrowIconSize),
+                tint = colorResource(id = R.color.primary)
             )
-
         }
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CustomizationDialog(userViewModel: UserViewModel) {
     var newName by remember { mutableStateOf("") }
 
     AlertDialog(
         onDismissRequest = { userViewModel.showCustomizationDialog = false },
-        title = { Text("Change Your Name") },
+        title = { Text("Change Your Name", color = colorResource(id = R.color.primary)) },
         text = {
             TextField(
                 value = newName,
                 onValueChange = { newName = it },
-                label = { Text("New Name") }
+                label = { Text("New Name", color = colorResource(id = R.color.primary)) },
+                colors = TextFieldDefaults.textFieldColors(
+                    containerColor = colorResource(id = R.color.white),
+                    focusedIndicatorColor = colorResource(id = R.color.primary),
+                    unfocusedIndicatorColor = colorResource(id = R.color.secundary)
+                )
             )
         },
         confirmButton = {
@@ -173,14 +182,22 @@ fun CustomizationDialog(userViewModel: UserViewModel) {
                 onClick = {
                     userViewModel.updateUserName(newName)
                     userViewModel.showCustomizationDialog = false
-                }
+                },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = colorResource(id = R.color.primary),
+                    contentColor = colorResource(id = R.color.white)
+                )
             ) {
                 Text("Update")
             }
         },
         dismissButton = {
             Button(
-                onClick = { userViewModel.showCustomizationDialog = false }
+                onClick = { userViewModel.showCustomizationDialog = false },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = colorResource(id = R.color.primary),
+                    contentColor = colorResource(id = R.color.white)
+                )
             ) {
                 Text("Cancel")
             }

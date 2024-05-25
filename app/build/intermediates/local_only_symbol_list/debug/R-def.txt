@@ -1,11 +1,15 @@
 R_DEF: Internal format may change without notice
 local
 color black
+color item
+color primary
 color purple_200
 color purple_500
 color purple_700
+color secundary
 color teal_200
 color teal_700
+color transparent
 color white
 drawable about_confi
 drawable arrow_back
@@ -25,6 +29,9 @@ drawable ic_profile_card_image
 drawable icon_google
 drawable list
 drawable list_focus
+drawable localocker
+drawable localocker_sinfondo
+drawable logo
 drawable map
 drawable map_focus
 drawable more_customization_confi

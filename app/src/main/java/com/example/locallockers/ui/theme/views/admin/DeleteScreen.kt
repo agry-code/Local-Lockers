@@ -15,13 +15,16 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -31,8 +34,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.locallockers.R
 import com.example.locallockers.model.LockerModel
 import com.example.locallockers.model.UserModel
 import com.example.locallockers.navigation.BottomNav
@@ -48,7 +53,7 @@ fun DeleteScreen(
     lockerViewModel: LockerViewModel,
     deleteViewModel: DeleteViewModel
 
-){
+) {
     val user by userViewModel.currentUser.observeAsState()
     val context = LocalContext.current
     val activity = context as? Activity
@@ -72,13 +77,18 @@ fun DeleteScreen(
                     }) {
                         Icon(imageVector = Icons.Default.ExitToApp, contentDescription = "")
                     }
-                })
+                },
+                colors = TopAppBarDefaults.smallTopAppBarColors(
+                    containerColor = colorResource(id = R.color.white),
+                    titleContentColor = colorResource(id = R.color.primary),
+                    navigationIconContentColor = colorResource(id = R.color.primary)
+                )
+            )
         },
         bottomBar = {
             BottomNav(navController, user?.role ?: "Turista")
         }
-    ){
-        paddingValues ->
+    ) { paddingValues ->
         Column(modifier = Modifier.padding(paddingValues)) {
             LazyColumn {
                 items(guests) { guest ->
@@ -118,7 +128,11 @@ fun GuestItem(guest: UserModel, locker: LockerModel?, onDeleteClick: () -> Unit)
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp)
+            .padding(8.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = colorResource(id = R.color.item),
+            contentColor = colorResource(id = R.color.primary)
+        )
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             Text(text = "Nombre: ${guest.userName}")
@@ -128,13 +142,18 @@ fun GuestItem(guest: UserModel, locker: LockerModel?, onDeleteClick: () -> Unit)
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Button(onClick = onDeleteClick) {
+                Button(onClick = onDeleteClick,
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = colorResource(id = R.color.primary),
+                        contentColor = colorResource(id = R.color.white)
+                    ) ) {
                     Text(text = "Eliminar")
                 }
             }
         }
     }
 }
+
 @Composable
 fun ConfirmDeleteDialog(
     guestName: String,
@@ -151,12 +170,20 @@ fun ConfirmDeleteDialog(
             Text("¿Está seguro de que desea eliminar al huésped $guestName, dueño del locker $lockerName?")
         },
         confirmButton = {
-            Button(onClick = onConfirm) {
+            Button(onClick = onConfirm,
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = colorResource(id = R.color.primary),
+                    contentColor = colorResource(id = R.color.white)
+                )) {
                 Text("Eliminar")
             }
         },
         dismissButton = {
-            Button(onClick = onCancel) {
+            Button(onClick = onCancel,
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = colorResource(id = R.color.primary),
+                    contentColor = colorResource(id = R.color.white)
+                )) {
                 Text("Cancelar")
             }
         }

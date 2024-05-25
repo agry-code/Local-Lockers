@@ -10,8 +10,11 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import com.example.locallockers.R
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EmailField(email: String, onTextFieldChanged: (String) -> Unit) {
@@ -24,7 +27,7 @@ fun EmailField(email: String, onTextFieldChanged: (String) -> Unit) {
         singleLine = true,
         textStyle = LocalTextStyle.current.copy(color = Color(0xFF636262)),
         colors = TextFieldDefaults.textFieldColors(
-            containerColor = Color(0xFFDEDDDD),
+            containerColor = colorResource(id = R.color.transparent),
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent
         )
@@ -43,7 +46,7 @@ fun NameField(name: String, text: String, onTextFieldChanged: (String) -> Unit) 
         singleLine = true,
         textStyle = LocalTextStyle.current.copy(color = Color(0xFF636262)),
         colors = TextFieldDefaults.textFieldColors(
-            containerColor = Color(0xFFDEDDDD),
+            containerColor = colorResource(id = R.color.transparent),
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent
         )
@@ -63,7 +66,7 @@ fun PasswordField(password: String, onPasswordChanged: (String) -> Unit) {
         visualTransformation = PasswordVisualTransformation(),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
         colors = TextFieldDefaults.outlinedTextFieldColors(
-            containerColor = Color(0xFFDEDDDD),
+            containerColor = colorResource(id = R.color.transparent),
             focusedBorderColor = Color.Transparent,
             unfocusedBorderColor = Color.Transparent
         )
@@ -84,7 +87,7 @@ fun ConfirmPasswordField(confirmPassword: String, onConfirmPasswordChanged: (Str
         visualTransformation = PasswordVisualTransformation(),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
         colors = TextFieldDefaults.outlinedTextFieldColors(
-            containerColor = Color(0xFFDEDDDD),
+            containerColor = colorResource(id = R.color.transparent),
             focusedBorderColor = Color.Transparent,
             unfocusedBorderColor = Color.Transparent
         )
@@ -100,7 +103,7 @@ fun LocationField(location: String, onLocationChanged: (String) -> Unit) {
         placeholder = { Text("Ubicación") },
         singleLine = true,
         colors = TextFieldDefaults.outlinedTextFieldColors(
-            containerColor = Color(0xFFDEDDDD),
+            containerColor = colorResource(id = R.color.transparent),
             focusedBorderColor = Color.Transparent,
             unfocusedBorderColor = Color.Transparent
         )
@@ -117,7 +120,7 @@ fun OpenHoursField(openHours: String, onOpenHoursChanged: (String) -> Unit) {
         placeholder = { Text("Horario de Apertura") },
         singleLine = true,
         colors = TextFieldDefaults.textFieldColors(
-            containerColor = Color(0xFFDEDDDD),
+            containerColor = colorResource(id = R.color.transparent),
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent
         )

@@ -14,21 +14,26 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.locallockers.R
 import com.example.locallockers.navigation.BottomNav
 import com.example.locallockers.ui.theme.views.turista.main.views.book.BookViewModel
 import com.example.locallockers.ui.theme.views.turista.main.views.maps.MapViewModel
@@ -55,7 +60,8 @@ fun RequestScreen(
 
     Scaffold(
         topBar = {
-            TopAppBar(title = { Text(text = "Lista de Solicitudes") },
+            TopAppBar(
+                title = { Text(text = "Lista de Solicitudes") },
                 navigationIcon = {
                     IconButton(onClick = {
                         mapViewModel.signOut()
@@ -63,7 +69,13 @@ fun RequestScreen(
                     }) {
                         Icon(imageVector = Icons.Default.ExitToApp, contentDescription = "")
                     }
-                })
+                },
+                colors = TopAppBarDefaults.smallTopAppBarColors(
+                    containerColor = colorResource(id = R.color.white),
+                    titleContentColor = colorResource(id = R.color.primary),
+                    navigationIconContentColor = colorResource(id = R.color.primary)
+                )
+            )
         },
         bottomBar = {
             BottomNav(navController, user?.role ?: "Turista")
@@ -75,8 +87,14 @@ fun RequestScreen(
                     RequestItem(
                         reservation,
                         onAccept = {
-                            Log.d("ProblemaStatus", "Reservation ID is null or invalid ${reservation.id}")
-                            Log.d("ProblemaStatus", "Reservation ID is null or invalid ${reservation.userName}")
+                            Log.d(
+                                "ProblemaStatus",
+                                "Reservation ID is null or invalid ${reservation.id}"
+                            )
+                            Log.d(
+                                "ProblemaStatus",
+                                "Reservation ID is null or invalid ${reservation.userName}"
+                            )
                             if (reservation.id != null) {
                                 bookViewModel.updateReservationStatus(reservation.id, "aceptada")
                             }
@@ -100,18 +118,34 @@ fun RequestItem(reservation: BookModel, onAccept: () -> Unit, onDecline: () -> U
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp)
+            .padding(8.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = colorResource(id = R.color.item),
+            contentColor = colorResource(id = R.color.primary)
+        )
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             Text("Solicitud de: ${reservation.userName}")
             Text("Para: ${reservation.lockerName}")
             Text("Desde: ${reservation.startTime} Hasta: ${reservation.endTime}")
             Row {
-                Button(onClick = { onAccept() }) {
+                Button(
+                    onClick = { onAccept() },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = colorResource(id = R.color.primary),
+                        contentColor = colorResource(id = R.color.white)
+                    )
+                ) {
                     Text("Aceptar")
                 }
                 Spacer(Modifier.width(8.dp))
-                Button(onClick = { onDecline() }) {
+                Button(
+                    onClick = { onDecline() },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = colorResource(id = R.color.primary),
+                        contentColor = colorResource(id = R.color.white)
+                    )
+                ) {
                     Text("Denegar")
                 }
             }

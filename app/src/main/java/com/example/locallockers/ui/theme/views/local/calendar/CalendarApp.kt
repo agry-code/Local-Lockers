@@ -18,8 +18,10 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import com.example.locallockers.R
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
@@ -66,6 +68,7 @@ fun CalendarApp(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun Form(viewModel: CalendarViewModel, lockerId: String, data: CalendarUiModel) {
@@ -94,22 +97,39 @@ fun Form(viewModel: CalendarViewModel, lockerId: String, data: CalendarUiModel) 
     ) {
         Text(
             text = "Detalles de la Reserva",
-            style = MaterialTheme.typography.titleMedium
+            style = MaterialTheme.typography.titleMedium,
+            color = colorResource(id = R.color.primary) // Ajuste del color del texto
+
         )
         OutlinedTextField(
             value = capacidad,
             onValueChange = { capacidad = it },
-            label = { Text("Capacidad") },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+            label = { Text("Capacidad", color = colorResource(id = R.color.primary)) },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                focusedBorderColor = colorResource(id = R.color.primary),
+                unfocusedBorderColor = colorResource(id = R.color.secundary),
+                cursorColor = colorResource(id = R.color.primary)
+            )
         )
         OutlinedTextField(
             value = precio,
             onValueChange = { precio = it },
-            label = { Text("Precio (€)") },
+            label = { Text("Precio (€)", color = colorResource(id = R.color.primary)) },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                focusedBorderColor = colorResource(id = R.color.primary),
+                unfocusedBorderColor = colorResource(id = R.color.secundary),
+                cursorColor = colorResource(id = R.color.primary)
+            )
         )
         Button(
             onClick = { viewModel.saveLockerDetails(lockerId, data.selectedDate.date, capacidad, precio) },
-            modifier = Modifier.align(Alignment.End)
+            modifier = Modifier.align(Alignment.End),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = colorResource(id = R.color.primary),
+                contentColor = colorResource(id = R.color.white)
+            )
         ) {
             Text("Actualizar")
         }
@@ -135,14 +155,18 @@ fun Header(
             },
             modifier = Modifier
                 .weight(1f)
-                .align(Alignment.CenterVertically)
+                .align(Alignment.CenterVertically),
+            color = colorResource(id = R.color.primary) // Ajuste del color del texto
+
         )
         IconButton(onClick = {
             onPrevClickListener(data.startDate.date)
         }) {
             Icon(
                 imageVector = Icons.Filled.ArrowBack,
-                contentDescription = "Back"
+                contentDescription = "Back",
+                tint = colorResource(id = R.color.primary) // Ajuste del color del texto
+
             )
         }
         IconButton(onClick = {
@@ -150,7 +174,9 @@ fun Header(
         }) {
             Icon(
                 imageVector = Icons.Filled.ArrowForward,
-                contentDescription = "Next"
+                contentDescription = "Next",
+                tint = colorResource(id = R.color.primary) // Ajuste del color del ícono
+
             )
         }
     }
@@ -161,7 +187,7 @@ fun Header(
 fun Content(
     viewModel: CalendarViewModel,
     data: CalendarUiModel,
-    lockerId: String,  // Asegúrate de tener acceso al lockerId aquí.
+    lockerId: String,
     onDateClickListener: (CalendarUiModel.Date) -> Unit,
 ) {
     LazyRow(Modifier.fillMaxWidth()) {
@@ -193,9 +219,9 @@ fun ContentItem(
             .height(50.dp),
         colors = CardDefaults.cardColors(
             containerColor = if (date.isSelected) {
-                MaterialTheme.colorScheme.primary
+                colorResource(id = R.color.item) // Ajuste del color cuando está seleccionado
             } else {
-                MaterialTheme.colorScheme.secondary
+                colorResource(id = R.color.secundary) // Ajuste del color cuando está seleccionado
             }
         ),
     ) {
@@ -208,12 +234,16 @@ fun ContentItem(
             Text(
                 text = date.day,
                 modifier = Modifier.align(Alignment.CenterHorizontally),
-                style = MaterialTheme.typography.bodySmall
+                style = MaterialTheme.typography.bodySmall,
+                color = colorResource(id = R.color.primary) // Ajuste del color del texto
+
             )
             Text(
                 text = date.date.dayOfMonth.toString(),
                 modifier = Modifier.align(Alignment.CenterHorizontally),
                 style = MaterialTheme.typography.bodyMedium,
+                color = colorResource(id = R.color.primary) // Ajuste del color del texto
+
             )
         }
     }

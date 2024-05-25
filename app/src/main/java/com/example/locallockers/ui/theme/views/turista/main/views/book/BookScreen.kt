@@ -14,12 +14,14 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -28,9 +30,11 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.locallockers.R
 import com.example.locallockers.navigation.BottomNav
 import com.example.locallockers.ui.theme.views.turista.main.views.maps.MapViewModel
 import com.google.android.gms.samples.pay.util.PaymentsUtil
@@ -67,7 +71,7 @@ fun BookScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(text = "Listado de Reservas") },
+                title = { Text(text = "Reservas realizadas") },
                 navigationIcon = {
                     IconButton(onClick = {
                         mapViewModel.signOut()
@@ -75,7 +79,12 @@ fun BookScreen(
                     }) {
                         Icon(imageVector = Icons.Default.ExitToApp, contentDescription = "")
                     }
-                })
+                }, colors = TopAppBarDefaults.smallTopAppBarColors(
+                    containerColor = colorResource(id = R.color.white),
+                    titleContentColor = colorResource(id = R.color.primary),
+                    navigationIconContentColor = colorResource(id = R.color.primary)
+                )
+            )
         },
         bottomBar = {
             BottomNav(navController, user?.role ?: "Turista")
@@ -84,7 +93,8 @@ fun BookScreen(
         Column(modifier = Modifier.padding(paddingValues)) {
             LazyColumn {
                 items(books) { book ->
-                    BookItem(book, user?.role ?: "Turista", checkoutViewModel
+                    BookItem(
+                        book, user?.role ?: "Turista", checkoutViewModel
                     ) {
                         activity?.let {
                             onGooglePayButtonClick(
@@ -113,7 +123,11 @@ fun BookItem(
             .padding(8.dp)
             .clickable {
                 checkoutViewModel.setBookId(book.id)  // Asegúrate de que esto se llama antes del proceso de pago
-            }
+            },
+        colors = CardDefaults.cardColors(
+            containerColor = colorResource(id = R.color.item),
+            contentColor = colorResource(id = R.color.primary)
+        )
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             if (userRole == "Turista") {

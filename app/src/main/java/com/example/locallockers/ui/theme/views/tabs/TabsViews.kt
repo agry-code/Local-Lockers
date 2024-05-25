@@ -15,7 +15,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.navigation.NavController
+import com.example.locallockers.R
 import com.example.locallockers.ui.theme.views.Register.ui.RegisterViewModel
 import com.example.locallockers.ui.theme.views.login.ui.LoginScreen
 import com.example.locallockers.ui.theme.views.login.ui.LoginViewModel
@@ -28,11 +30,12 @@ fun TabsViews(navController: NavController) {
 
     Column {
         TabRow(selectedTabIndex = selectedTab,
-            contentColor = Color.Black,
-            containerColor = Color.LightGray,
+            contentColor = colorResource(id = R.color.primary),
+            containerColor = colorResource(id = R.color.transparent),
             indicator = { tabPositions ->
                 TabRowDefaults.Indicator(
-                    Modifier.tabIndicatorOffset(tabPositions[selectedTab])
+                    Modifier.tabIndicatorOffset(tabPositions[selectedTab]),
+                    color = colorResource(id = R.color.primary)
                 )
             }) {
             tabs.forEachIndexed() { index, title ->
