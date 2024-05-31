@@ -1,6 +1,7 @@
 package com.example.locallockers
 
 
+import UserViewModel
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -15,8 +16,11 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.example.locallockers.navigation.NavManager
 import com.example.locallockers.ui.theme.LocalLockersTheme
+import com.example.locallockers.ui.theme.views.admin.DeleteViewModel
 import com.example.locallockers.ui.theme.views.login.ui.LoginViewModel
 import com.example.locallockers.ui.theme.views.turista.main.views.book.BookViewModel
+import com.example.locallockers.ui.theme.views.turista.main.views.list.LockerViewModel
+import com.example.locallockers.ui.theme.views.turista.main.views.maps.MapViewModel
 import com.google.android.gms.samples.pay.viewmodel.CheckoutViewModel
 import com.google.android.gms.wallet.AutoResolveHelper
 import com.google.android.gms.wallet.PaymentData
@@ -24,13 +28,17 @@ import com.google.android.gms.wallet.PaymentData
 //AIzaSyBTA_bquHKAeJfOOLKNX-RxaA4_Cr7iPao
 class MainActivity : ComponentActivity() {
     private val googlePayRequestCode = 99942
+    val loginViewModel: LoginViewModel by viewModels()
     val checkoutViewModel: CheckoutViewModel by viewModels()
     val bookViewModel: BookViewModel by viewModels()
-
+    val mapViewModel: MapViewModel by viewModels()
+    val lockerViewModel: LockerViewModel by viewModels()
+    val userViewModel: UserViewModel by viewModels()
+    val deleteViewModel: DeleteViewModel by viewModels()
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val loginViewModel: LoginViewModel by viewModels()
+
 
         setContent {
             LocalLockersTheme {
@@ -38,7 +46,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    NavManager(loginViewModel,bookViewModel, checkoutViewModel)
+                    NavManager(loginViewModel,bookViewModel, checkoutViewModel, mapViewModel, lockerViewModel, userViewModel, deleteViewModel)
                 }
             }
         }

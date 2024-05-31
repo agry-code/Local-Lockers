@@ -51,8 +51,8 @@ import kotlinx.coroutines.awaitAll
 @Composable
 fun BookScreen(
     navController: NavController,
-    mapViewModel: MapViewModel = viewModel(),
-    bookViewModel: BookViewModel = viewModel(),
+    mapViewModel: MapViewModel,
+    bookViewModel: BookViewModel,
     checkoutViewModel: CheckoutViewModel,
 ) {
     val userViewModel: UserViewModel = viewModel()

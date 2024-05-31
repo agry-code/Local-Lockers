@@ -61,8 +61,8 @@ import java.util.*
 @Composable
 fun ListadoScreen(
     navController: NavController,
-    mapViewModel: MapViewModel = viewModel(),
-    lockerViewModel: LockerViewModel = viewModel()
+    mapViewModel: MapViewModel,
+    lockerViewModel: LockerViewModel
 ) {
     // Aquí estamos dentro del contexto composable, por lo que es seguro obtener el contexto local
     val context = LocalContext.current

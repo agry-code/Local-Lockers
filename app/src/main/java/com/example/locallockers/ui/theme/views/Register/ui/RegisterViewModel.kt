@@ -99,7 +99,7 @@ class RegisterViewModel : ViewModel() {
                             }
                         }
                     } else {
-                        showError("Error al crear usuario en Firebase, el email debe ser válido")
+                        showError("Error al crear usuario, el email debe ser válido")
                         Log.d("Error en Firebase", "Error al crear usuario")
                     }
                 }

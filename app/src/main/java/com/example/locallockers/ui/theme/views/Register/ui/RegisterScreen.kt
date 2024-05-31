@@ -112,7 +112,7 @@ fun RegisterScreen(
             registerModel.closeAlert()
 
             // Validación de campos vacíos
-            if (email.isBlank() || password.isBlank() || name.isBlank() || (selectedRole == "Huesped" && location.isBlank())) {
+            if (email.isBlank() || password.isBlank() || name.isBlank() || (selectedRole == "Huesped" && (location.isBlank() || localName.isBlank() || openHours.isBlank()))) {
                 registerModel.showAlert = true
                 registerModel.showError("Todos los campos son obligatorios")
                 Log.d("RegisterScreen", "Validación Fallida: Campos vacíos")
@@ -120,6 +120,11 @@ fun RegisterScreen(
                 registerModel.showAlert = true
                 registerModel.showError("Correo electrónico no válido")
                 Log.d("RegisterScreen", "Validación Fallida: Correo electrónico no válido")
+            }
+            else if (password.length < 6) {
+                registerModel.showAlert = true
+                registerModel.showError("La contraseña debe tener al menos 6 caracteres")
+                Log.d("RegisterScreen", "Validación Fallida: Contraseña no cumple longitud mínima")
             }
             else if (password != confirmPassword) {
                 registerModel.showAlert = true

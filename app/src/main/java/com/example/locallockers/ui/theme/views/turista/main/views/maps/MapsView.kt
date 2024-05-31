@@ -313,31 +313,3 @@ fun showDatePicker(
     }
     datePickerDialog.show()
 }
-
-@Composable
-fun InformativeDialog(
-    title: String,
-    message: String,
-    onDismiss: () -> Unit
-) {
-    AlertDialog(
-        onDismissRequest = onDismiss,
-        confirmButton = {
-            Button(
-                onClick = onDismiss,
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = colorResource(id = R.color.primary),
-                    contentColor = colorResource(id = R.color.white)
-                )
-            ) {
-                Text("OK")
-            }
-        },
-        title = {
-            Text(text = title)
-        },
-        text = {
-            Text(text = message)
-        }
-    )
-}
