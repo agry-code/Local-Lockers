@@ -2,6 +2,7 @@ package com.example.locallockers.ui.theme.views.admin
 
 import UserViewModel
 import android.app.Activity
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -43,20 +44,16 @@ import com.example.locallockers.model.UserModel
 import com.example.locallockers.navigation.BottomNav
 import com.example.locallockers.ui.theme.views.turista.main.views.list.LockerViewModel
 import com.example.locallockers.ui.theme.views.turista.main.views.maps.MapViewModel
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DeleteScreen(
     navController: NavController,
     userViewModel: UserViewModel,
     mapViewModel: MapViewModel,
-    lockerViewModel: LockerViewModel,
-    deleteViewModel: DeleteViewModel
-
+    lockerViewModel: LockerViewModel
 ) {
     val user by userViewModel.currentUser.observeAsState()
     val context = LocalContext.current
-    val activity = context as? Activity
     val guests by userViewModel.guests.observeAsState(emptyList())
     var showDialog by remember { mutableStateOf(false) }
     var selectedGuest by remember { mutableStateOf<UserModel?>(null) }
@@ -69,7 +66,7 @@ fun DeleteScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(text = "Eliminar Huesped") },
+                title = { Text(text = "Eliminar Huésped") },
                 navigationIcon = {
                     IconButton(onClick = {
                         mapViewModel.signOut()
@@ -112,16 +109,19 @@ fun DeleteScreen(
                 guestName = selectedGuest!!.userName,
                 lockerName = selectedLocker?.name ?: "Sin asignar",
                 onConfirm = {
-                    deleteViewModel.deleteGuestAndLocker(selectedGuest!!.userId, selectedLocker?.id)
+                    userViewModel.deleteGuestAndLocker(selectedGuest!!.userId, selectedLocker?.id)
+                    Toast.makeText(context, "Huésped ${selectedGuest!!.userName} eliminado", Toast.LENGTH_LONG).show()
                     showDialog = false
                 },
                 onCancel = {
                     showDialog = false
+                    Toast.makeText(context, "Se ha cancelado la eliminación de ${selectedGuest!!.userName}", Toast.LENGTH_LONG).show()
                 }
             )
         }
     }
 }
+
 
 @Composable
 fun GuestItem(guest: UserModel, locker: LockerModel?, onDeleteClick: () -> Unit) {

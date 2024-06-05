@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -72,8 +73,10 @@ class MainActivity : ComponentActivity() {
                                 // Actualiza el estado de la reserva
                                 bookViewModel.updateReservationStatus(bookId, "Pagado")
                                 Log.d("Pago", "Reserva $bookId actualizada a 'Pagado'")
+                                Toast.makeText(this, "Pago realizado con éxito", Toast.LENGTH_LONG).show()
                             } else {
                                 Log.e("Pago", "El bookId es null después de la transacción")
+                                Toast.makeText(this, "Error: bookId es null después de la transacción", Toast.LENGTH_LONG).show()
                             }
                         }
                     }
@@ -81,12 +84,14 @@ class MainActivity : ComponentActivity() {
 
                 RESULT_CANCELED -> {
                     Log.d("Pago", "Se ha cancelado la transacción")
+                    Toast.makeText(this, "Se ha cancelado la transacción", Toast.LENGTH_LONG).show()
                 }
 
                 else -> {
                     val status = AutoResolveHelper.getStatusFromIntent(data)
                     status?.let {
                         Log.e("GooglePay", "Error processing payment: ${it.statusCode}")
+                        Toast.makeText(this, "Error en el procesamiento del pago: ${it.statusCode}", Toast.LENGTH_LONG).show()
                     }
                 }
             }

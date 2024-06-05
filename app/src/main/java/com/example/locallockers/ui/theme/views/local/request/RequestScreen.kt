@@ -3,6 +3,7 @@ package com.example.locallockers.ui.theme.views.local.request
 import BookModel
 import UserViewModel
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -29,6 +30,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -115,6 +117,7 @@ fun RequestScreen(
 
 @Composable
 fun RequestItem(reservation: BookModel, onAccept: () -> Unit, onDecline: () -> Unit) {
+    val context = LocalContext.current
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -130,7 +133,9 @@ fun RequestItem(reservation: BookModel, onAccept: () -> Unit, onDecline: () -> U
             Text("Desde: ${reservation.startTime} Hasta: ${reservation.endTime}")
             Row {
                 Button(
-                    onClick = { onAccept() },
+                    onClick = { onAccept()
+                        Toast.makeText(context, "Reserva aceptada", Toast.LENGTH_LONG).show()
+                    },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = colorResource(id = R.color.primary),
                         contentColor = colorResource(id = R.color.white)
@@ -140,7 +145,9 @@ fun RequestItem(reservation: BookModel, onAccept: () -> Unit, onDecline: () -> U
                 }
                 Spacer(Modifier.width(8.dp))
                 Button(
-                    onClick = { onDecline() },
+                    onClick = { onDecline()
+                        Toast.makeText(context, "Reserva denegada", Toast.LENGTH_LONG).show()
+                    },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = colorResource(id = R.color.primary),
                         contentColor = colorResource(id = R.color.white)

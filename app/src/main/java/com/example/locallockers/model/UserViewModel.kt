@@ -21,9 +21,7 @@ class UserViewModel : ViewModel() {
     var showSnackbar by mutableStateOf(false)
 
     init {
-        //updateUser() Neceistamos aplicar una lógica para que no se pueda moficiar el rol del user. Creo que si lo dejamos en blanco no se modifica pero tengo que mirarlo
         loadUserInfo()
-        //loadGuests()
     }
 
     private fun loadUserInfo() {
@@ -51,6 +49,7 @@ class UserViewModel : ViewModel() {
             Log.d("UserVM", "No user is currently logged in")
         }
     }
+
     fun loadGuests() {
         db.collection("Users").whereEqualTo("role", "Huesped").get()
             .addOnSuccessListener { result ->
@@ -63,6 +62,24 @@ class UserViewModel : ViewModel() {
                 Log.d("Firestore", "Error getting guests: ", exception)
             }
     }
+
+    fun deleteGuestAndLocker(guestId: String, lockerId: String?) {
+        val guestRef = db.collection("Users").document(guestId)
+
+        db.runBatch { batch ->
+            batch.delete(guestRef)
+            if (lockerId != null) {
+                val lockerRef = db.collection("Lockers").document(lockerId)
+                batch.delete(lockerRef)
+            }
+        }.addOnSuccessListener {
+            Log.d("DeleteViewModel", "Guest and locker deleted successfully")
+            loadGuests() // Actualiza la lista de huéspedes después de la eliminación
+        }.addOnFailureListener { e ->
+            Log.e("DeleteViewModel", "Error deleting guest and locker", e)
+        }
+    }
+
     private fun updateUser() {
         val firebaseUser = auth.currentUser
         if (firebaseUser != null) {
@@ -77,7 +94,7 @@ class UserViewModel : ViewModel() {
                             userName = userName,
                             role = "Turista", //MODIFICAR POR SI ES HUESPED SE QUEDE HUESPED
                             lockerId = document.getString("lockerId") ?: ""
-                            )
+                        )
                     } else {
                         Log.d("Firestore", "No such document")
                         // Fallback to default name if document does not exist
@@ -87,7 +104,6 @@ class UserViewModel : ViewModel() {
                             userName = "Default Name",
                             role = "Turista", /*TODO*/
                             lockerId = document.getString("lockerId") ?: ""
-
                         )
                     }
                 }
@@ -113,6 +129,7 @@ class UserViewModel : ViewModel() {
                 showSnackbar = true
             }
     }
+
     fun dismissSnackbar() {
         showSnackbar = false
     }

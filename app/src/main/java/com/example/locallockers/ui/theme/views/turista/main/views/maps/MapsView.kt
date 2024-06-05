@@ -34,6 +34,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.locallockers.R
 import com.example.locallockers.model.LockerModel
 import com.example.locallockers.model.Reservation
+import com.example.locallockers.ui.theme.views.turista.main.views.list.InformativeDialog
 import com.example.locallockers.ui.theme.views.turista.main.views.list.LockerViewModel
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
@@ -125,26 +126,35 @@ fun MapsView(lockers: List<LockerModel>, lockerViewModel: LockerViewModel) {
                             dateOnlyFormat.format(startDate)
                         } al ${dateOnlyFormat.format(endDate)}."
                         showInformativeDialog = true
-                    },
+
+                        lockerViewModel.createReservation(
+                            user!!.userId,
+                            user!!.email,
+                            selectedLocker!!.id,
+                            selectedLocker!!.name,
+                            startTime,
+                            endTime,
+                            user!!.userName
+                        )
+                                },
                     onFailure = { insufficientDate ->
                         dialogTitle = "Capacidad Insuficiente"
                         dialogMessage = "No hay suficiente capacidad para el día $insufficientDate."
                         showInformativeDialog = true
                     }
                 )
-                lockerViewModel.createReservation(
-                    user!!.userId,
-                    user!!.email,
-                    selectedLocker!!.id,
-                    selectedLocker!!.name,
-                    startTime,
-                    endTime,
-                    user!!.userName
-                )
+
 
                 // Cerrar el diálogo
                 showDialog = false
             }
+        )
+    }
+    if (showInformativeDialog) {
+        InformativeDialog(
+            title = dialogTitle,
+            message = dialogMessage,
+            onDismiss = { showInformativeDialog = false }
         )
     }
 }

@@ -50,7 +50,7 @@ fun NavManager(
             composable("Book") {BookScreen(navController, mapViewModel, bookViewModel, checkoutViewModel)}
             composable("Request") { RequestScreen(navController) }
             composable("Calendar") {CalendarScreen(navController,mapViewModel)}
-            composable("Delete"){ DeleteScreen(navController, userViewModel, mapViewModel,lockerViewModel, deleteViewModel)}
+            composable("Delete"){ DeleteScreen(navController, userViewModel, mapViewModel,lockerViewModel)}
         }
     }
 }
