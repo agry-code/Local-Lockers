@@ -34,7 +34,6 @@ fun NavManager(
     mapViewModel: MapViewModel,
     lockerViewModel: LockerViewModel,
     userViewModel: UserViewModel,
-    deleteViewModel: DeleteViewModel
 ) {
     val navController = rememberNavController()
 

@@ -35,7 +35,6 @@ class MainActivity : ComponentActivity() {
     val mapViewModel: MapViewModel by viewModels()
     val lockerViewModel: LockerViewModel by viewModels()
     val userViewModel: UserViewModel by viewModels()
-    val deleteViewModel: DeleteViewModel by viewModels()
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +46,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    NavManager(loginViewModel,bookViewModel, checkoutViewModel, mapViewModel, lockerViewModel, userViewModel, deleteViewModel)
+                    NavManager(loginViewModel,bookViewModel, checkoutViewModel, mapViewModel, lockerViewModel, userViewModel)
                 }
             }
         }
