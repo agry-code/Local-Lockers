@@ -8,12 +8,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.locallockers.R
 import com.example.locallockers.ui.theme.Composable.*
 import com.example.locallockers.ui.theme.views.Register.ui.RegisterViewModel
 import com.example.locallockers.ui.theme.views.turista.main.views.maps.SearchViewModel
+
+/**
+ * Campos en la pantalla BlankView para registrar al usuario.
+ */
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "UnrememberedMutableState")
 @Composable
 fun RegisterScreen(
@@ -22,6 +27,7 @@ fun RegisterScreen(
     navController: NavController,
     modifier: Modifier = Modifier
 ) {
+    /* Observamos los estados de las variables del ViewModel */
     val email: String by registerModel.email.observeAsState(initial = "")
     val name: String by registerModel.name.observeAsState(initial = "")
     val password: String by registerModel.password.observeAsState(initial = "")
@@ -38,6 +44,7 @@ fun RegisterScreen(
             .fillMaxWidth()
             .padding(16.dp)
     ) {
+        /* Lista de roles disponibles para el registro */
         val roles = listOf("Turista", "Huesped")
         var selectedRole by remember { mutableStateOf("Turista") }
         var expanded by remember { mutableStateOf(false) }
@@ -63,6 +70,7 @@ fun RegisterScreen(
                 }
             }
         }
+        /* Campos de entrada para el registro */
         Column(modifier = modifier) {
             Spacer(modifier = Modifier.padding(40.dp))
             EmailField(email = email, onTextFieldChanged = { registerModel.onEmailChanged(it) })
@@ -84,7 +92,8 @@ fun RegisterScreen(
 
         }
 
-        // Mostrar los campos adicionales si el usuario es "Huésped"
+        /* Mostrar campos adicionales si el usuario es "Huesped" */
+
         if (registerModel.userType == "Huesped") {
             NameField(
                 name = localName,
@@ -103,15 +112,19 @@ fun RegisterScreen(
             )
         }
         Spacer(modifier = Modifier.padding(8.dp))
+
+        /* Mostrar un indicador de carga si el registro está en proceso */
         if (registerModel.isLoading) {
             CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
-            Text("Registrando...", modifier = Modifier.align(Alignment.CenterHorizontally))
+            Text(stringResource(R.string.registrando), modifier = Modifier.align(Alignment.CenterHorizontally))
         }
-        Button(onClick = {
-            // Resetea cualquier alerta previa
-            registerModel.closeAlert()
 
-            // Validación de campos vacíos
+        /* Botón para enviar el formulario de registro */
+        Button(onClick = {
+
+            /* Resetea cualquier alerta previa */
+            registerModel.closeAlert()
+            /* Validación de campos vacíos */
             if (email.isBlank() || password.isBlank() || name.isBlank() || (selectedRole == "Huesped" && (location.isBlank() || localName.isBlank() || openHours.isBlank()))) {
                 registerModel.showAlert = true
                 registerModel.showError("Todos los campos son obligatorios")
@@ -131,7 +144,8 @@ fun RegisterScreen(
                 registerModel.showError("Las contraseñas no coinciden")
                 Log.d("RegisterScreen", "Validación Fallida: Las contraseñas no coinciden")
             } else {
-                // Procesa el registro dependiendo del rol seleccionado
+                /* Procesa el registro dependiendo del rol seleccionado */
+
                 if (selectedRole == "Turista") {
                     registerModel.showLoading(true)
                     registerModel.createUser(email, password, name, 0.0, 0.0) {
@@ -164,18 +178,20 @@ fun RegisterScreen(
                 contentColor = colorResource(id = R.color.white)
             )
         ) {
-            Text(text = "Registrarse")
+            Text(text = stringResource(R.string.registrarse))
         }
     }
+    /* Mostrar alerta si hay un error en el registro */
     if (registerModel.showAlert) {
         Alert(
-            title = "Alerta",
+            title = stringResource(id = R.string.alerta),
             msg = registerModel.alertMessage,
-            confirmText = "Aceptar",
+            confirmText = stringResource(id = R.string.aceptar),
             onConfirmClick = { registerModel.closeAlert() }) {
         }
     }
 }
+/* Función para validar si un correo electrónico es válido */
 fun isValidEmail(email: String): Boolean {
     return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
 }

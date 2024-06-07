@@ -24,6 +24,7 @@ import com.example.locallockers.ui.theme.views.turista.main.views.maps.MapViewMo
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.locallockers.R
 
@@ -36,7 +37,7 @@ fun ConfiScreen(navController: NavController, mapViewModel: MapViewModel) {
 
     Scaffold(
         topBar = {
-            TopAppBar(title = { Text(text = "Configuración") },
+            TopAppBar(title = { Text(text = stringResource(R.string.configuraci_n)) },
                 navigationIcon = {
                     IconButton(onClick = {
                         mapViewModel.signOut()

@@ -32,6 +32,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
@@ -39,7 +40,14 @@ import com.example.locallockers.R
 import com.example.locallockers.navigation.BottomNav
 import com.example.locallockers.ui.theme.views.turista.main.views.book.BookViewModel
 import com.example.locallockers.ui.theme.views.turista.main.views.maps.MapViewModel
-
+/**
+ * Función composable que muestra la pantalla de solicitudes donde los usuarios pueden ver y gestionar sus solicitudes de reserva.
+ * Incluye una barra superior con un botón de cierre de sesión, una lista de solicitudes de reserva pendientes y una barra de navegación inferior.
+ *
+ * @param navController el controlador de navegación utilizado para navegar entre pantallas
+ * @param mapViewModel el ViewModel responsable de manejar las operaciones relacionadas con el mapa
+ * @param bookViewModel el ViewModel responsable de manejar las operaciones relacionadas con las reservas
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RequestScreen(
@@ -114,7 +122,14 @@ fun RequestScreen(
         }
     }
 }
-
+/**
+ * Función composable que muestra un solo elemento de solicitud con los detalles de una reserva y
+ * botones para aceptar o rechazar la reserva.
+ *
+ * @param reservation los detalles de la reserva a mostrar
+ * @param onAccept la función de callback a ejecutar cuando se hace clic en el botón de aceptar
+ * @param onDecline la función de callback a ejecutar cuando se hace clic en el botón de rechazar
+ */
 @Composable
 fun RequestItem(reservation: BookModel, onAccept: () -> Unit, onDecline: () -> Unit) {
     val context = LocalContext.current
@@ -134,26 +149,26 @@ fun RequestItem(reservation: BookModel, onAccept: () -> Unit, onDecline: () -> U
             Row {
                 Button(
                     onClick = { onAccept()
-                        Toast.makeText(context, "Reserva aceptada", Toast.LENGTH_LONG).show()
+                        Toast.makeText(context, context.getString(R.string.reserva_aceptada), Toast.LENGTH_LONG).show();
                     },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = colorResource(id = R.color.primary),
                         contentColor = colorResource(id = R.color.white)
                     )
                 ) {
-                    Text("Aceptar")
+                    Text(stringResource(R.string.aceptar))
                 }
                 Spacer(Modifier.width(8.dp))
                 Button(
                     onClick = { onDecline()
-                        Toast.makeText(context, "Reserva denegada", Toast.LENGTH_LONG).show()
+                        Toast.makeText(context, context.getString(R.string.reserva_denegada), Toast.LENGTH_LONG).show();
                     },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = colorResource(id = R.color.primary),
                         contentColor = colorResource(id = R.color.white)
                     )
                 ) {
-                    Text("Denegar")
+                    Text(stringResource(R.string.denegar))
                 }
             }
         }

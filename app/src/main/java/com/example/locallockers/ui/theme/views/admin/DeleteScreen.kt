@@ -36,6 +36,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.locallockers.R
@@ -44,6 +45,13 @@ import com.example.locallockers.model.UserModel
 import com.example.locallockers.navigation.BottomNav
 import com.example.locallockers.ui.theme.views.turista.main.views.list.LockerViewModel
 import com.example.locallockers.ui.theme.views.turista.main.views.maps.MapViewModel
+/**
+ * Pantalla de eliminación de huéspedes que permite a los administradores eliminar huéspedes y sus taquillas asociadas.
+ * @param navController Controlador de navegación.
+ * @param userViewModel ViewModel que gestiona los datos de los usuarios.
+ * @param mapViewModel ViewModel que gestiona los datos del mapa.
+ * @param lockerViewModel ViewModel que gestiona los datos de las taquillas.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DeleteScreen(
@@ -66,7 +74,7 @@ fun DeleteScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(text = "Eliminar Huésped") },
+                title = { Text(text = stringResource(R.string.eliminar_hu_sped)) },
                 navigationIcon = {
                     IconButton(onClick = {
                         mapViewModel.signOut()
@@ -110,19 +118,24 @@ fun DeleteScreen(
                 lockerName = selectedLocker?.name ?: "Sin asignar",
                 onConfirm = {
                     userViewModel.deleteGuestAndLocker(selectedGuest!!.userId, selectedLocker?.id)
-                    Toast.makeText(context, "Huésped ${selectedGuest!!.userName} eliminado", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, context.getString(R.string.huesped_eliminado, selectedGuest!!.userName), Toast.LENGTH_LONG).show()
                     showDialog = false
                 },
                 onCancel = {
                     showDialog = false
-                    Toast.makeText(context, "Se ha cancelado la eliminación de ${selectedGuest!!.userName}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, context.getString(R.string.cancelacion_eliminacion, selectedGuest!!.userName), Toast.LENGTH_LONG).show()
                 }
             )
         }
     }
 }
 
-
+/**
+ * Composable que muestra un ítem de huésped con información del huésped y su taquilla asociada.
+ * @param guest Modelo de datos del huésped.
+ * @param locker Modelo de datos de la taquilla asociada al huésped.
+ * @param onDeleteClick Acción a realizar al hacer clic en el botón de eliminar.
+ */
 @Composable
 fun GuestItem(guest: UserModel, locker: LockerModel?, onDeleteClick: () -> Unit) {
     Card(
@@ -153,7 +166,13 @@ fun GuestItem(guest: UserModel, locker: LockerModel?, onDeleteClick: () -> Unit)
         }
     }
 }
-
+/**
+ * Composable que muestra un diálogo de confirmación para eliminar un huésped y su taquilla asociada.
+ * @param guestName Nombre del huésped a eliminar.
+ * @param lockerName Nombre de la taquilla asociada al huésped.
+ * @param onConfirm Acción a realizar al confirmar la eliminación.
+ * @param onCancel Acción a realizar al cancelar la eliminación.
+ */
 @Composable
 fun ConfirmDeleteDialog(
     guestName: String,

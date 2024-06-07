@@ -35,6 +35,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -50,7 +51,10 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-
+/**
+ * Composable que representa la pantalla de inicio de sesión.
+ * Muestra un indicador de carga si isLoading es true, de lo contrario muestra el formulario de inicio de sesión.
+ */
 @Composable
 fun LoginScreen(viewModel: LoginViewModel, navController: NavController) {
     val isLoading = viewModel.isLoading
@@ -68,7 +72,10 @@ fun LoginScreen(viewModel: LoginViewModel, navController: NavController) {
         }
     }
 }
-
+/**
+ * Composable que muestra el formulario de inicio de sesión.
+ * Incluye campos para email y contraseña, y botones para iniciar sesión.
+ */
 @Composable
 fun Login(modifier: Modifier, viewModel: LoginViewModel, navController: NavController) {
     val email: String by viewModel.email.observeAsState(initial = "")
@@ -109,16 +116,19 @@ fun Login(modifier: Modifier, viewModel: LoginViewModel, navController: NavContr
         }
        // GoogleSignInButton(launcher) Futura implementación para tomar los datos del cliente
         if (viewModel.showAlert) {
-            Alert(title = "Alerta",
-                msg = "Usuario o contraseña erronea",
-                confirmText = "Aceptar",
+            Alert(title = stringResource(R.string.alerta),
+                msg = stringResource(R.string.usuario_o_contrase_a_erronea),
+                confirmText = stringResource(id = R.string.aceptar),
                 onConfirmClick = { viewModel.closeAlert() }) {
             }
         }
     }
 }
 
-
+/**
+ * Botón para iniciar sesión con Google.
+ * Configura e inicia la intención de inicio de sesión con Google.
+ */
 @Composable
 fun GoogleSignInButton(
     launcher: ManagedActivityResultLauncher<Intent, ActivityResult>,
@@ -144,7 +154,7 @@ fun GoogleSignInButton(
     ) {
         Image(
             painter = painterResource(id = R.drawable.icon_google),
-            contentDescription = "Contend descripcion",
+            contentDescription = "Cont descripcion",
             modifier = Modifier
                 .padding(10.dp)
                 .size(40.dp)
@@ -152,7 +162,10 @@ fun GoogleSignInButton(
         Text(text = "Iniciar sesión con Google", color = Color.White)
     }
 }
-
+/**
+ * Botón de inicio de sesión.
+ * Desactivado si el loginEnable es false.
+ */
 @Composable
 fun LogginButton(loginEnable: Boolean, login: () -> Unit) {
     Button(
@@ -168,11 +181,15 @@ fun LogginButton(loginEnable: Boolean, login: () -> Unit) {
             disabledContainerColor = colorResource(id = R.color.secundary),
             ), enabled = loginEnable
     ) {
-        Text(text = "Iniciar sesion")
+        Text(text = stringResource(R.string.iniciar_sesion))
     }
 
 }
 
+/**
+ * Composable para la opción de "¿Olvidaste la contraseña?".
+ * Actualmente sin funcionalidad, solo texto clicable.
+ */
 @Composable
 fun ForgotPassword(align: Modifier) {
     Text(
@@ -183,6 +200,9 @@ fun ForgotPassword(align: Modifier) {
     )
 }
 
+/**
+ * Imagen de encabezado para la pantalla de inicio de sesión.
+ */
 @Composable
 fun HeaderImage(modifier: Modifier) {
     Image(

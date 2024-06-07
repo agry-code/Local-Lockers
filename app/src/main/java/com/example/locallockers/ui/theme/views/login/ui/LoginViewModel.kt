@@ -21,7 +21,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-
+/**
+ * ViewModel para manejar la funcionalidad de inicio de sesión de usuarios en la aplicación Local Lockers.
+ * Administra el estado y la lógica asociada con la autenticación de usuarios y la obtención de sus perfiles.
+ */
 class LoginViewModel : ViewModel() {
     private val auth: FirebaseAuth = Firebase.auth
     var showAlert by mutableStateOf(false)
@@ -44,6 +47,11 @@ class LoginViewModel : ViewModel() {
     init {
         loadInitialData()
     }
+
+    /**
+     * Carga los datos iniciales del usuario si ya hay un usuario autenticado.
+     * Establece isLoading en true mientras se obtienen los datos y en false una vez terminado.
+     */
     private fun loadInitialData() {
         viewModelScope.launch {
             isLoading = true
@@ -71,7 +79,12 @@ class LoginViewModel : ViewModel() {
             }
         }
     }
-
+    /**
+     * Obtiene los detalles del usuario desde Firestore basado en el usuario autenticado actual.
+     * Llama al callback onDetailsFetched una vez que los detalles se obtienen correctamente.
+     *
+     * @param onDetailsFetched Callback que se invoca después de obtener los detalles del usuario.
+     */
     private fun fetchUserDetails(onDetailsFetched: () -> Unit) {
         isLoading = true
         auth.currentUser?.let { firebaseUser ->
@@ -95,7 +108,14 @@ class LoginViewModel : ViewModel() {
             }
         }
     }
-
+    /**
+     * Autentica al usuario con correo electrónico y contraseña.
+     * En caso de inicio de sesión exitoso, obtiene los detalles del usuario e invoca el callback onSuccess.
+     *
+     * @param email Correo electrónico del usuario.
+     * @param password Contraseña del usuario.
+     * @param onSuccess Callback que se invoca después de un inicio de sesión exitoso.
+     */
 fun login(email: String, password: String, onSuccess: () -> Unit) {
     viewModelScope.launch {
         isLoading = true
@@ -120,7 +140,13 @@ fun login(email: String, password: String, onSuccess: () -> Unit) {
         }
     }
 }
-
+    /**
+     * Inicia sesión del usuario utilizando credenciales de Google.
+     * En caso de inicio de sesión exitoso, invoca el callback home.
+     *
+     * @param credential Credencial de autenticación de Google.
+     * @param home Callback que se invoca después de un inicio de sesión exitoso.
+     */
     fun signInWithGoogleCredential(credential: AuthCredential, home:() -> Unit)
     = viewModelScope.launch {
         try {
@@ -139,19 +165,43 @@ fun login(email: String, password: String, onSuccess: () -> Unit) {
         }
 
     }
+    /**
+     * Actualiza el correo electrónico, la contraseña y el estado del botón de inicio de sesión basado en los valores proporcionados.
+     *
+     * @param email Correo electrónico del usuario.
+     * @param password Contraseña del usuario.
+     */
     fun onLoginChanged(email: String, password: String) {
         _email.value = email
         _password.value = password
         _loginEnable.value = isValidEmail(email) && isValidPass(password)
     }
-
+    /**
+     * Valida el formato del correo electrónico.
+     *
+     * @param email Correo electrónico a validar.
+     * @return True si el formato del correo electrónico es válido, de lo contrario false.
+     */
     private fun isValidEmail(email: String): Boolean =
         Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    /**
+     * Valida la longitud de la contraseña.
+     *
+     * @param password Contraseña a validar.
+     * @return True si la longitud de la contraseña es al menos 6 caracteres, de lo contrario false.
+     */
     private fun isValidPass(password: String): Boolean = password.length >= 6
-
+    /**
+     * Cierra el diálogo de alerta.
+     */
     fun closeAlert(){
         showAlert = false
     }
+    /**
+     * Obtiene los detalles del usuario basado en el correo electrónico proporcionado.
+     *
+     * @param email Correo electrónico del usuario cuyos detalles se van a obtener.
+     */
     fun fetchUserDetailsByEmail(email: String) {
         isLoading = true
         Firebase.firestore.collection("Users")

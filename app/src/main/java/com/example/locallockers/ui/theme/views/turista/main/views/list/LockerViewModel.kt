@@ -22,20 +22,28 @@ import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
+// Definición de la clase LockerViewModel que hereda de ViewModel
 class LockerViewModel : ViewModel() {
+    // Inicialización de la instancia de Firebase Firestore
     private val db = FirebaseFirestore.getInstance()
+    // Declaración de MutableLiveData para la lista de lockers
     private val _lockers = MutableLiveData<List<LockerModel>>()
+    // LiveData para exponer la lista de lockers
     val lockers: LiveData<List<LockerModel>> = _lockers
 
+    // Bloque de inicialización que carga los lockers cuando se crea una instancia de LockerViewModel
     init {
         loadLockers()
     }
 
+    // Función para cargar los lockers desde Firestore
     private fun loadLockers() {
         db.collection("Lockers")
             .get()
             .addOnSuccessListener { result ->
+                // Creación de una lista mutable para almacenar los lockers
                 val lockerList = mutableListOf<LockerModel>()
+                // Iteración sobre los documentos recuperados
                 for (document in result) {
                     val id = document.id
                     val name = document.getString("name") ?: ""
@@ -43,6 +51,7 @@ class LockerViewModel : ViewModel() {
                     val owner = document.getString("owner") ?: ""  // Extracción del campo 'owner'
                     val longitude = document.getDouble("longitude")
                     val latitude = document.getDouble("latitude")
+                    // Adición de un nuevo LockerModel a la lista
                     lockerList.add(
                         LockerModel(
                             id = id,
@@ -51,10 +60,10 @@ class LockerViewModel : ViewModel() {
                             owner = owner,
                             longitude = longitude,
                             latitude = latitude
-
                         )
                     )
                 }
+                // Actualización de LiveData con la lista de lockers
                 _lockers.value = lockerList
             }
             .addOnFailureListener { exception ->
@@ -62,6 +71,7 @@ class LockerViewModel : ViewModel() {
             }
     }
 
+    // Función para obtener un locker por el ID del dueño (guestId)
     fun getLockerByGuest(guestId: String): LiveData<LockerModel?> {
         val result = MutableLiveData<LockerModel?>()
         db.collection("Lockers")
@@ -90,6 +100,8 @@ class LockerViewModel : ViewModel() {
             }
         return result
     }
+
+    // Función para actualizar la capacidad de reserva de un locker
     fun updateReservationCapacity(
         lockerId: String,
         numberOfBags: Int,
@@ -168,8 +180,7 @@ class LockerViewModel : ViewModel() {
         }
     }
 
-
-
+    // Función para obtener la reserva de un locker para una fecha específica
     @RequiresApi(Build.VERSION_CODES.O)
     fun getReservationForDate(lockerId: String, date: LocalDate): LiveData<Reservation?> {
         val result = MutableLiveData<Reservation?>()
@@ -207,7 +218,7 @@ class LockerViewModel : ViewModel() {
     }
 
     /**
-     * Función para obtener el día de la reserva en el mapa. El mapa solo reserva para hoy.
+     * Función para obtener la reserva de hoy para un locker específico
      */
     fun getTodayReservation(lockerId: String): LiveData<Reservation?> {
         val today = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
@@ -243,7 +254,7 @@ class LockerViewModel : ViewModel() {
         return result
     }
 
-
+    // Función para crear una nueva reserva
     fun createReservation(
         userId: String,
         userEmail: String,

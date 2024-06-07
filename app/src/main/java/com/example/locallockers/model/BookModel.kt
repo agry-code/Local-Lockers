@@ -5,7 +5,8 @@ import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.util.Date
 import java.util.Locale
-
+// Constructor para inicializar los campos con valores predeterminados.
+// Requiere al menos Android Oreo (API 26) debido a la anotación @RequiresApi.
 @IgnoreExtraProperties
 data class BookModel @RequiresApi(Build.VERSION_CODES.O) constructor(
     var id: String = "",
@@ -18,7 +19,5 @@ data class BookModel @RequiresApi(Build.VERSION_CODES.O) constructor(
     val userName: String = "",
     val status: String = ""
 )
-// Para formatear o parsear fechas:
+// Formateador de fechas que sigue el formato ISO 8601.
 val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US)
-val dateStr = dateFormat.format(Date())  // Para obtener String desde Date
-val date = dateFormat.parse("2024-04-22T09:00:00Z")  // Para parsear String a Date

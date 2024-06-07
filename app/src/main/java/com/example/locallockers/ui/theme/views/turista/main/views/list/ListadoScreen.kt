@@ -51,6 +51,7 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import com.example.locallockers.R
 import dateFormat
 import java.text.SimpleDateFormat
@@ -78,11 +79,12 @@ fun ListadoScreen(
     var showInformativeDialog by remember { mutableStateOf(false) }
     var dialogTitle by remember { mutableStateOf("") }
     var dialogMessage by remember { mutableStateOf("") }
+    // Configuración de la interfaz de usuario
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(text = "Listado de Reservas") },
+                title = { Text(text = stringResource(R.string.listado_de_reservas)) },
                 navigationIcon = {
                     IconButton(onClick = {
                         mapViewModel.signOut()
@@ -135,7 +137,7 @@ fun ListadoScreen(
                     contentColor = colorResource(id = R.color.white)
                 )
             ) {
-                Text("Seleccionar Fecha para filtrar")
+                Text(stringResource(R.string.seleccionar_fecha_para_filtrar))
             }
             Spacer(modifier = Modifier.padding(8.dp))
             LazyColumn {
@@ -165,10 +167,12 @@ fun ListadoScreen(
                             onSuccess = {
                                 val dateOnlyFormat =
                                     SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-                                dialogTitle = "Reserva Exitosa"
-                                dialogMessage = "Reserva realizada con éxito para los días ${
-                                    dateOnlyFormat.format(startDate)
-                                } al ${dateOnlyFormat.format(endDate)}."
+                                dialogTitle = context.getString(R.string.reserva_exitosa_titulo)
+                                dialogMessage = context.getString(
+                                    R.string.reserva_exitosa_mensaje,
+                                    dateOnlyFormat.format(startDate),
+                                    dateOnlyFormat.format(endDate)
+                                )
                                 showInformativeDialog = true
                                 lockerViewModel.createReservation(
                                     user!!.userId,
@@ -181,9 +185,11 @@ fun ListadoScreen(
                                 )
                             },
                             onFailure = { insufficientDate ->
-                                dialogTitle = "Capacidad Insuficiente"
-                                dialogMessage =
-                                    "No hay suficiente capacidad para el día $insufficientDate."
+                                dialogTitle = context.getString(R.string.capacidad_insuficiente_titulo)
+                                dialogMessage = context.getString(
+                                    R.string.capacidad_insuficiente_mensaje,
+                                    insufficientDate
+                                )
                                 showInformativeDialog = true
                                 // hay que salir para que no se cree la reserva. No se debe crear porque no hay capacidad
                             }
@@ -228,13 +234,13 @@ fun LockerItem(
         )
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
-            Text("Nombre: ${locker.name}", style = MaterialTheme.typography.titleMedium)
-            Text("Horario: ${locker.openHours}", style = MaterialTheme.typography.bodySmall)
+            Text(stringResource(id = R.string.nombre) + " ${locker.name}", style = MaterialTheme.typography.titleMedium)
+            Text(stringResource(id = R.string.horario) + " ${locker.openHours}", style = MaterialTheme.typography.bodySmall)
             if (reservation != null) {
-                Text("Capacidad disponible: ${reservation!!.capacidad}")
-                Text("Precio por bolsa: ${reservation!!.precio}")
+                Text(stringResource(id = R.string.capacidad_disponible) + " ${reservation!!.capacidad}")
+                Text(stringResource(id = R.string.precio_por_bolsa) + " ${reservation!!.precio}")
             } else {
-                Text("No hay información de reserva para esta fecha")
+                Text(stringResource(id = R.string.sin_reserva))
             }
         }
     }

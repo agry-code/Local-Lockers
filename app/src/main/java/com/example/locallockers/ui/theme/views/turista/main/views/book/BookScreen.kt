@@ -31,6 +31,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
@@ -46,7 +47,6 @@ import com.google.pay.button.ButtonType
 import com.google.pay.button.PayButton
 import kotlinx.coroutines.awaitAll
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BookScreen(
@@ -55,23 +55,25 @@ fun BookScreen(
     bookViewModel: BookViewModel,
     checkoutViewModel: CheckoutViewModel,
 ) {
+    // Obtener el ViewModel de usuario y observar el estado del usuario actual
     val userViewModel: UserViewModel = viewModel()
     val user by userViewModel.currentUser.observeAsState()
     val books by bookViewModel.reservations.observeAsState(emptyList())
     val context = LocalContext.current
     val activity = context as? Activity
 
-
+    // Efecto lanzado cuando cambian el userId o role del usuario
     LaunchedEffect(user?.userId, user?.role) {
         if (user?.userId != null && user?.role != null) {
             bookViewModel.loadReservations(user?.userId!!, user?.role!!)
         }
     }
 
+    // Interfaz principal con barra superior y navegación inferior
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(text = "Reservas realizadas") },
+                title = { Text(text = stringResource(R.string.reservas_realizadas)) },
                 navigationIcon = {
                     IconButton(onClick = {
                         mapViewModel.signOut()
@@ -111,18 +113,21 @@ fun BookScreen(
     }
 }
 
+/**
+ * Composable para mostrar los valores de lazyColumn
+ */
 @Composable
 fun BookItem(
     book: BookModel, userRole: String, checkoutViewModel: CheckoutViewModel,
     onGooglePayButtonClick: () -> Unit,
 ) {
-
+    // Tarjeta que representa un elemento de reserva
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
             .clickable {
-                checkoutViewModel.setBookId(book.id)  // Asegúrate de que esto se llama antes del proceso de pago
+                checkoutViewModel.setBookId(book.id)  // Establecer el ID del libro antes del pago
             },
         colors = CardDefaults.cardColors(
             containerColor = colorResource(id = R.color.item),
@@ -157,6 +162,8 @@ fun BookItem(
 }
 
 private val googlePayRequestCode = 99942
+
+// Función para manejar el clic en el botón de Google Pay
 fun onGooglePayButtonClick(
     activity: Activity,
     checkoutViewModel: CheckoutViewModel,
@@ -164,13 +171,10 @@ fun onGooglePayButtonClick(
     bookId: String
 ) {
     Log.d("Pago", "Estableciendo bookId: $bookId")
-    checkoutViewModel.setBookId(bookId)  // Asegúrate de que esto se llama antes del proceso de pago
+    checkoutViewModel.setBookId(bookId)  // Establecer el ID del libro antes del proceso de pago
     AutoResolveHelper.resolveTask(
         checkoutViewModel.getLoadPaymentDataTask(price),
         activity,
         googlePayRequestCode
     )
 }
-
-
-

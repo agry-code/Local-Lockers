@@ -12,31 +12,44 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.style.TextAlign
 import com.example.locallockers.R
 
+/**
+ * Composable que muestra una alerta con un título, un mensaje y botones de confirmación y cancelación.
+ * @param title Título de la alerta.
+ * @param msg Mensaje de la alerta.
+ * @param confirmText Texto del botón de confirmación.
+ * @param onConfirmClick Acción a realizar al hacer clic en el botón de confirmación.
+ * @param onDismissClick Acción a realizar al hacer clic fuera de la alerta o en el botón de cancelar.
+ */
 @Composable
 fun Alert(
-    title:String,
-    msg:String,
-    confirmText:String,
-    onConfirmClick:() -> Unit,
-    onDismissClick:() -> Unit,
-){
-    val scroll = rememberScrollState(0)
+    title: String,
+    msg: String,
+    confirmText: String,
+    onConfirmClick: () -> Unit,
+    onDismissClick: () -> Unit,
+) {
+    val scroll = rememberScrollState(0) // Estado de desplazamiento para el texto de la alerta
 
-    AlertDialog(onDismissRequest = {onDismissClick},
-        title = { Text(text = title)},
-        text = { Text(text = msg,
-            textAlign = TextAlign.Justify,
-        modifier = Modifier.verticalScroll(scroll)
-        )}
-        , confirmButton = {
+    AlertDialog(
+        onDismissRequest = { onDismissClick() }, // Acción a realizar al hacer clic fuera de la alerta
+        title = { Text(text = title) }, // Título de la alerta
+        text = {
+            Text(
+                text = msg,
+                textAlign = TextAlign.Justify, // Alineación del texto del mensaje
+                modifier = Modifier.verticalScroll(scroll) // Habilita el desplazamiento vertical si el mensaje es largo
+            )
+        },
+        confirmButton = {
             Button(
-                onClick = { onConfirmClick() },
+                onClick = { onConfirmClick() }, // Acción a realizar al hacer clic en el botón de confirmación
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = colorResource(id = R.color.primary),
-                    contentColor = colorResource(id = R.color.white)
+                    containerColor = colorResource(id = R.color.primary), // Color de fondo del botón
+                    contentColor = colorResource(id = R.color.white) // Color del texto del botón
                 )
-            )  {
-                Text(text = confirmText)
+            ) {
+                Text(text = confirmText) // Texto del botón de confirmación
             }
-        })
+        }
+    )
 }

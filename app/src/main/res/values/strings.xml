@@ -1,6 +1,59 @@
 <resources>
     <string name="app_name">Local Lockers</string>
-    <string name="token">737784074734-fo1cdue2jte8ho2s0qq5nb1sjtfuqno7.apps.googleusercontent.com</string>
+    <string name="token" translatable="false">737784074734-fo1cdue2jte8ho2s0qq5nb1sjtfuqno7.apps.googleusercontent.com</string>
     <string name="tu_perfil">Tu perfil</string>
     <string name="email_no_disponible">Email no disponible</string>
+    <string name="pago_realizado_con_xito">Pago realizado con éxito</string>
+    <string name="error_bookid_es_null_despu_s_de_la_transacci_n">Error: bookId es null después de la transacción</string>
+    <string name="se_ha_cancelado_la_transacci_n">Se ha cancelado la transacción</string>
+    <string name="error_en_el_procesamiento_del_pago">Error en el procesamiento del pago: %1$s</string>
+    <!-- Nuevas entradas para los títulos de BottomBarScreen -->
+    <string name="title_map">Mapa</string>
+    <string name="title_listado">Listado</string>
+    <string name="title_book">Reserva</string>
+    <string name="title_confi">Configuracion</string>
+    <string name="title_request">Solicitudes</string>
+    <string name="title_calendar">Calendario</string>
+    <string name="title_delete">Eliminar</string>
+    <string name="email">Email</string>
+    <string name="contrase_a">Contrasena</string>
+    <string name="confirmar_contrase_a">Confirmar Contrasena</string>
+    <string name="ubicaci_n">Ubicacion</string>
+    <string name="horario_de_apertura">Horario de Apertura</string>
+    <string name="eliminar_hu_sped">Eliminar Huesped</string>
+    <!-- Nuevas cadenas para los diálogos de eliminación -->
+    <string name="huesped_eliminado">Huesped %1$s eliminado</string>
+    <string name="cancelacion_eliminacion">Se ha cancelado la eliminacion de %1$s</string>
+    <string name="denegar">Denegar</string>
+    <string name="aceptar">Aceptar</string>
+    <!-- Nuevas cadenas para los Toasts -->
+    <string name="reserva_denegada">Reserva denegada</string>
+    <string name="reserva_aceptada">Reserva aceptada</string>
+    <string name="iniciar_sesion">Iniciar sesion</string>
+    <string name="alerta">Alerta</string>
+    <string name="usuario_o_contrase_a_erronea">Usuario o contrasena erronea</string>
+    <string name="registrarse">Registrarse</string>
+    <string name="reservas_realizadas">Reservas realizadas</string>
+    <string name="listado_de_reservas">Listado de Reservas</string>
+    <string name="seleccionar_fecha_para_filtrar">Seleccionar Fecha para filtrar</string>
+    <!-- Otras cadenas ya existentes -->
+    <string name="reserva_exitosa_titulo">Reserva Exitosa</string>
+    <string name="reserva_exitosa_mensaje">Reserva realizada con éxito para los días %1$s al %2$s.</string>
+    <string name="capacidad_insuficiente_titulo">Capacidad Insuficiente</string>
+    <string name="capacidad_insuficiente_mensaje">No hay suficiente capacidad para el día %1$s.</string>
+    <string name="nombre">Nombre:</string>
+    <string name="horario">Horario:</string>
+    <string name="capacidad_disponible">Capacidad disponible:</string>
+    <string name="precio_por_bolsa">Precio por bolsa:</string>
+    <string name="sin_reserva">No hay información de reserva para esta fecha</string>
+    <string name="mapa">Mapa</string>
+    <string name="configuraci_n">Configuración</string>
+    <string name="registrando">Registrando...</string>
+    <!-- Mensajes de error:-->
+    <string name="campos_obligatorios">Todos los campos son obligatorios</string>
+    <string name="email_no_valido">Correo electrónico no válido</string>
+    <string name="contrasena_corta">La contraseña debe tener al menos 6 caracteres</string>
+    <string name="contrasenas_no_coinciden">Las contraseñas no coinciden</string>
+    <string name="informacion_ubicacion_faltante">Es necesario completar la información de ubicación para Huesped</string>
+
 </resources>

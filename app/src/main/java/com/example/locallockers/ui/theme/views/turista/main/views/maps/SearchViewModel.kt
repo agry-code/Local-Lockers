@@ -16,47 +16,66 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.net.URL
 
-class SearchViewModel : ViewModel(){
+// ViewModel para la búsqueda de ubicaciones
+class SearchViewModel : ViewModel() {
+    // LiveData para almacenar la latitud de la ubicación
     private val _lat = MutableLiveData<Double>()
     val lat: LiveData<Double> = _lat
 
+    // LiveData para almacenar la longitud de la ubicación
     private val _long = MutableLiveData<Double>()
     val long: LiveData<Double> = _long
+
+    // Estado mutable para almacenar la dirección de la ubicación
     var address by mutableStateOf("")
         private set
+
+    // Estado mutable para controlar la visibilidad de la dirección
     var show by mutableStateOf(false)
         private set
 
-    // Nuevos estados para Huesped
+    // Nuevos estados para Huésped
+    // LiveData para almacenar la ubicación en formato de texto
     private val _location = MutableLiveData<String>()
     val location: LiveData<String> = _location
 
+    // Método llamado cuando la ubicación cambia
     fun onLocationChanged(location: String) {
         _location.value = location
+        // Llama a getLocation para obtener la latitud y longitud de la ubicación
         getLocation(location)
     }
 
+    // Método para obtener la latitud y longitud de una ubicación mediante la API de Google Geocoding
     fun getLocation(search: String) {
         viewModelScope.launch {
             try {
-                val apiKey = "AIzaSyBTA_bquHKAeJfOOLKNX-RxaA4_Cr7iPao"
+                // Clave de la API de Google Maps Geocoding
+                val apiKey = "Tu_API_Key_Aquí"
 
+                // Construye la URL de la solicitud de geocodificación
                 val url = "https://maps.googleapis.com/maps/api/geocode/json?address=$search&key=$apiKey"
+                // Realiza la solicitud HTTP y obtiene la respuesta como texto
                 val response = withContext(Dispatchers.IO) {
                     URL(url).readText()
                 }
 
+                // Convierte la respuesta JSON en un objeto GoogleGeoResults utilizando Gson
                 val results = Gson().fromJson(response, GoogleGeoResults::class.java)
 
+                // Si se encontraron resultados de geocodificación
                 if (results.results.isNotEmpty()) {
                     show = true
+                    // Actualiza la latitud y longitud con los valores obtenidos
                     _lat.value = results.results[0].geometry.location.lat
                     _long.value = results.results[0].geometry.location.lng
+                    // Almacena la dirección formateada
                     address = results.results[0].formatted_address
                 } else {
                     Log.d("SearchViewModel", "No se encontraron resultados para la búsqueda")
                 }
             } catch (e: Exception) {
+                // Registra cualquier error que ocurra durante la solicitud de geocodificación
                 Log.e("SearchViewModel", "Error al obtener la ubicación", e)
             }
         }
