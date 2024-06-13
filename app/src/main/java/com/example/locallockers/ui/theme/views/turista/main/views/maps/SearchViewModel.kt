@@ -51,7 +51,7 @@ class SearchViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 // Clave de la API de Google Maps Geocoding
-                val apiKey = "Tu_API_Key_Aquí"
+                val apiKey = "AIzaSyBTA_bquHKAeJfOOLKNX-RxaA4_Cr7iPao"
 
                 // Construye la URL de la solicitud de geocodificación
                 val url = "https://maps.googleapis.com/maps/api/geocode/json?address=$search&key=$apiKey"
